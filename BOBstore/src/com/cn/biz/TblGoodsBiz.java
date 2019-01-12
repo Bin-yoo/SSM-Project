@@ -45,5 +45,20 @@ public class TblGoodsBiz {
 		tblGoodsQuery.setLimit(limit);
 		return tblGoodsMapper.selectByHotGoods(tblGoodsQuery);
 	}
+	/**
+	 * 
+	 * @param tblGoods 
+	 * @return
+	 */
+	public boolean addFun(TblGoods tblGoods) {
+		// TODO Auto-generated method stub
+		try{
+			tblGoodsMapper.insertFun(tblGoods);
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 	
 }

@@ -13,4 +13,6 @@ public interface TblGoodsMapper {
 
 	List<TblGoods> selectByHotGoods(TblGoodsQuery tblGoodsQuery);
 
+	void insertFun(TblGoods tblGoods);
+
 }

@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-default">查询</button>
-                                <a href="admin/goods" class="btn btn-primary" style="float: right;">添加商品</a>
+                                <a href="good/befAdd" class="btn btn-primary" style="float: right;">添加商品</a>
                             </form>
                         </div>
                     </div>

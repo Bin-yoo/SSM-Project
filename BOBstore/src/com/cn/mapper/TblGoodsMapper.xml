@@ -22,6 +22,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and dt.detailedTypeID = #{detailedTypeID}
 			</if>
 	</sql>
+	<insert id="insertFun" parameterType="tblGoods" useGeneratedKeys="true" keyProperty="goodsID">
+		insert into tbl_goods(goodsName,detailedTypeID,goodsInCount,goodsPrice,goodsDiscountPrice,goodsDescript,goodsDate)
+		
+		values(#{goodsName},#{detailedTypeID},#{goodsInCount},#{goodsPrice},#{goodsDiscountPrice},#{goodsDescript},#{goodsDate})
+		<!-- <if test="goodsImageUrl !=null">
+			,{#goodsImageUrl}
+		</if> -->
+		
+	</insert>
 	
 	<select id="selectCountConditionPageFun" parameterType="tblGoodsQuery" resultType="int">
 		select count(*) from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
