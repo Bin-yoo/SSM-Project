@@ -18,6 +18,7 @@ import com.cn.entity.TblGoods;
 import com.cn.entity.TblGoodsQuery;
 import com.cn.entity.TblGoodsType;
 import com.cn.entity.TblGoodsTypeDetail;
+import com.cn.util.PageBean;
 
 @Controller
 @RequestMapping("/good")
@@ -90,6 +91,19 @@ public class TblGoodsController {
 		modelAndView.addObject("popularCandyList",popularCandyList);
 		modelAndView.addObject("popularSnacksList",popularSnacksList);
 		modelAndView.setViewName("index");
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/viewgoods")
+	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID){
+		int limit = 10;
+		PageBean <TblGoods> pageBean = tblGoodsBiz.viewBydetailedTypeID(tblGoodsQuery,currPage, limit,detailedTypeID);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pageBean",pageBean);
+		modelAndView.setViewName("goods_list");
+	
 		
 		return modelAndView;
 	}

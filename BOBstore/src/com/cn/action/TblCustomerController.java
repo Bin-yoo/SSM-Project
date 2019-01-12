@@ -33,7 +33,7 @@ public class TblCustomerController {
 		else{
 			session.setAttribute("customer", tblCustomer);
 //			modelAndView.setViewName("redirect:../house/viewByConditionPage");
-			modelAndView.setViewName("redirect:../index.jsp");
+			modelAndView.setViewName("redirect:/good/index");
 		}
 		return modelAndView;
 	}
