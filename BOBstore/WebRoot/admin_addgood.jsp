@@ -101,9 +101,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="col-sm-10">
                                         <select name="detailedTypeID" id="detailedTypeID" class="form-control">
-                                            <c:forEach items="${detailTypeList}" var="type">
-											<option value="${detailTypeList.id}" ${detailTypeList.id == tblGoods.detailedTypeID ?"selected='selected'":"" }>${detailTypeList.detailedTypeName }</option>
-										</c:forEach>
+	                                        <c:forEach items="${detailTypeList}" var="detailType">
+												<option value="" ${detailType.detailedTypeID == tblGoods.detailedTypeID ?"selected='selected'":"" }> ${detailType.detailedTypeName }</option>
+											</c:forEach>
                                         </select>
                                     </div>
                                 </div>
