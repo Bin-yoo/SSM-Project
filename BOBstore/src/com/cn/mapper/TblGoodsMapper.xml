@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.cn.mapper.TblGoodsMapper">
+	<sql id="tblGoods_where">
+			<if test="goodsName !=null and  goodsName != '' ">
+				and goodsName like '%${goodsName}%'
+			</if>
+			<if test="priceB !=null">
+				and goodsDiscountPrice &gt;=#{priceB}
+			</if>
+			<if test="priceE !=null">
+				and goodsDiscountPrice &lt;=#{priceE}
+			</if>
+			<if test="goodsTypeID !=null">
+				and t.goodsTypeID = #{goodsTypeID}
+			</if>
+			<if test="detailedTypeID !=null">
+				and dt.detailedTypeID = #{detailedTypeID}
+			</if>
+	</sql>
+	
+	<select id="selectCountConditionPageFun" parameterType="tblGoodsQuery" resultType="int">
+		select count(*) from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
+		<where>
+			g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
+			
+				<include refid="tblGoods_where"></include>
+		</where>
+	</select>
+	
+	<select id="selectByConditionPageFun" parameterType="tblGoodsQuery" resultType="tblGoods">
+		select top ${pageSize} * from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
+		<where>
+			g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
+			and not exists (select top ${startNum} * from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t
+				<where>
+					<include refid="tblGoods_where"/>
+				</where>
+				 order by g.goodsid)
+				<include refid="tblGoods_where"></include>
+		</where>
+		order by g.goodsid;
+	</select>
+	
+</mapper>
+
