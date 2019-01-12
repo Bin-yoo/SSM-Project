@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.cn.biz.TblGoodsBiz;
 import com.cn.biz.TblGoodsTypeBiz;
 import com.cn.biz.TblGoodsTypeDetailBiz;
+import com.cn.entity.TblGoods;
+import com.cn.entity.TblGoodsQuery;
 import com.cn.entity.TblGoodsType;
 import com.cn.entity.TblGoodsTypeDetail;
 
@@ -20,6 +23,8 @@ public class TblGoodsController {
 	TblGoodsTypeBiz tblGoodsTypeBiz;
 	@Autowired
 	TblGoodsTypeDetailBiz tblGoodsTypeDetailBiz;
+	@Autowired
+	TblGoodsBiz tblGoodsBiz;
 
 	@RequestMapping("/befAdd")
 	public ModelAndView befAddFun(){
@@ -38,5 +43,23 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
-	
+	@RequestMapping("/index")
+	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery){
+		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,null,4);
+		List<TblGoods> popularGoodsList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, null, 10);
+		List<TblGoods> popularWineList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 1, 5);
+		List<TblGoods> popularCandyList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 10, 5);
+		List<TblGoods> popularSnacksList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 15, 5);
+		
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("bannerList",bannerList);
+		modelAndView.addObject("popularGoodsList",popularGoodsList);
+		modelAndView.addObject("popularWineList",popularWineList);
+		modelAndView.addObject("popularCandyList",popularCandyList);
+		modelAndView.addObject("popularSnacksList",popularSnacksList);
+		modelAndView.setViewName("index");
+		
+		return modelAndView;
+	}
 }

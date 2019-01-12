@@ -11,4 +11,6 @@ public interface TblGoodsMapper {
 
 	List<TblGoods> selectByConditionPageFun(TblGoodsQuery tblGoodsQuery);
 
+	List<TblGoods> selectByHotGoods(TblGoodsQuery tblGoodsQuery);
+
 }

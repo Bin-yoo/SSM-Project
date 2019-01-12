@@ -45,6 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 		order by g.goodsid;
 	</select>
-	
+	<select id="selectByHotGoods" resultType="tblGoods" parameterType="tblGoodsQuery">
+		select top ${limit} * from tbl_goods
+		<where>
+			<if test="detailedTypeID != null">
+				and detailedTypeID = ${detailedTypeID}
+			</if>
+		</where>
+			
+		order by goodsSellCount desc
+	</select>
 </mapper>
 

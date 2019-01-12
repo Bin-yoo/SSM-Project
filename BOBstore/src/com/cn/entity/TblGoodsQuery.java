@@ -10,6 +10,21 @@ public class TblGoodsQuery extends TblGoods {
 	private String strPrice;
 	private Integer priceB;
 	private Integer priceE;
+	//查询指定类型的商品
+	private Integer detailedTypeID;
+	private int limit;
+	public Integer getDetailedTypeID() {
+		return detailedTypeID;
+	}
+	public void setDetailedTypeID(Integer detailedTypeID) {
+		this.detailedTypeID = detailedTypeID;
+	}
+	public int getLimit() {
+		return limit;
+	}
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
 	
 	public Integer getStartNum() {
 		return startNum;

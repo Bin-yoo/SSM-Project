@@ -1,5 +1,7 @@
 package com.cn.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,20 @@ public class TblGoodsBiz {
 		}
 		
 		return pageBean;
+	}
+
+	/**
+	 * 这个方法用于查询热门 商品
+	 * @param tblGoodsQuery 
+	 * @param detailedTypeID 传要查询的商品类型
+	 * @param limit 要查询的条数
+	 * @return
+	 */
+	public List<TblGoods> viewHotGoods(TblGoodsQuery tblGoodsQuery, Integer detailedTypeID, int limit) {
+		// TODO Auto-generated method stub
+		tblGoodsQuery.setDetailedTypeID(detailedTypeID);
+		tblGoodsQuery.setLimit(limit);
+		return tblGoodsMapper.selectByHotGoods(tblGoodsQuery);
 	}
 	
 }

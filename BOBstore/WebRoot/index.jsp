@@ -111,334 +111,95 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="container">
                     <div class="theory">
                         <div class="owl-carousel owl-theme">
-                            <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt="">
-                            <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt="">
-                            <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt="">
-                            <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt="">
+                            <c:forEach items="${bannerList}" var="banner">
+                    			<span>${banner.goodsPrice }</span>
+                    		</c:forEach>
                         </div>
+                        
                     </div>
+                   
                     <span class="tab">全部热销</span>
                     <hr>
                     <div class="goodsbox">
                         <dl class="goodslist">
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
+                        	<c:forEach items="${popularGoodsList}" var="popularGoods">
+                        	
+                            	<dt class="item" >
+                                	<div class="img">
+                                    	<img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
+                                	</div>
+                                	<div class="text">
+                                    	<p class="g_title">${popularGoods.goodsName}</p>
+                                    	<p class="price">￥
+                                    	<span class="pri">${popularGoods.goodsDiscountPrice}</span>
+                                    	<span class="num">${popularGoods.goodsSellCount}已销售</span>
+                                    	</p>
+                                	</div>
+                            	</dt>
+                            </c:forEach>
                         </dl>
                     </div>
                     <span class="tab">热销酒水</span>
                     <hr>
                     <div class="goodsbox">
                         <dl class="goodslist">
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
+                        	<c:forEach items="${popularWineList}" var="popularWine">
+                        	
+                            	<dt class="item" >
+                                	<div class="img">
+                                    	<img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
+                                	</div>
+                                	<div class="text">
+                                    	<p class="g_title">${popularWine.goodsName}</p>
+                                    	<p class="price">￥
+                                    	<span class="pri">${popularWine.goodsDiscountPrice}</span>
+                                    	<span class="num">${popularWine.goodsSellCount}已销售</span>
+                                    	</p>
+                                	</div>
+                            	</dt>
+                            </c:forEach>
                         </dl>
                     </div>
                     <span class="tab">热销糖果</span>
                     <hr>
                     <div class="goodsbox">
                         <dl class="goodslist">
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
+                            <c:forEach items="${popularCandyList}" var="popularCandy">
+                        	
+                            	<dt class="item" >
+                                	<div class="img">
+                                    	<img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
+                                	</div>
+                                	<div class="text">
+                                    	<p class="g_title">${popularCandy.goodsName}</p>
+                                    	<p class="price">￥
+                                    	<span class="pri">${popularCandy.goodsDiscountPrice}</span>
+                                    	<span class="num">${popularCandy.goodsSellCount}已销售</span>
+                                    	</p>
+                                	</div>
+                            	</dt>
+                            </c:forEach>
                         </dl>
                     </div>
                     <span class="tab">热销零食</span>
                     <hr>
                     <div class="goodsbox">
                         <dl class="goodslist">
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
-                            <dt class="item">
-                                <div class="img">
-                                    <img src="../assets/logo.gif">
-                                </div>
-                                <div class="text">
-                                    <p class="g_title">压力马斯内</p>
-                                    <p class="price">
-                                    <span class="pri">￥666</span>
-                                    <span class="num">114销售</span>
-                                    </p>
-                                </div>
-                            </dt>
+                            <c:forEach items="${popularSnacksList}" var="popularSnacks">
+                        	
+                            	<dt class="item" >
+                                	<div class="img">
+                                    	<img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
+                                	</div>
+                                	<div class="text">
+                                    	<p class="g_title">${popularSnacks.goodsName}</p>
+                                    	<p class="price">￥
+                                    	<span class="pri">${popularSnacks.goodsDiscountPrice}</span>
+                                    	<span class="num">${popularSnacks.goodsSellCount}已销售</span>
+                                    	</p>
+                                	</div>
+                            	</dt>
+                            </c:forEach>
                         </dl>
                     </div>
                 </div>
