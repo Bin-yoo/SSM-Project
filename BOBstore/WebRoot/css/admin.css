@@ -165,3 +165,4 @@ table,td,tr{text-align: center; padding: 5px;}
 tr{height: 51px;}
 
 .tr,.tr>td{text-align: left;}
+#currpage{width: 50px; height: 18px; color:#000}

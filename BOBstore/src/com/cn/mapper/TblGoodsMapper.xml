@@ -45,8 +45,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select top ${pageSize} * from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
 		<where>
 			g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
-			and not exists (select top ${startNum} * from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t
+			and g.goodsID not in (select top ${startNum} g.goodsID from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t
 				<where>
+					g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
 					<include refid="tblGoods_where"/>
 				</where>
 				 order by g.goodsid)

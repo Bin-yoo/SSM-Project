@@ -18,23 +18,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery-2.1.0.min.js"></script>
 	
 	<script type="text/javascript">
+	
+		
+	
+		function doTurnTO(){
+			var f = document.getElementById('sform');
+			var currPage = $('#currpage').val();
+			f.action = f.action + "?currPage=" +currPage;
+			f.submit();
+		}
+	
+		function doSearch(currPage){
+			var f = document.getElementById('sform');
+			f.action = f.action + "?currPage=" +currPage;
+			f.submit();
+		}
 		
 		$(function(){
 			$("#goodsTypeID").change(function(){
-				$.post("detail/viewByGoodsTypeId",
-					{
-						"goodsTypeID":$("#goodsTypeID").val()
-					},
-					function(data,textStatus){
-						var detailedTypeID = $("#detailedTypeID");
-						detailedTypeID.empty();
-						$.each(data,function(index,detailedType){
-							console.log(detailedType);
-							var option = $("<option>").text(detailedType.detailedTypeName).val(detailedType.detailedTypeID);
-							detailedTypeID.append(option)
-						})
-					},"json"
-				);
+				
+				var i = $("#goodsTypeID").val();
+				console.log(i)
+				if(i == null || i == ""){
+					var detailedTypeID = $("#detailedTypeID");
+					detailedTypeID.empty();
+					var a = $("<option>").text("不限").val("");
+					detailedTypeID.append(a);
+				}else{
+					$.post("detail/viewByGoodsTypeId",
+						{
+							"goodsTypeID":$("#goodsTypeID").val()
+						},
+						function(data,textStatus){
+							var detailedTypeID = $("#detailedTypeID");
+							detailedTypeID.empty();
+							var a = $("<option>").text("不限").val("");
+							detailedTypeID.append(a);
+							$.each(data,function(index,detailedType){
+								var option = $("<option>").text(detailedType.detailedTypeName).val(detailedType.detailedTypeID);
+								detailedTypeID.append(option);
+							})
+						},"json"
+					);
+				}
 			});
 		});
 		
@@ -65,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="panel-heading">
                         <h4>商品管理</h4>
                         <div class="addgoods">
-                            <form action="" method="post" class="form-inline">
+                            <form action="admin/goods" method="post" class="form-inline" id="sform">
                                 <div class="form-group">
                                     <label for="goodsName">商品名</label>
                                     <input type="text" class="form-control" name="goodsName" id="goodsName" placeholder="输入商品关键词">
@@ -73,16 +99,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="form-group">
                                     <label for="goodsTypeID">商品类型</label>
                                     <select class="form-control" name="goodsTypeID" id="goodsTypeID">
+                                    	<option value="">不限</option>
                                     	<c:forEach items="${typeList}" var="type">
-											<option value="${type.goodsTypeID}" ${type.goodsTypeID == tblGoods.goodsTypeID ?"selected='selected'":"" }>${type.goodsTypeName }</option>
+											<option value="${type.goodsTypeID}" ${type.goodsTypeID == tblGoodsQuery.goodsTypeID ?"selected='selected'":"" }>${type.goodsTypeName }</option>
 										</c:forEach>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="detailedTypeID">商品详细类型</label>
                                     <select class="form-control" name="detailedTypeID" id="detailedTypeID">
-                                        <c:forEach items="${detailTypeList}" var="detailType">
-											<option value="" ${detailType.detailedTypeID == tblGoods.detailedTypeID ?"selected='selected'":"" }> ${detailType.detailedTypeName }</option>
+                                    	<option value="">不限</option>
+                                    	<c:forEach items="${detailTypeList}" var="detailType">
+											<option value="${detailType.detailedTypeID}" ${detailType.detailedTypeID == tblGoodsQuery.detailedTypeID ?"selected='selected'":"" }> ${detailType.detailedTypeName }</option>
 										</c:forEach>
                                     </select>
                                 </div>
@@ -90,10 +118,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <label for="strPrice">价格</label>
                                     <select class="form-control" name="strPrice" id="strPrice">
                                     	<option value="">不限</option>
-                                        <option value="0-49">0-49</option>
-                                        <option value="50-99">50-99</option>
-                                        <option value="100-150">100-150</option>
-                                        <option value="150-99999">150以上</option>
+                                        <option value="0-49" ${tblGoodsQuery.strPrice == '0-49' ?"selected='selected'":"" }>0-49</option>
+                                        <option value="50-99" ${tblGoodsQuery.strPrice == '50-99' ?"selected='selected'":"" }>50-99</option>
+                                        <option value="100-150" ${tblGoodsQuery.strPrice == '100-150' ?"selected='selected'":"" }>100-150</option>
+                                        <option value="150-99999" ${tblGoodsQuery.strPrice == '150-99999' ?"selected='selected'":"" }>150以上</option>
                                     </select>
                                 </div>
                                 <button type="submit" class="btn btn-default">查询</button>
@@ -137,19 +165,86 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="page">
                         <nav aria-label="Page navigation">
                             <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
+                            	<c:if test="${pageBean.currPage <= 1 }">
+									<li>
+										<span aria-hidden="true">首页</span>
+	                                	<span aria-hidden="true">&laquo;</span>
+	                                </li>
+								</c:if>
+								<c:if test="${pageBean.currPage > 1 }">
+									<li>
+										<a href="javascript:void(0)" onclick="doSearch(1)">
+	                                        <span aria-hidden="true">首页</span>
+	                                    </a>
+	                                    <a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage - 1 })">
+	                                        <span aria-hidden="true">&laquo;</span>
+	                                    </a>
+                                    </li>
+								</c:if>
+								<c:if test="${pageBean.totalPage <= 5}">
+								    <c:forEach begin="1" end="${pageBean.totalPage}" step="1" var="i">
+								        <c:if test="${pageBean.currPage == i}">
+								            <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								        </c:if>
+								        <c:if test="${pageBean.currPage != i}">
+								            <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								        </c:if>
+								    </c:forEach>
+								</c:if>
+								<c:if test="${pageBean.totalPage > 5}">
+								    <c:if test="${pageBean.currPage > 2}">
+								        <c:if test="${pageBean.currPage+3 >= pageBean.totalPage}">
+								            <c:forEach begin="${pageBean.totalPage-4}" end="${pageBean.totalPage}" var="i">
+								                <c:if test="${i == page.currPage+1}">
+								                    <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								                </c:if>
+								                <c:if test="${i != page.currPage+1}">
+								                    <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								                </c:if>
+								            </c:forEach>
+								        </c:if>
+								        <c:if test="${pageBean.currPage+3 < pageBean.totalPage}">
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage-2 })">${pageBean.currPage-2}</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage-1 })">${pageBean.currPage-1}</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage })">${pageBean.currPage }</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage+1 })">${pageBean.currPage+1 }</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage+2 })">${pageBean.currPage+2 }</a></li>
+								        </c:if>
+								    </c:if>
+								    <c:if test="${pageBean.currPage <= 2}">
+								        <c:forEach begin="1" end="5" step="1" var="i">
+								            <c:if test="${page.currPage+1 == i}">
+								                <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								            </c:if>
+								            <c:if test="${page.currPage+1 != i}">
+								                <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
+								            </c:if>
+								        </c:forEach>
+								    </c:if>
+								</c:if>
+					            <c:if test="${pageBean.currPage >= pageBean.totalPage }">
+					            	<li>
+                                		<span aria-hidden="true">&raquo;</span>
+										<span aria-hidden="true">末页</span>
+                                	</li>
+								</c:if>
+								<c:if test="${pageBean.currPage < pageBean.totalPage }">
+									<li>
+	                                    <a href="javascript:void(0)" aria-label="Next"  onclick="doSearch(${pageBean.currPage + 1 })">
+	                                        <span aria-hidden="true">&raquo;</span>
+	                                    </a>
+	                                    <a href="javascript:void(0)" onclick="doSearch(${pageBean.totalPage })">
+											<span aria-hidden="true">末页</span>
+										</a>
+	                                </li>
+								</c:if>
+								
+								<li>
+									<span aria-hidden="true">当前页:<input type="text" class="btn" placeholder="${pageBean.currPage}" id="currpage"></span>
                                 </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
                                 <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
+	                                <a href="javascript:void(0)" aria-label="Next"  onclick="doTurnTO()">
+                                        <span aria-hidden="true">跳转</span>
                                     </a>
                                 </li>
                             </ul>

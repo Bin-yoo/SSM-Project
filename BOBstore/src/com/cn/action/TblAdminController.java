@@ -66,16 +66,14 @@ public class TblAdminController {
 	
 	@RequestMapping("/goods")
 	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery){
-		int limit = 3;
+		int limit = 6;
 		PageBean <TblGoods> pageBean = tblGoodsBiz.viewByConditionPageFun(tblGoodsQuery,currPage, limit);
 		
 		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
 		List<TblGoodsTypeDetail> detailTypeList = null;
 		
-		if(typeList.size() > 0){
-			TblGoodsType tblGoodsType = typeList.get(0);
-			int i = tblGoodsType.getGoodsTypeID();
-			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(i);
+		if(typeList.size() > 0 && tblGoodsQuery.getGoodsTypeID() != null && !tblGoodsQuery.getGoodsTypeID().equals("")){
+			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(tblGoodsQuery.getGoodsTypeID());
 		}
 		
 		ModelAndView modelAndView = new ModelAndView();

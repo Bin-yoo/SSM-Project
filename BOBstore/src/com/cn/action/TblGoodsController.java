@@ -73,6 +73,7 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
+	
 	@RequestMapping("/index")
 	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery){
 		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,null,4);
