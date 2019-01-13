@@ -19,7 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	
-		
+		function deleteFun(goodsID,currPage){
+			var flag = confirm("您真的要删除该行记录吗？");
+			
+			if(flag){
+				window.location.href="/BOBstore/good/remove?goodsID=" + goodsID + "&currPage=" + currPage;
+			}
+		}
 	
 		function doTurnTO(){
 			var f = document.getElementById('sform');
@@ -155,7 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                    <td>${good.goodsPrice}</td>
 	                                    <td>${good.goodsDiscountPrice}</td>
 	                                    <td><button type="button" class="btn btn-success btn-sm">修改</button>
-	                                        <button type="button" class="btn btn-danger btn-sm">下架</button>
+	                                        <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.goodsID},${pageBean.currPage})'>删除</button>
 	                                    </td>
 	                                </tr>
                             	</c:forEach>

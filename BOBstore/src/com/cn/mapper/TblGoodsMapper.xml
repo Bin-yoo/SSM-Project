@@ -22,7 +22,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and dt.detailedTypeID = #{detailedTypeID}
 			</if>
 	</sql>
-	
+	<delete id="delectFun">
+		delete from tbl_goods where goodsID=#{goodsID}
+	</delete>
 	<select id="selectByIdFun" resultType="tblGoods">
 		select * from tbl_goods where goodsID = #{goodsID}
 	</select>

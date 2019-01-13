@@ -17,4 +17,6 @@ public interface TblGoodsMapper {
 
 	List<TblGoods> selectByIdFun(Integer goodsID);
 
+	void delectFun(Integer goodsID);
+
 }
