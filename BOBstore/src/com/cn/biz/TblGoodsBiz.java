@@ -80,7 +80,7 @@ public class TblGoodsBiz {
 		return pageBean;
 	}
 
-	public List<TblGoods> selectGoodsByIdFun(Integer goodsID) {
+	public TblGoods selectGoodsByIdFun(Integer goodsID) {
 		return tblGoodsMapper.selectByIdFun(goodsID);
 	}
 

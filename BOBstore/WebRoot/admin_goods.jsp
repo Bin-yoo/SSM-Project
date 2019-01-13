@@ -19,8 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	
-<<<<<<< HEAD
-=======
 		function deleteFun(goodsID,currPage){
 			var flag = confirm("您真的要删除该行记录吗？");
 			
@@ -29,7 +27,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		}
 	
->>>>>>> 60a09b18349171faeb9f0c4cbf066ac716b66df7
 		function doTurnTO(){
 			var f = document.getElementById('sform');
 			var currPage = $('#currpage').val();

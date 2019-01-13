@@ -153,60 +153,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-2">
                             <div class="goodbox">
-                            	<c:forEach items="${viewGoodsList}" var="goods">
+                            	
                                 	<div class="good_img">
-                                    	<img src="${goods.goodsImageUrl}" alt="">
+                                    	<img src="${tblGoods.goodsImageUrl}" alt="">
                                 	</div>
                                 	<div class="goods_detail">
                                     	<div class="goods_detail_title">
-                                        	<h4>${goods.goodsName}</h4>
+                                        	<h4>${tblGoods.goodsName}</h4>
                                     	</div>
                                     	<div class="goods_detail_price">
-                                    		<input type="hidden" value="${goods.goodsInCount - goods.goodsSellCount}" id="Stock" />
+                                    		<input type="hidden" value="${tblGoods.goodsInCount - tblGoods.goodsSellCount}" id="Stock" />
                         
-                                        	<p>价格:<span class="price">${goods.goodsDiscountPrice}</span></p>
+                                        	<p>价格:<span class="price">${tblGoods.goodsDiscountPrice}</span></p>
                                         	
-                                        	<p>原价:<span class="p"><s>${goods.goodsPrice}</s></span></p>
+                                        	<p>原价:<span class="p"><s>${tblGoods.goodsPrice}</s></span></p>
                                     	</div>
                                     	<div class="goods_detail_fare">
                                         	配送费:<span class="fare">免配送费</span>
                                     	</div>
                                     	<div class="goods_detail_sellcount">
-                                       	 已卖出: <span class="sellcount">${goods.goodsSellCount}</span>
+                                       	 已卖出: <span class="sellcount">${tblGoods.goodsSellCount}</span>
                                     	</div>
                                    		<div class="goods_detail_sum">
-                                   			<c:if test="${goods.goodsInCount - goods.goodsSellCount == 0}">
+                                   			<c:if test="${tblGoods.goodsInCount - tblGoods.goodsSellCount == 0}">
                                    				已售完
                                    			</c:if>
-                                   			<c:if test="${goods.goodsInCount - goods.goodsSellCount != 0}">
+                                   			<c:if test="${tblGoods.goodsInCount - tblGoods.goodsSellCount != 0}">
                                    				数量: <span class="sellcount">
 			                                            <button type="button" class="btn btn-default" id="reduce">-</button>
 			                                        	<input type="text" name="goodsInCount" value="1" id="Count" style="max-width:80px;text-align: center;" class="btn">
 			                                        	<button type="button" class="btn btn-default" id="add">+</button>
 			                                        </span>
-                                        		库存: ${goods.goodsInCount - goods.goodsSellCount}件
+                                        		库存: ${tblGoods.goodsInCount - tblGoods.goodsSellCount}件
                                    			</c:if>
                                     </div>
                                     <div class="buy">
                                         <a type="button" class="btn btn-success">立即购买</a>
                                         <button type="button" class="btn btn-danger">加入购物车</button>
                                     </div>
-                                    </c:forEach>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="goods_des">
                         <div class="panel panel-default">
-                        	<c:forEach items="${viewGoodsList}" var="goods">
+                      
                             <div class="panel-heading">
                                	 商品详情
                             </div>
                             <div class="des">
-                                <p>${goods.goodsDescript}</p>
-                                <img src="${goods.goodsImageUrl}" alt="">
+                                <p>${tblGoods.goodsDescript}</p>
+                                <img src="${tblGoods.goodsImageUrl}" alt="">
                             </div>
-                            </c:forEach>
+                     
                         </div>
                     </div>
                 </div>

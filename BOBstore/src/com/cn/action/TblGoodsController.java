@@ -43,8 +43,7 @@ public class TblGoodsController {
 	 * @param tblGoods
 	 * @param session
 	 * @param model
-	 * @return 注意！！添加功能是半成品，因为表的问题，什么都不填的时候也能提交成功,需要写一些JS验证，有空再说吧
-	 * 不知道什么原因，拿不到admin，所以注释掉的东西是无效的
+	 * @return 
 	 * 
 	 */ 
 	
@@ -160,10 +159,10 @@ public class TblGoodsController {
 	
 	@RequestMapping("/goodsdetail")
 	public ModelAndView viewGoodsDetail(Integer goodsID){
-		List<TblGoods> viewGoodsList = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		TblGoods tblGoods = tblGoodsBiz.selectGoodsByIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("viewGoodsList",viewGoodsList);
+		modelAndView.addObject("tblGoods",tblGoods);
 		
 		modelAndView.setViewName("goods_detail");
 		
@@ -181,8 +180,26 @@ public class TblGoodsController {
 	}
 	
 	@RequestMapping("/befModify")
-	public ModelAndView befModifyFun(Integer goodsID,Integer currPage){
+	public ModelAndView befModifyFun(Integer goodsID,Integer currPage,TblGoodsQuery tblGoodsQuery){
 		
+		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
+		List<TblGoodsTypeDetail> detailTypeList = null;
+		
+		if(typeList.size() > 0 && tblGoodsQuery.getGoodsTypeID() != null && !tblGoodsQuery.getGoodsTypeID().equals("")){
+			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(tblGoodsQuery.getGoodsTypeID());
+		}
+		
+		TblGoods tblGoods = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		
+		modelAndView.addObject("typeList",typeList);
+		modelAndView.addObject("detailTypeList",detailTypeList);
+		
+		
+		return modelAndView;
 	}
 	 
 }

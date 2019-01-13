@@ -15,7 +15,7 @@ public interface TblGoodsMapper {
 
 	void insertFun(TblGoods tblGoods);
 
-	List<TblGoods> selectByIdFun(Integer goodsID);
+	TblGoods selectByIdFun(Integer goodsID);
 
 	void delectFun(Integer goodsID);
 
