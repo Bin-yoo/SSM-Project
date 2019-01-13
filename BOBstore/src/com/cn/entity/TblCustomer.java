@@ -12,7 +12,7 @@ public class TblCustomer {
 	private char sex;
 	private String customerEmail;
 	private String customerPhone;
-	private Timestamp customerRegDate;
+	private Timestamp customerRegDate  = new Timestamp((new java.util.Date()).getTime());
 	
 	
 	

@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="login">
             <form action="admin/login" method="post" class="form-group" name="form1" onsubmit="return checkForm()">
                 <table class="">
-                    <div class="errMsg" id="Msg"></div>
+                    <div class="errMsg" id="Msg">${errMsg }</div>
                     <tr>
                         <td><label for="name" class="control-label">用户名:</label></td>
                         <td>

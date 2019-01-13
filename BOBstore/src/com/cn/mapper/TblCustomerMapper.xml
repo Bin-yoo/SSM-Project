@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="insertFun" parameterType="tblCustomer">
-		insert into tbl_customer values(#{name},#{password},#{telephone},#{username},#{isadmin})
+		insert into tbl_customer(customerName,password,customerTrueName,customerAddress,sex,customerEmail,customerPhone,customerRegDate)
+		values(#{customerName},#{password},#{customerTrueName},#{customerAddress},#{sex},#{customerEmail},#{customerPhone},#{customerRegDate})
 	</insert>
 </mapper>

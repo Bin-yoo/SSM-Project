@@ -18,6 +18,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/jquery-2.1.0.min.js"></script>
 	
 	<script type="text/javascript">
+	
+		function checkForm(){
+			var errMsg = "";
+			if(document.form1.goodsName.value == ""){
+				errMsg = errMsg+"商品名不能为空<br>"
+			}
+			if(document.form1.goodsInCount.value == "" || document.form1.goodsInCount.value < 1){
+				errMsg = errMsg+"进货数量不能小于1<br>"
+			}
+			if(isNaN(document.form1.goodsInCount.value)){
+				errMsg = errMsg+"进货数量只能填数字<br>"
+			}
+			if(document.form1.goodsPrice.value == ""){
+				errMsg = errMsg+"价格不能为空<br>"
+			}
+			if(document.form1.goodsDescript.value == ""){
+				errMsg = errMsg+"商品描述不能为空<br>"
+			}
+				
+			if (errMsg == ""){
+				return true;
+			}else{
+				$("#Msg").html(errMsg)
+				return false;
+			}
+		}
 		
 		$(function(){
 			$("#goodsTypeID").change(function(){
@@ -46,8 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				goodsInCount.val(parseInt(goodsInCount.val())+1)
 				
 			})
-		});
 		
+		});
 	</script>
 
 </head>
@@ -73,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="menu">
                 <ul class="shop_list">
-                    <li><a href="admin.html">商品管理</a></li>
+                    <li><a href="admin/goods">商品管理</a></li>
                     <li><a href="">订单</a></li>
                 </ul>
             </div>
@@ -84,7 +110,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="panel-heading"><h4>添加商品</h4></div>
                     <div class="add">
                         <div>
-                            <form class="form-horizontal" action="good/add" method="post" role="form">
+                        	<div id="Msg" style="text-align: center; color:red;">${Msg }</div>
+                            <form class="form-horizontal" action="good/add" method="post" name="form1" role="form"  onsubmit="return checkForm()" enctype="multipart/form-data">
                                 <div class="from-group">
                                     <div class="col-sm-2">
                                         <label for="goodsName" class="control-label">商品名字:</label>
@@ -102,6 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                           <c:forEach items="${typeList}" var="type">
 											<option value="${type.goodsTypeID}" ${type.goodsTypeID == tblGoods.goodsTypeID ?"selected='selected'":"" }>${type.goodsTypeName }</option>
 										</c:forEach>
+										
                                         </select>
                                     </div>
                                 </div>
@@ -112,7 +140,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="col-sm-10">
                                         <select name="detailedTypeID" id="detailedTypeID" class="form-control">
                                          	<c:forEach items="${detailTypeList}" var="detailType">
-												<option value="${detailType.detailedTypeID}" ${detailType.detailedTypeID == tblGoodsQuery.detailedTypeID ?"selected='selected'":"" }> ${detailType.detailedTypeName }</option>
+												<option value="${detailType.detailedTypeID}" ${detailType.detailedTypeID == tblGoods.detailedTypeID ?"selected='selected'":"" }> ${detailType.detailedTypeName }</option>
 											</c:forEach>
                                         </select>
                                     </div>
@@ -123,6 +151,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="col-sm-10" style="text-align: left;">
                                         <button type="button" class="btn btn-default" id="reduce">-</button>
+                                        <c:if test="">
+                                        	
+                                        </c:if>
                                         <input type="text" name="goodsInCount" value="1" id="goodsInCount" style="max-width:80px;text-align: center;" class="btn">
                                         <button type="button" class="btn btn-default" id="add">+</button>
                                     </div>
@@ -156,11 +187,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <label for="file" class="button default"> 商品图片:</label>
                                     </div>
                                     <div class="col-sm-4">
-                                        <input id='location' class="form-control"disabled>
+                                        <input id='goodsImageUrl' class="form-control" disabled>
                                     </div>
                                     <div class="col-sm-1">
                                         <input type="button" id="i-check" value="浏览" class="btn" onclick="$('#i-file').click();">
-                                        <input type="file" id='i-file'  onchange="$('#location').val($('#i-file').val());" style="display: none">
+                                        <input type="file" id='i-file' name="i-file" onchange="$('#goodsImageUrl').val($('#i-file').val())" style="display: none">
                                     </div>
                                 </div>
                                 <div class="from-group lastdiv">

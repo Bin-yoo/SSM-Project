@@ -19,8 +19,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	
-		
-	
 		function doTurnTO(){
 			var f = document.getElementById('sform');
 			var currPage = $('#currpage').val();
@@ -146,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             	<c:forEach items="${pageBean.list}" var="good">
                             		<tr class="tr">
 	                                    <td>
-	                                        <img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt="" class="good_img">
+	                                        <img src="${good.goodsImageUrl }" alt="" class="good_img">
 	                                        <span>${good.goodsName}</span>
 	                                    </td>
 	                                    <td>${good.goodsTypeName}</td>

@@ -33,7 +33,7 @@ public class TblCustomerController {
 		else{
 			session.setAttribute("customer", tblCustomer);
 //			modelAndView.setViewName("redirect:../house/viewByConditionPage");
-			modelAndView.setViewName("redirect:../index.jsp");
+			modelAndView.setViewName("redirect:../good/index");
 		}
 		return modelAndView;
 	}
@@ -45,10 +45,11 @@ public class TblCustomerController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		if(flag){
-			modelAndView.setViewName("redirect:../register_success.jsp");
+			modelAndView.setViewName("redirect:../user/login?name="+tblCustomer.getCustomerName()+"&password="+tblCustomer.getPassword());
 		}else{
 			modelAndView.addObject("errMsg", "×¢²áÊ§°Ü!!!");
-			modelAndView.setViewName("../register");
+			modelAndView.addObject("tblCustomer", tblCustomer);
+			modelAndView.setViewName("register");
 		}
 		
 		return modelAndView;

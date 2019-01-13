@@ -36,10 +36,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 <body>
     <div class="bg"></div>
+    <div class="login_nav">
+        <div class="shop_title">
+            <a href="good/index"><h2>弟中弟商店-校园宅基送</h2></a>
+        </div>
+    </div>
     <div class="loginbox">
         <div class="title"><h4>用户登录</h4></div>
         <div class="login">
-            <form action="user/login" method="post" class="form-group" name="form1" onsubmit="return checkForm()">
+            <form action="user/register" method="post" class="form-group" name="form1" onsubmit="return checkForm()">
                 <table class="">
                     <div class="errMsg" id="Msg">${errMsg}</div>
                     <tr>

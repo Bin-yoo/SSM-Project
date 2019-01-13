@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="container-fluid">
         <div class="header">
             <div class="shop_title">
-                <h3>弟中弟商店-校园宅基送</h3>
+                <a href="good/index"><h3>弟中弟商店-校园宅基送</h3></a>
             </div>
             <div class="search">
                 <form action="#" class="search_form">
