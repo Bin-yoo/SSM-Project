@@ -159,7 +159,7 @@ public class TblGoodsController {
 	
 	@RequestMapping("/goodsdetail")
 	public ModelAndView viewGoodsDetail(Integer goodsID){
-		TblGoods tblGoods = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("tblGoods",tblGoods);
@@ -178,26 +178,80 @@ public class TblGoodsController {
 		return "redirect:../admin/goods?currPage=" + currPage;
 		
 	}
-	
-	@RequestMapping("/befModify")
-	public ModelAndView befModifyFun(Integer goodsID,Integer currPage,TblGoodsQuery tblGoodsQuery){
-		
-		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
-		List<TblGoodsTypeDetail> detailTypeList = null;
-		
-		if(typeList.size() > 0 && tblGoodsQuery.getGoodsTypeID() != null && !tblGoodsQuery.getGoodsTypeID().equals("")){
-			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(tblGoodsQuery.getGoodsTypeID());
+	@RequestMapping("modify")
+	public String modifyFun(TblGoods tblGoods,HttpSession session,Model model,@RequestParam("i-file") MultipartFile picture, HttpServletRequest request){
+		TblAdmin admin = (TblAdmin)session.getAttribute("admin");
+		if(admin == null){
+			return "redirect:/admin.jsp";
 		}
 		
-		TblGoods tblGoods = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		//获取文件在服务器的储存位置
+        String path = request.getSession().getServletContext().getRealPath("/upload");
+        File filePath = new File(path);
+        System.out.println("文件的保存路径：" + path);
+        if (!filePath.exists() && !filePath.isDirectory()) {
+            System.out.println("目录不存在，创建目录:" + filePath);
+            filePath.mkdir();
+        }
+ 
+        //获取原始文件名称(包含格式)
+        String originalFileName = picture.getOriginalFilename();
+        System.out.println("原始文件名称：" + originalFileName);
+ 
+        //获取文件类型，以最后一个`.`为标识
+        String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+        System.out.println("文件类型：" + type);
+        //获取文件名称（不包含格式）
+        String name = originalFileName.substring(0, originalFileName.lastIndexOf("."));
+ 
+        //设置文件新名称: 当前时间+文件名称（不包含格式）
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+        String date = sdf.format(d);
+        String fileName = date + name + "." + type;
+        System.out.println("新文件名称：" + fileName);
+ 
+        //在指定路径下创建一个文件
+        File targetFile = new File(path, fileName);
+ 
+        //将文件保存到服务器指定位置
+        try {
+            picture.transferTo(targetFile);
+            System.out.println("上传成功");
+            //将文件在服务器的存储路径返回
+            tblGoods.setGoodsImageUrl("./upload/"+fileName);
+            boolean flag = tblGoodsBiz.modifyFun(tblGoods);
+    		if(flag){
+    			return "redirect:/admin/goods";
+    		}else{
+    			model.addAttribute("errMsg","保存失败");
+    			model.addAttribute("tblGoods", tblGoods);
+    			return "/admin_updategood";
+    		}
+        } catch (IOException e) {
+            System.out.println("上传失败");
+            e.printStackTrace();
+            model.addAttribute("errMsg","保存失败");
+			model.addAttribute("tblGoods", tblGoods);
+			return "/admin_updategood";
+        }
+	}
+	
+	@RequestMapping("/befModify")
+	public ModelAndView befModifyFun(Integer goodsID,Integer goodsTypeID,TblGoodsQuery tblGoodsQuery){
+		
+		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
+		List<TblGoodsTypeDetail> detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(goodsTypeID);
+
+		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		
+		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.addObject("typeList",typeList);
 		modelAndView.addObject("detailTypeList",detailTypeList);
-		
+		modelAndView.setViewName("admin_updategood");
 		
 		return modelAndView;
 	}

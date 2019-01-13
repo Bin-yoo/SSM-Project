@@ -19,4 +19,6 @@ public interface TblGoodsMapper {
 
 	void delectFun(Integer goodsID);
 
+	void updateFun(TblGoods tblGoods);
+
 }

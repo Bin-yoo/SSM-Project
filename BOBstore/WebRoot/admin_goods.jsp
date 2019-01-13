@@ -18,7 +18,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery-2.1.0.min.js"></script>
 	
 	<script type="text/javascript">
-	
+		function updateFun(goodsID,goodsTypeID){
+			window.location.href="/BOBstore/good/befModify?goodsID=" + goodsID + "&goodsTypeID=" + goodsTypeID;
+		}
 		function deleteFun(goodsID,currPage){
 			var flag = confirm("您真的要删除该行记录吗？");
 			
@@ -160,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                    <td>${good.goodsInCount - goodsSellCount}</td>
 	                                    <td>${good.goodsPrice}</td>
 	                                    <td>${good.goodsDiscountPrice}</td>
-	                                    <td><button type="button" class="btn btn-success btn-sm">修改</button>
+	                                    <td><button type="button" class="btn btn-success btn-sm" onclick='updateFun(${good.goodsID},${good.goodsTypeID})'>修改</button>
 	                                        <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.goodsID},${pageBean.currPage})'>删除</button>
 	                                    </td>
 	                                </tr>
