@@ -54,15 +54,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="cus_msg">
                     	<div class="cus_name form-inline">
                     		<label for="customerAddressee" class="control-label">收件人:</label>
-                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="aaaa" />
+                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
                     	</div>
                     	<div class="cus_address form-inline"">
                     		<label for="customerAddress" class="control-label">收件地址:</label>
-                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="aaaa" />
+                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
                     	</div>
                     	<div class="cus_phone form-inline"">
                     		<label for="customerPhone" class="control-label">联系电话:</label>
-                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="aaaa" />
+                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
                     	</div>
                     </div>
                     <div class="userbox check">

@@ -171,4 +171,18 @@ public class TblGoodsController {
 		
 	}
 	
+	@RequestMapping("remove")
+	public String removeFun(Integer goodsID,Integer currPage){
+		if(goodsID!=null){
+			tblGoodsBiz.removeFun(goodsID);
+		}
+		return "redirect:../admin/goods?currPage=" + currPage;
+		
+	}
+	
+	@RequestMapping("/befModify")
+	public ModelAndView befModifyFun(Integer goodsID,Integer currPage){
+		
+	}
+	 
 }

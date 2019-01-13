@@ -83,5 +83,15 @@ public class TblGoodsBiz {
 	public List<TblGoods> selectGoodsByIdFun(Integer goodsID) {
 		return tblGoodsMapper.selectByIdFun(goodsID);
 	}
+
+	public boolean removeFun(Integer goodsID) {
+		// TODO Auto-generated method stub
+		try{
+			tblGoodsMapper.delectFun(goodsID);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
 	
 }
