@@ -4,7 +4,7 @@ import com.cn.entity.TblCustomer;
 
 public interface TblCustomerMapper {
 
-	public TblCustomer selectByNameFun(String name);
+	public TblCustomer selectByCustomerNameFun(String name);
 	
 	public void insertFun(TblCustomer tblCustomer);
 	

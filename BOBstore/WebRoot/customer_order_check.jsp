@@ -14,6 +14,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>用户商城</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/users.css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+	
+	<script type="text/javascript">
+	
+		function getFocus(id){
+			
+			if(id == 1){
+				$("#customerAddressee").focus();
+			}else if(id == 2){
+				$("#customerAddress").focus();
+			}else if(id == 3){
+				$("#customerPhone").focus();
+			}
+		}
+	</script>
 </head>
 <body>
     <div class="container-fluid">
@@ -31,12 +46,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="container-fluid mt">
             <div class="aside">
                 <div class="user">
-                    <h4>你好，用户标哥</h4>
+                	<c:if test="${not empty sessionScope.customer}">
+                		<h4>
+	                    	你好，用户${sessionScope.customer.customerTrueName}
+	                    </h4>
+                	</c:if>
+                	<c:if test="${empty sessionScope.customer}">
+                		<h4>
+	                    	你好，请 <a href="login.jsp">登录</a>
+	                    </h4>
+                	</c:if>
                     <div class="controller">
-                        <span><a href="">注销用户</a></span>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                    	<c:if test="${not empty sessionScope.customer}">
+	                		<span><a href="user/logout">注销用户</a></span>
+	                	</c:if>
+	                	<c:if test="${empty sessionScope.customer}">
+	                		<span><a href="register.jsp">注册账号</a></span>
+	                	</c:if>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
@@ -54,15 +81,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="cus_msg">
                     	<div class="cus_name form-inline">
                     		<label for="customerAddressee" class="control-label">收件人:</label>
-                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
+                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="${tblCustomer.customerTrueName}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(1)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_address form-inline"">
                     		<label for="customerAddress" class="control-label">收件地址:</label>
-                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
+                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="${tblCustomer.customerAddress}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(2)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_phone form-inline"">
                     		<label for="customerPhone" class="control-label">联系电话:</label>
-                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="aaaa" /><i class="glyphicon glyphicon-pencil"></i>
+                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="${tblCustomer.customerPhone}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(3)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     </div>
                     <div class="userbox check">
@@ -78,23 +105,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <ul class="item-content">
                                 <li class="td td-item">
                                     <div class="item_img">
-                                        <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
+                                        <a href=""><img src="${tblGoods.goodsImageUrl }" alt=""></a>
                                     </div>
                                     <div class="item_title">
-                                        <a href="#">电脑键盘清洁泥笔记本清洁套装软胶汽车内饰清洗清理工具手机液晶屏幕清洁剂去尘除尘清灰胶魔力机械死角神器</a>
+                                        <a href="#">${tblGoods.goodsName }</a>
                                     </div>
                                 </li>
-                                <li class="td td-price">￥199.00</li>
-                                <li class="td td-sum">￥159.00</li>
+                                <li class="td td-price">
+                                	<c:if test="${empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsPrice }
+                                	</c:if>
+                                	<c:if test="${not empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsDiscountPrice }
+                                	</c:if>
+                                </li>
+                                <li class="td td-sum">
+                                	<c:if test="${empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsPrice * count}
+                                	</c:if>
+                                	<c:if test="${not empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsDiscountPrice * count}
+                                	</c:if>
+                                </li>
                                 <li class="td td-amount">
-                                    <input type="text" name="amount" value="x 1" style="max-width:80px;text-align: center;" class="btn" disabled="disabled">
+                                    <input type="text" name="amount" value="x ${count}" style="max-width:80px;text-align: center;" class="btn" disabled="disabled">
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="commit_order">
                         <div class="rightBar">
-                            <div class="total">总计: ￥159.00</div>
+                            <div class="total">
+                            	总计: <c:if test="${empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsPrice * count}
+                                	</c:if>
+                                	<c:if test="${not empty tblGoods.goodsDiscountPrice}">
+                                		￥${tblGoods.goodsDiscountPrice * count}
+                                	</c:if>
+							</div>
                             <div class="order"><a href="">提交订单</a></div>
                         </div>
                     </div>
