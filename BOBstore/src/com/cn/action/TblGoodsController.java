@@ -107,4 +107,18 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping("/goodsdetail")
+	public ModelAndView viewGoodsDetail(Integer goodsID){
+		List<TblGoods> viewGoodsList = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("viewGoodsList",viewGoodsList);
+		
+		modelAndView.setViewName("goods_detail");
+		
+		return modelAndView;
+		
+	}
+	
 }

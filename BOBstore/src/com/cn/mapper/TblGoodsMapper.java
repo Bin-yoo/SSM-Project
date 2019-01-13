@@ -15,4 +15,6 @@ public interface TblGoodsMapper {
 
 	void insertFun(TblGoods tblGoods);
 
+	List<TblGoods> selectByIdFun(Integer goodsID);
+
 }

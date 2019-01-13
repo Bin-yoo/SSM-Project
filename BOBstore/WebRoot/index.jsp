@@ -125,10 +125,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	<c:forEach items="${popularGoodsList}" var="popularGoods">
                             	<dt class="item" >
                                 	<div class="img">
-                                    	<img src="img/2d295ff0a3796aaa6f01c93bc798f861.jpg">
+                                    	<a href="good/goodsdetail?goodsID=${goods.goodsID}"><img src="${goods.goodsImageUrl}"></a>
                                 	</div>
                                 	<div class="text">
-                                    	<p class="g_title">${popularGoods.goodsName}</p>
+                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${goods.goodsID}">${popularGoods.goodsName}</a></p>
                                     	<p class="price">￥
                                     	<span class="pri">${popularGoods.goodsDiscountPrice}</span>
                                     	<span class="num">${popularGoods.goodsSellCount}已销售</span>
