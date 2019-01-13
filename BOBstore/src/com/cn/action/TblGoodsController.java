@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -126,7 +127,9 @@ public class TblGoodsController {
 	
 	@RequestMapping("/index")
 	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery){
-		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,null,5);
+		Random random = new Random();
+		int suibiangao = random.nextInt(16)+1;
+		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,suibiangao,5);
 		List<TblGoods> popularGoodsList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, null, 10);
 		List<TblGoods> popularWineList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 1, 5);
 		List<TblGoods> popularCandyList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 10, 5);
@@ -241,8 +244,17 @@ public class TblGoodsController {
 	public ModelAndView befModifyFun(Integer goodsID,Integer goodsTypeID,TblGoodsQuery tblGoodsQuery){
 		
 		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
+<<<<<<< HEAD
 		List<TblGoodsTypeDetail> detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(goodsTypeID);
 
+=======
+		List<TblGoodsTypeDetail> detailTypeList = null;
+		
+		if(typeList.size() > 0 && tblGoodsQuery.getGoodsTypeID() != null && !tblGoodsQuery.getGoodsTypeID().equals("")){
+			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(tblGoodsQuery.getGoodsTypeID());
+		}
+		
+>>>>>>> 7835ff904eed94f5019212ca393832b6c72a8987
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();

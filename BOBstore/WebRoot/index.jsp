@@ -52,12 +52,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		<span><a href="user/logout">注销用户</a></span>
 	                	</c:if>
 	                	<c:if test="${empty sessionScope.customer}">
-	                		<span><a href="login.jsp">用户登陆</a></span>
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
@@ -66,37 +63,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li>
                             <p class="shop_list_title">酒水饮料</p>
                             <ul class="extraMenu">
-                                <li><a href="/BOBstore/good/viewgoods?detailedTypeID=1">啤酒风味</a></li>
-                                <li><a href="/BOBstore/good/viewgoods?detailedTypeID=2">中国精酿</a></li>
-                                <li><a href="/BOBstore/good/viewgoods?detailedTypeID = 3">各国精酿</a></li>
-                                <li><a href="/BOBstore/good/viewgoods?detailedTypeID = 4">果汁饮料</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=1">啤酒风味</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=2">中国精酿</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=3">各国精酿</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=4">果汁饮料</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">咖啡冲饮</p>
                             <ul class="extraMenu">
-                                <li><a href="/good/viewgoods?detailedTypeID = 5">速溶咖啡</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 6">固体饮料</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=5">速溶咖啡</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=6">固体饮料</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">糖果系列</p>
                             <ul class="extraMenu">
-                                <li><a href="/good/viewgoods?detailedTypeID = 7">软糖</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 8">奶片</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 9">果冻</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 10">硬糖</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 11">巧克力</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=7">软糖</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=8">奶片</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=9">果冻</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=10">硬糖</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=11">巧克力</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">零食糕点</p>
                             <ul class="extraMenu">
-                                <li><a href="/good/viewgoods?detailedTypeID = 12">曲奇饼干</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 13">西式糕点</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 14">传统糕点</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 15">膨化食品</a></li>
-                                <li><a href="/good/viewgoods?detailedTypeID = 16">辣条</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=12">曲奇饼干</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=13">西式糕点</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=14">传统糕点</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=15">膨化食品</a></li>
+                                <li><a href="good/viewgoods?detailedTypeID=16">辣条</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -112,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="theory">
                         <div class="owl-carousel owl-theme">
                             <c:forEach items="${bannerList}" var="banner">
-                    			<img src="${banner.goodsImageUrl}">
+                    			<a href="good/goodsdetail?goodsID=${banner.goodsID}"><img src="${banner.goodsImageUrl}"></a>
                     		</c:forEach>
                         </div>
                         

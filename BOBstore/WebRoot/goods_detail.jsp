@@ -23,7 +23,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/index.js"></script>
    <script type="text/javascript">
-  	$(function(){
+   
+   		function buyNow(goodsID){
+   			var count = $("#Count").val();
+			window.location.href= "/BOBstore/order/buyNow?goodsID=" + goodsID + "&count=" + count;
+		}
+   
+		$(function(){
 			var Count = $('#Count');
 			var Stock = $('#Stock');
 			$('#reduce').click(function(){
@@ -66,7 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="container-fluid mt">
             <div class="aside">
-                <div class="user">
+				<div class="user">
                 	<c:if test="${not empty sessionScope.customer}">
                 		<h4>
 	                    	你好，用户${sessionScope.customer.customerTrueName}
@@ -82,12 +88,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		<span><a href="user/logout">注销用户</a></span>
 	                	</c:if>
 	                	<c:if test="${empty sessionScope.customer}">
-	                		<span><a href="login.jsp">用户登陆</a></span>
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
@@ -163,10 +166,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     	</div>
                                     	<div class="goods_detail_price">
                                     		<input type="hidden" value="${tblGoods.goodsInCount - tblGoods.goodsSellCount}" id="Stock" />
-                        
-                                        	<p>价格:<span class="price">${tblGoods.goodsDiscountPrice}</span></p>
-                                        	
-                                        	<p>原价:<span class="p"><s>${tblGoods.goodsPrice}</s></span></p>
+                        					<c:if test="${empty tblGoods.goodsDiscountPrice}">
+                        						<p>价格:<span class="price">￥ ${tblGoods.goodsPrice}</span></p>
+                        					</c:if>
+                        					<c:if test="${not empty tblGoods.goodsDiscountPrice}">
+                        						<p>价格:<span class="price">￥ ${tblGoods.goodsDiscountPrice}</span></p>
+                                        		<p>原价:<span class="p"><s>￥ ${tblGoods.goodsPrice}</s></span></p>
+                        					</c:if>
                                     	</div>
                                     	<div class="goods_detail_fare">
                                         	配送费:<span class="fare">免配送费</span>
@@ -188,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                    			</c:if>
                                     </div>
                                     <div class="buy">
-                                        <a type="button" class="btn btn-success">立即购买</a>
+                                        <button type="button" class="btn btn-success" onclick="buyNow(${tblGoods.goodsID})">立即购买</button>
                                         <button type="button" class="btn btn-danger">加入购物车</button>
                                     </div>
                                     

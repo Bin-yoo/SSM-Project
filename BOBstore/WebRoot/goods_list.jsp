@@ -59,12 +59,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                		<span><a href="user/logout">注销用户</a></span>
 	                	</c:if>
 	                	<c:if test="${empty sessionScope.customer}">
-	                		<span><a href="login.jsp">用户登陆</a></span>
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">

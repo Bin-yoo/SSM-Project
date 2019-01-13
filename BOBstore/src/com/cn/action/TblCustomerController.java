@@ -57,7 +57,7 @@ public class TblCustomerController {
 	
 	@RequestMapping("/checkName")
 	public @ResponseBody String checkName(String name){
-		boolean flag = tblCustomerBiz.viewByName(name);
+		boolean flag = tblCustomerBiz.checkByCustomerName(name);
 		return flag + "";
 	}
 	

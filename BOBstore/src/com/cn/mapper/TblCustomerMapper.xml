@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from tbl_customer
 	</select>
 	
-	<select id="selectByNameFun" parameterType="String" resultType="tblCustomer">
+	<select id="selectByCustomerNameFun" parameterType="String" resultType="tblCustomer">
 		select * from tbl_customer where customerName=#{name}
 	</select>
 	
