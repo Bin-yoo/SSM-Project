@@ -26,6 +26,7 @@ import com.cn.entity.TblGoods;
 import com.cn.entity.TblGoodsQuery;
 import com.cn.entity.TblGoodsType;
 import com.cn.entity.TblGoodsTypeDetail;
+import com.cn.util.PageBean;
 
 @Controller
 @RequestMapping("/good")
@@ -126,7 +127,7 @@ public class TblGoodsController {
 	
 	@RequestMapping("/index")
 	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery){
-		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,null,4);
+		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,null,5);
 		List<TblGoods> popularGoodsList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, null, 10);
 		List<TblGoods> popularWineList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 1, 5);
 		List<TblGoods> popularCandyList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 10, 5);
@@ -143,4 +144,31 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
+	
+	@RequestMapping("/viewgoods")
+	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID){
+		int limit = 10;
+		PageBean <TblGoods> pageBean = tblGoodsBiz.viewBydetailedTypeID(tblGoodsQuery,currPage, limit,detailedTypeID);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("pageBean",pageBean);
+		modelAndView.setViewName("goods_list");
+	
+		
+		return modelAndView;
+	}
+	
+	@RequestMapping("/goodsdetail")
+	public ModelAndView viewGoodsDetail(Integer goodsID){
+		List<TblGoods> viewGoodsList = tblGoodsBiz.selectGoodsByIdFun(goodsID);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("viewGoodsList",viewGoodsList);
+		
+		modelAndView.setViewName("goods_detail");
+		
+		return modelAndView;
+		
+	}
+	
 }

@@ -60,5 +60,28 @@ public class TblGoodsBiz {
 			return false;
 		}
 	}
+
+	public PageBean<TblGoods> viewBydetailedTypeID(TblGoodsQuery tblGoodsQuery, Integer currPage, int limit,
+			Integer detailedTypeID) {
+		// TODO Auto-generated method stub
+		int totalCount = tblGoodsMapper.selectCountConditionPageFun(tblGoodsQuery);
+		
+		PageBean <TblGoods>pageBean = new PageBean<TblGoods>(totalCount,currPage,limit);
+		if(tblGoodsQuery == null){
+			tblGoodsQuery = new TblGoodsQuery();
+		}
+		tblGoodsQuery.setDetailedTypeID(detailedTypeID);
+		tblGoodsQuery.setPageSize(pageBean.getLimit());
+		tblGoodsQuery.setStartNum((pageBean.getCurrPage() - 1)*pageBean.getLimit());
+		if(totalCount > 0){
+			pageBean.setList(tblGoodsMapper.selectByConditionPageFun(tblGoodsQuery));
+		}
+		
+		return pageBean;
+	}
+
+	public List<TblGoods> selectGoodsByIdFun(Integer goodsID) {
+		return tblGoodsMapper.selectByIdFun(goodsID);
+	}
 	
 }

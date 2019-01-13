@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and dt.detailedTypeID = #{detailedTypeID}
 			</if>
 	</sql>
+	
+	<select id="selectByIdFun" resultType="tblGoods">
+		select * from tbl_goods where goodsID = #{goodsID}
+	</select>
 	<insert id="insertFun" parameterType="tblGoods" useGeneratedKeys="true" keyProperty="goodsID">
 		insert into tbl_goods(goodsName,detailedTypeID,goodsInCount,goodsPrice,goodsDiscountPrice,goodsImageUrl,goodsDescript,goodsDate)
 		

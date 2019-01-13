@@ -1,6 +1,14 @@
+
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+	<base href="<%=basePath%>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -14,12 +22,40 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/index.js"></script>
+   <script type="text/javascript">
+  	$(function(){
+			var Count = $('#Count');
+			var Stock = $('#Stock');
+			$('#reduce').click(function(){
+				if(parseInt(Count.val()) > 1){
+					Count.val(parseInt(Count.val())-1)
+				}	
+			})
+			$('#add').click(function(){
+				if(parseInt(Count.val()) < parseInt(Stock.val())){
+					Count.val(parseInt(Count.val())+1)
+				}
+			})
+			
+			Count.blur(function(){
+				if(parseInt(Count.val()) < 1){
+					parseInt(Count.val(1));
+				}if(isNaN(Count.val())){
+					parseInt(Count.val(1));
+				}if(parseInt(Count.val()) > parseInt(Stock.val())){
+					parseInt(Count.val(parseInt(Stock.val())));
+				}
+				
+			})
+			
+		});
+   </script>
 </head>
 <body>
     <div class="container-fluid">
         <div class="header">
             <div class="shop_title">
-                <h3>弟中弟商店-校园宅基送</h3>
+                <a href="good/index"><h3>弟中弟商店-校园宅基送</h3></a>
             </div>
             <div class="search">
                 <form action="#" class="search_form">
@@ -31,9 +67,24 @@
         <div class="container-fluid mt">
             <div class="aside">
                 <div class="user">
-                    <h4>你好，用户标哥</h4>
+                	<c:if test="${not empty sessionScope.customer}">
+                		<h4>
+	                    	你好，用户${sessionScope.customer.customerTrueName}
+	                    </h4>
+                	</c:if>
+                	<c:if test="${empty sessionScope.customer}">
+                		<h4>
+	                    	你好，请 <a href="login.jsp">登录</a>
+	                    </h4>
+                	</c:if>
                     <div class="controller">
-                        <span><a href="">注销用户</a></span>
+                    	<c:if test="${not empty sessionScope.customer}">
+	                		<span><a href="user/logout">注销用户</a></span>
+	                	</c:if>
+	                	<c:if test="${empty sessionScope.customer}">
+	                		<span><a href="login.jsp">用户登陆</a></span>
+	                		<span><a href="register.jsp">注册账号</a></span>
+	                	</c:if>
                         <br>
                         <span><a href="">账号管理</a></span>
                         <span><a href="">我的商城</a></span>
@@ -41,44 +92,55 @@
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
-                        <li class="hotpush"><a href="">热门推荐</a></li>
+                        <li class="hotpush"><a href="good/index">热门推荐</a></li>
                         <li>
                             <p class="shop_list_title">酒水饮料</p>
                             <ul class="extraMenu">
-                                <li><a href="">啤酒风味</a></li>
-                                <li class="active_li"><a href="">中国精酿</a></li>
-                                <li><a href="">各国精酿</a></li>
-                                <li><a href="">果汁饮料</a></li>
+                            	
+									<li><a href="good/viewgoods?detailedTypeID=1">啤酒风味</a></li>
+									<li><a href="good/viewgoods?detailedTypeID=2">中国精酿</a></li>
+									<li><a href="good/viewgoods?detailedTypeID=3">各国精酿</a></li>
+									<li><a href="good/viewgoods?detailedTypeID=4">果汁饮料</a></li>
+                                
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">咖啡冲饮</p>
                             <ul class="extraMenu">
-                                <li><a href="">速溶咖啡</a></li>
-                                <li><a href="">固体饮料</a></li>
+                            	
+									<li><a href="good/viewgoods?detailedTypeID=5">速溶咖啡</a></li>
+									<li><a href="good/viewgoods?detailedTypeID=6">固体饮料</a></li>
+                                 
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">糖果系列</p>
                             <ul class="extraMenu">
-                                <li><a href="">软糖</a></li>
-                                <li><a href="">硬糖</a></li>
-                                <li><a href="">奶片</a></li>
-                                <li><a href="">果冻</a></li>
-                                <li><a href="">巧克力</a></li>
+									<li ><a href="good/viewgoods?detailedTypeID=7">软糖</a></li>
+
+									<li ><a href="good/viewgoods?detailedTypeID=8">奶片</a></li>
+
+									<li ><a href="good/viewgoods?detailedTypeID=9">果冻</a></li>
+
+									<li ><a href="good/viewgoods?detailedTypeID=10">硬糖</a></li>
+
+									<li ><a href="good/viewgoods?detailedTypeID=11">巧克力</a></li>
+                               
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">零食糕点</p>
                             <ul class="extraMenu">
-                                <li><a href="">曲奇饼干</a></li>
-                                <li><a href="">西式糕点</a></li>
-                                <li><a href="">传统糕点</a></li>
-                                <li><a href="">膨化食品</a></li>
-                                <li><a href="">辣条</a></li>
+                            	
+	                                <li ><a href="good/viewgoods?detailedTypeID=12">曲奇饼干</a></li>
+	                                <li ><a href="good/viewgoods?detailedTypeID=13">西式糕点</a></li>
+	                                <li ><a href="good/viewgoods?detailedTypeID=14">传统糕点</a></li>
+	                                <li ><a href="good/viewgoods?detailedTypeID=15">膨化食品</a></li>
+	                                <li><a href="good/viewgoods?detailedTypeID=16">辣条</a></li>
+                                
                             </ul>
                         </li>
-                    </ul>
+                    </ul> 
                 </div>
                 <div class="shop_cart">
                     <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
@@ -91,48 +153,60 @@
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-2">
                             <div class="goodbox">
-                                <div class="good_img">
-                                    <img src="img/f1B7WoD.jpg" alt="">
-                                </div>
-                                <div class="goods_detail">
-                                    <div class="goods_detail_title">
-                                        <h4>孩之宝 星球大战 黑武士 达斯维达 收藏级 头盔 可变声 现货</h4>
-                                    </div>
-                                    <div class="goods_detail_price">
-                                        <p>价格:<span class="price">¥ 699.00</span></p>
-                                        <p>原价:<span class="p"><s>¥ 699.00</s></span></p>
-                                    </div>
-                                    <div class="goods_detail_fare">
-                                        配送费:<span class="fare">免配送费</span>
-                                    </div>
-                                    <div class="goods_detail_sellcount">
-                                        已卖出: <span class="sellcount">5</span>
-                                    </div>
-                                    <div class="goods_detail_sum">
-                                        数量: <span class="sellcount">
-                                            <button type="button" class="btn btn-default">-</button>
-                                            <input type="text" name="amount" value="1" style="max-width:50px;text-align: center;" class="btn">
-                                            <button type="button" class="btn btn-default">+</button>
-                                        </span>
-                                        库存: 8件
+                            	<c:forEach items="${viewGoodsList}" var="goods">
+                                	<div class="good_img">
+                                    	<img src="${goods.goodsImageUrl}" alt="">
+                                	</div>
+                                	<div class="goods_detail">
+                                    	<div class="goods_detail_title">
+                                        	<h4>${goods.goodsName}</h4>
+                                    	</div>
+                                    	<div class="goods_detail_price">
+                                    		<input type="hidden" value="${goods.goodsInCount - goods.goodsSellCount}" id="Stock" />
+                        
+                                        	<p>价格:<span class="price">${goods.goodsDiscountPrice}</span></p>
+                                        	
+                                        	<p>原价:<span class="p"><s>${goods.goodsPrice}</s></span></p>
+                                    	</div>
+                                    	<div class="goods_detail_fare">
+                                        	配送费:<span class="fare">免配送费</span>
+                                    	</div>
+                                    	<div class="goods_detail_sellcount">
+                                       	 已卖出: <span class="sellcount">${goods.goodsSellCount}</span>
+                                    	</div>
+                                   		<div class="goods_detail_sum">
+                                   			<c:if test="${goods.goodsInCount - goods.goodsSellCount == 0}">
+                                   				已售完
+                                   			</c:if>
+                                   			<c:if test="${goods.goodsInCount - goods.goodsSellCount != 0}">
+                                   				数量: <span class="sellcount">
+			                                            <button type="button" class="btn btn-default" id="reduce">-</button>
+			                                        	<input type="text" name="goodsInCount" value="1" id="Count" style="max-width:80px;text-align: center;" class="btn">
+			                                        	<button type="button" class="btn btn-default" id="add">+</button>
+			                                        </span>
+                                        		库存: ${goods.goodsInCount - goods.goodsSellCount}件
+                                   			</c:if>
                                     </div>
                                     <div class="buy">
                                         <a type="button" class="btn btn-success">立即购买</a>
                                         <button type="button" class="btn btn-danger">加入购物车</button>
                                     </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="goods_des">
                         <div class="panel panel-default">
+                        	<c:forEach items="${viewGoodsList}" var="goods">
                             <div class="panel-heading">
-                                商品详情
+                               	 商品详情
                             </div>
                             <div class="des">
-                                <p>萨达撒大声地撒的</p>
-                                <img src="img/price_bg.png" alt="">
+                                <p>${goods.goodsDescript}</p>
+                                <img src="${goods.goodsImageUrl}" alt="">
                             </div>
+                            </c:forEach>
                         </div>
                     </div>
                 </div>
