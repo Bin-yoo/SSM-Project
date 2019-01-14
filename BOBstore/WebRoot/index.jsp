@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="shop_cart">
                     <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
-                    <a href="#">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    <a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
                 </div>
             </div>
             <div class="main">
@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     	<a href="good/goodsdetail?goodsID=${popularGoods.goodsID}"><img src="${popularGoods.goodsImageUrl}"></a>
                                 	</div>
                                 	<div class="text">
-                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${goods.goodsID}">${popularGoods.goodsName}</a></p>
+                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${popularGoods.goodsID}">${popularGoods.goodsName}</a></p>
                                     	<p class="g_price">￥
                                     	<span class="pri">${popularGoods.goodsPrice}</span>
                                     	<span class="num">${popularGoods.goodsSellCount}已销售</span>

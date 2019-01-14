@@ -28,7 +28,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			var count = $("#Count").val();
 			window.location.href= "/BOBstore/order/buyNow?goodsID=" + goodsID + "&count=" + count;
 		}
-   
+		function addShopCart(goodsID){
+			var count = $("#Count").val();
+			window.location.href= "/BOBstore/shopCart/add?goodsID=" + goodsID + "&count=" + count;
+		}
+   		
 		$(function(){
 			var Count = $('#Count');
 			var Stock = $('#Stock');
@@ -194,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="buy">
                                         <button type="button" class="btn btn-success" onclick="buyNow(${tblGoods.goodsID})">立即购买</button>
-                                        <button type="button" class="btn btn-danger">加入购物车</button>
+                                        <button type="button" class="btn btn-danger" onclick="addShopCart(${tblGoods.goodsID})">加入购物车</button>
                                     </div>
                                     
                                 </div>

@@ -14,8 +14,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>用户商城</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/users.css">
+    <script src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript">
+    	/* function setSum(){
+   			var amount = $('#amount');
+			var goodsPrice = $('#goodsPrice').text();
+			var goodsDiscountPrice = $('#goodsDiscountPrice').text();
+			var sum = 0;
+			if(!isNaN(goodsDiscountPrice)){
+				sum = amount.val() * goodsDiscountPrice;
+			}
+		} */
+    	$(function(){
+			var Amount = $('#Amount');
+			var Stock = $('#Stock');
+			/* var sum = $('sum').test(); */
+			/* var goodsPrice = $('goodsPrice').test();
+			var goodsDiscountPrice = $('goodsDiscountPrice').test(); */
+			
+			$('#reduce').click(function(){
+				if(parseInt(Amount.val()) > 1){
+					Amount.val(parseInt(Amount.val())-1)
+				}	
+			})
+			$('#add').click(function(){
+				if(parseInt(Amount.val()) < parseInt(Stock.val())){
+					Amount.val(parseInt(Amount.val())+1)
+					
+				}
+			})
+			
+			amount.blur(function(){
+				if(parseInt(Amount.val()) < 1){
+					parseInt(Amount.val(1));
+				}if(isNaN(Amount.val())){
+					parseInt(Amount.val(1));
+				}if(parseInt(Amount.val()) > parseInt(Stock.val())){
+					parseInt(Amount.val(parseInt(Stock.val())));
+				}
+				
+			})
+		});
+    </script>
 </head>
 <body>
+	
+	
     <div class="container-fluid">
         <div class="header">
             <div class="shop_title">
@@ -65,9 +109,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="order_list">
-                        <div class="item">
+                    	<c:forEach items="${shopcartList }" var="good">
+                        <div class="item">	
                             <ul class="item-content">
                                 <li class="td td-chk">
+                                	
                                     <input type="checkbox" name="select" value="">
                                 </li>
                                 <li class="td td-item">
@@ -75,21 +121,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
                                     </div>
                                     <div class="item_title">
-                                        <a href="#">电脑键盘清洁泥笔记本清洁套装软胶汽车内饰清洗清理工具手机液晶屏幕清洁剂去尘除尘清灰胶魔力机械死角神器</a>
+                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
+                                        <a href="#">${good.goodsName}</a>
                                     </div>
                                 </li>
-                                <li class="td td-price">￥199.00</li>
-                                <li class="td td-amount">
-                                    <button type="button" class="btn btn-default">-</button>
-                                    <input type="text" name="amount" value="1" style="max-width:80px;text-align: center;" class="btn">
-                                    <button type="button" class="btn btn-default">+</button>
+                                <li class="td td-price">
+                                	<c:if test="${empty good.goodsDiscountPrice}">
+                  						￥ <span id="goodsPrice">${good.goodsPrice}</span>
+                  					</c:if>
+                  					<c:if test="${not empty good.goodsDiscountPrice}">
+                  						￥ <span id="goodsDiscountPrice">${good.goodsDiscountPrice}</span>
+                  					</c:if>
                                 </li>
-                                <li class="td td-sum">￥159.00</li>
+                                <li class="td td-amount">
+                                    <button type="button" class="btn btn-default" id="reduce">-</button>
+                                    <input type="text" name="amount" value="1" id="Amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <button type="button" class="btn btn-default" id="add">+</button>
+                                </li>
+                                <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">
                                     <a href="#" class="btn btn-danger">删除</a>
                                 </li>
                             </ul>
                         </div>
+                        </c:forEach>
                     </div>
                     <div class="commit_order">
                         <div class="selectall">
