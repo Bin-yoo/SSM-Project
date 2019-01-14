@@ -147,8 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="shop_cart">
                     <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
-                    <a href="#">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">3</span></a>
-                    <span class="shop_cart_total">¥200</span>
+                    <a href="#">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
                 </div>
             </div>
             <div class="main">

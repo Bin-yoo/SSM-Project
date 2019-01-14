@@ -22,11 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cn.biz.TblGoodsBiz;
 import com.cn.biz.TblGoodsTypeBiz;
 import com.cn.biz.TblGoodsTypeDetailBiz;
+import com.cn.biz.TblShopcartBiz;
 import com.cn.entity.TblAdmin;
+import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
 import com.cn.entity.TblGoodsQuery;
 import com.cn.entity.TblGoodsType;
 import com.cn.entity.TblGoodsTypeDetail;
+import com.cn.entity.TblShopcart;
 import com.cn.util.PageBean;
 
 @Controller
@@ -39,6 +42,8 @@ public class TblGoodsController {
 	TblGoodsTypeDetailBiz tblGoodsTypeDetailBiz;
 	@Autowired
 	TblGoodsBiz tblGoodsBiz;
+	@Autowired
+	TblShopcartBiz tblShopcartBiz;
 	/**
 	 * 
 	 * @param tblGoods
@@ -126,7 +131,17 @@ public class TblGoodsController {
 	}
 	
 	@RequestMapping("/index")
-	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery){
+	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery,HttpSession session){
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(customer == null){
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+		
+		
 		Random random = new Random();
 		int suibiangao = random.nextInt(16)+1;
 		List<TblGoods> bannerList = tblGoodsBiz.viewHotGoods(tblGoodsQuery,suibiangao,5);
@@ -135,8 +150,9 @@ public class TblGoodsController {
 		List<TblGoods> popularCandyList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 10, 5);
 		List<TblGoods> popularSnacksList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 15, 5);
 		
+		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
 		
-		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("ShopcartCount",ShopcartCount);
 		modelAndView.addObject("bannerList",bannerList);
 		modelAndView.addObject("popularGoodsList",popularGoodsList);
 		modelAndView.addObject("popularWineList",popularWineList);
@@ -148,11 +164,25 @@ public class TblGoodsController {
 	}
 	
 	@RequestMapping("/viewgoods")
-	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID){
+	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID,HttpSession session){
 		int limit = 10;
+		
+		
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
 		PageBean <TblGoods> pageBean = tblGoodsBiz.viewBydetailedTypeID(tblGoodsQuery,currPage, limit,detailedTypeID);
 		
+		
 		ModelAndView modelAndView = new ModelAndView();
+		
+		if(customer == null){
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+		
+		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
+		
+		
+		modelAndView.addObject("ShopcartCount",ShopcartCount);
 		modelAndView.addObject("pageBean",pageBean);
 		modelAndView.setViewName("goods_list");
 	
@@ -161,13 +191,21 @@ public class TblGoodsController {
 	}
 	
 	@RequestMapping("/goodsdetail")
-	public ModelAndView viewGoodsDetail(Integer goodsID){
+	public ModelAndView viewGoodsDetail(Integer goodsID,HttpSession session){
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("tblGoods",tblGoods);
+		if(customer == null){
+			modelAndView.setViewName("login");
+			return modelAndView;
+		}
+		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
 		
+		
+		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.setViewName("goods_detail");
+		modelAndView.addObject("ShopcartCount",ShopcartCount);
 		
 		return modelAndView;
 		
@@ -244,17 +282,9 @@ public class TblGoodsController {
 	public ModelAndView befModifyFun(Integer goodsID,Integer goodsTypeID,TblGoodsQuery tblGoodsQuery){
 		
 		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
-<<<<<<< HEAD
+		
 		List<TblGoodsTypeDetail> detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(goodsTypeID);
 
-=======
-		List<TblGoodsTypeDetail> detailTypeList = null;
-		
-		if(typeList.size() > 0 && tblGoodsQuery.getGoodsTypeID() != null && !tblGoodsQuery.getGoodsTypeID().equals("")){
-			detailTypeList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(tblGoodsQuery.getGoodsTypeID());
-		}
-		
->>>>>>> 7835ff904eed94f5019212ca393832b6c72a8987
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();

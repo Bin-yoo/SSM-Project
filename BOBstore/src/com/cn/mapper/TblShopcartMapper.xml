@@ -8,5 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllFun" resultType="tblShopcart">
 		select * from tbl_street
 	</select>
+	<select id="selectShopcartCountByName" resultType="int">
+		select count(*) from tbl_shopcart where customerName=#{customerName}
+	</select>
 </mapper>
 

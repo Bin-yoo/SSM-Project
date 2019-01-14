@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.cn.biz.TblCustomerBiz;
+import com.cn.biz.TblShopcartBiz;
 import com.cn.entity.TblCustomer;
+import com.cn.entity.TblShopcart;
 
 @Controller
 @RequestMapping("/user")
@@ -19,11 +21,14 @@ public class TblCustomerController {
 
 	@Autowired
 	TblCustomerBiz tblCustomerBiz;
+	@Autowired
+	TblShopcartBiz tblShopcartBiz;
 	
 	@RequestMapping("/login")
 	public ModelAndView Login(@ModelAttribute("name")String name,String password,HttpSession session){
 		
 		TblCustomer tblCustomer = tblCustomerBiz.login(name, password);
+		
 		
 		ModelAndView modelAndView = new ModelAndView();
 		if(tblCustomer==null){
@@ -31,6 +36,9 @@ public class TblCustomerController {
 			modelAndView.setViewName("login");
 		}
 		else{
+			
+			
+			
 			session.setAttribute("customer", tblCustomer);
 //			modelAndView.setViewName("redirect:../house/viewByConditionPage");
 			modelAndView.setViewName("redirect:../good/index");
