@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
 import com.cn.entity.TblShopcart;
+import com.cn.entity.TblShopcartQuery;
 import com.cn.mapper.TblShopcartMapper;
 
 @Service
@@ -37,9 +38,8 @@ public class TblShopcartBiz {
 		
 	}
 
-	public List<TblGoods> selectAllFun(TblCustomer customer) {
-		return tblShopcartMapper.selectAllByName(customer.getCustomerName());
-		
+	public List<TblShopcartQuery> selectAllFun(TblCustomer customer) {
+		return tblShopcartMapper.selectAllByName(customer.getCustomerName());	
 	}
 	
 }

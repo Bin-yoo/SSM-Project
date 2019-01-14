@@ -14,6 +14,7 @@ import com.cn.biz.TblShopcartBiz;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
 import com.cn.entity.TblShopcart;
+import com.cn.entity.TblShopcartQuery;
 
 @Controller
 @RequestMapping("/shopCart")
@@ -32,7 +33,7 @@ public class TblShopCartController
 			return modelAndView;
 		}
 		
-		List<TblGoods> shopcartList=tblShopcartBiz.selectAllFun(customer);
+		List<TblShopcartQuery> shopcartList=tblShopcartBiz.selectAllFun(customer);
 		
 		modelAndView.addObject("shopcartList",shopcartList);
 		modelAndView.setViewName("customer_shop_cart");

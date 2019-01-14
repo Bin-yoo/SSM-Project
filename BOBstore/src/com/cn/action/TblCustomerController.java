@@ -1,5 +1,7 @@
 package com.cn.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cn.biz.TblCustomerBiz;
 import com.cn.biz.TblShopcartBiz;
 import com.cn.entity.TblCustomer;
+import com.cn.entity.TblGoods;
 import com.cn.entity.TblShopcart;
 
 @Controller
@@ -23,6 +26,8 @@ public class TblCustomerController {
 	TblCustomerBiz tblCustomerBiz;
 	@Autowired
 	TblShopcartBiz tblShopcartBiz;
+	
+	
 	
 	@RequestMapping("/login")
 	public ModelAndView Login(@ModelAttribute("name")String name,String password,HttpSession session){

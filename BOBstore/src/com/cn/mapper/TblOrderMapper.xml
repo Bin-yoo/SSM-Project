@@ -8,5 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllFun" resultType="tblOrder">
 		select * from tbl_street
 	</select>
+	<select id="selectAllByName" parameterType="String" resultType="tblOrderQuery">
+		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
+	</select>
 </mapper>
 

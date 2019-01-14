@@ -1,4 +1,6 @@
-package com.cn.action;
+ package com.cn.action;
+
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -12,6 +14,8 @@ import com.cn.biz.TblGoodsBiz;
 import com.cn.biz.TblOrderBiz;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
+import com.cn.entity.TblOrder;
+import com.cn.entity.TblOrderQuery;
 
 @Controller
 @RequestMapping("/order")
@@ -23,6 +27,22 @@ public class TblOrderController {
 	TblGoodsBiz tblGoodsBiz;
 	@Autowired
 	TblCustomerBiz tblCustomerBiz;
+	
+	@RequestMapping("/allOrder")
+	public ModelAndView allOrder(HttpSession session){
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		
+		List<TblOrderQuery> orderList=tblOrderBiz.selectAllFun(customer);
+		
+		modelAndView.addObject("orderList",orderList);
+		modelAndView.setViewName("customer_order");
+		
+		return modelAndView;
+	}
 	
 	@RequestMapping("/setOrder")
 	public ModelAndView setOrder(){

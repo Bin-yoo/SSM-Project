@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.cn.entity.TblGoods;
 import com.cn.entity.TblShopcart;
+import com.cn.entity.TblShopcartQuery;
 
 public interface TblShopcartMapper {
 
@@ -12,6 +13,6 @@ public interface TblShopcartMapper {
 
 	void insertFun(TblShopcart tblShopcart);
 
-	List<TblGoods> selectAllByName(String customerName);
+	List<TblShopcartQuery> selectAllByName(String customerName);
 
 }

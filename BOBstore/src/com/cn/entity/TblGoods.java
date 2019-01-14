@@ -19,29 +19,6 @@ public class TblGoods {
 	private String goodsTypeName;
 	private String detailedTypeName;
 	
-	
-	private Integer shopcartID;
-	private String customerName;
-	private Integer goodCount;
-	
-	public Integer getShopcartID() {
-		return shopcartID;
-	}
-	public void setShopcartID(Integer shopcartID) {
-		this.shopcartID = shopcartID;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-	public Integer getGoodCount() {
-		return goodCount;
-	}
-	public void setGoodCount(Integer goodCount) {
-		this.goodCount = goodCount;
-	}
 	public String getGoodsTypeName() {
 		return goodsTypeName;
 	}

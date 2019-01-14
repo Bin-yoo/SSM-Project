@@ -62,6 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="order_list">
+                    <c:forEach items="orderList" var="order">
                         <div class="item">
                             <ul class="item-content">
                                 <li class="td td-item">
@@ -69,7 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
                                     </div>
                                     <div class="item_title">
-                                        <a href="#">电脑键盘清洁泥笔记本清洁套装软胶汽车内饰清洗清理工具手机液晶屏幕清洁剂去尘除尘清灰胶魔力机械死角神器</a>
+                      
+                                        <a href="#">${order}</a>
                                     </div>
                                 </li>
                                 <li class="td td-price">￥199.00</li>
@@ -85,6 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                             </ul>
                         </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
