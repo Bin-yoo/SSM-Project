@@ -81,15 +81,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="cus_msg">
                     	<div class="cus_name form-inline">
                     		<label for="customerAddressee" class="control-label">收件人:</label>
-                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="${tblCustomer.customerTrueName}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(1)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="${sessionScope.customer.customerTrueName}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(1)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_address form-inline"">
                     		<label for="customerAddress" class="control-label">收件地址:</label>
-                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="${tblCustomer.customerAddress}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(2)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="${sessionScope.customer.customerAddress}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(2)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_phone form-inline"">
                     		<label for="customerPhone" class="control-label">联系电话:</label>
-                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="${tblCustomer.customerPhone}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(3)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="${sessionScope.customer.customerPhone}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(3)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     </div>
                     <div class="userbox check">

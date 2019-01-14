@@ -40,9 +40,7 @@ public class TblOrderController {
 		}
 		
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
-		TblCustomer customer = tblCustomerBiz.viewByCustomerName(tblCustomer.getCustomerName());
-		
-		modelAndView.addObject("tblCustomer",customer);
+
 		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.addObject("count",count);
 		modelAndView.setViewName("customer_order_check");

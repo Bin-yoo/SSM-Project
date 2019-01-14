@@ -15,7 +15,8 @@ public class Uploader {
 
 	public String upload(@RequestParam("picture") MultipartFile picture, HttpServletRequest request) {
 		 
-        //获取文件在服务器的储存位置
+
+		//获取文件在服务器的储存位置
         String path = request.getSession().getServletContext().getRealPath("/upload");
         File filePath = new File(path);
         System.out.println("文件的保存路径：" + path);
@@ -43,18 +44,17 @@ public class Uploader {
  
         //在指定路径下创建一个文件
         File targetFile = new File(path, fileName);
- 
-        //将文件保存到服务器指定位置
         try {
             picture.transferTo(targetFile);
             System.out.println("上传成功");
             //将文件在服务器的存储路径返回
-            return (path +"/"+ fileName);
+            return "./upload/"+fileName;
         } catch (IOException e) {
             System.out.println("上传失败");
             e.printStackTrace();
-            return ("上传失败");
+            return null;
         }
+        
     }
 	
 }

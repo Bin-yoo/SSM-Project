@@ -31,6 +31,7 @@ import com.cn.entity.TblGoodsType;
 import com.cn.entity.TblGoodsTypeDetail;
 import com.cn.entity.TblShopcart;
 import com.cn.util.PageBean;
+import com.cn.util.Uploader;
 
 @Controller
 @RequestMapping("/good")
@@ -60,41 +61,11 @@ public class TblGoodsController {
 			return "redirect:/admin.jsp";
 		}
 		
-		//获取文件在服务器的储存位置
-        String path = request.getSession().getServletContext().getRealPath("/upload");
-        File filePath = new File(path);
-        System.out.println("文件的保存路径：" + path);
-        if (!filePath.exists() && !filePath.isDirectory()) {
-            System.out.println("目录不存在，创建目录:" + filePath);
-            filePath.mkdir();
-        }
- 
-        //获取原始文件名称(包含格式)
-        String originalFileName = picture.getOriginalFilename();
-        System.out.println("原始文件名称：" + originalFileName);
- 
-        //获取文件类型，以最后一个`.`为标识
-        String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-        System.out.println("文件类型：" + type);
-        //获取文件名称（不包含格式）
-        String name = originalFileName.substring(0, originalFileName.lastIndexOf("."));
- 
-        //设置文件新名称: 当前时间+文件名称（不包含格式）
-        Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String date = sdf.format(d);
-        String fileName = date + name + "." + type;
-        System.out.println("新文件名称：" + fileName);
- 
-        //在指定路径下创建一个文件
-        File targetFile = new File(path, fileName);
- 
-        //将文件保存到服务器指定位置
+		Uploader uploader = new Uploader();
+		String path = uploader.upload(picture, request);
+		
         try {
-            picture.transferTo(targetFile);
-            System.out.println("上传成功");
-            //将文件在服务器的存储路径返回
-            tblGoods.setGoodsImageUrl("./upload/"+fileName);
+            tblGoods.setGoodsImageUrl(path);
             boolean flag = tblGoodsBiz.addFun(tblGoods);
     		if(flag){
     			return "redirect:/admin/goods";
@@ -103,7 +74,7 @@ public class TblGoodsController {
     			model.addAttribute("tblGoods", tblGoods);
     			return "/admin_addgood";
     		}
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("上传失败");
             e.printStackTrace();
             model.addAttribute("errMsg","保存失败");
@@ -136,11 +107,10 @@ public class TblGoodsController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		if(customer == null){
-			modelAndView.setViewName("login");
-			return modelAndView;
+		if(customer != null){
+			int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
+			modelAndView.addObject("ShopcartCount",ShopcartCount);
 		}
-		
 		
 		Random random = new Random();
 		int suibiangao = random.nextInt(16)+1;
@@ -150,9 +120,6 @@ public class TblGoodsController {
 		List<TblGoods> popularCandyList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 10, 5);
 		List<TblGoods> popularSnacksList = tblGoodsBiz.viewHotGoods(tblGoodsQuery, 15, 5);
 		
-		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
-		
-		modelAndView.addObject("ShopcartCount",ShopcartCount);
 		modelAndView.addObject("bannerList",bannerList);
 		modelAndView.addObject("popularGoodsList",popularGoodsList);
 		modelAndView.addObject("popularWineList",popularWineList);
@@ -166,24 +133,21 @@ public class TblGoodsController {
 	@RequestMapping("/viewgoods")
 	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID,HttpSession session){
 		int limit = 10;
-		
-		
+
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
 		PageBean <TblGoods> pageBean = tblGoodsBiz.viewBydetailedTypeID(tblGoodsQuery,currPage, limit,detailedTypeID);
-		
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		
-		if(customer == null){
-			modelAndView.setViewName("login");
-			return modelAndView;
+		if(customer != null){
+			int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
+			modelAndView.addObject("ShopcartCount",ShopcartCount);
 		}
 		
-		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
-		
-		
-		modelAndView.addObject("ShopcartCount",ShopcartCount);
+		List<TblGoods> glist = pageBean.getList();
+		TblGoods tgoods = glist.get(0);
 		modelAndView.addObject("pageBean",pageBean);
+		modelAndView.addObject("detailedTypeID",tgoods.getDetailedTypeID());
 		modelAndView.setViewName("goods_list");
 	
 		
@@ -226,41 +190,13 @@ public class TblGoodsController {
 			return "redirect:/admin.jsp";
 		}
 		
-		//获取文件在服务器的储存位置
-        String path = request.getSession().getServletContext().getRealPath("/upload");
-        File filePath = new File(path);
-        System.out.println("文件的保存路径：" + path);
-        if (!filePath.exists() && !filePath.isDirectory()) {
-            System.out.println("目录不存在，创建目录:" + filePath);
-            filePath.mkdir();
-        }
- 
-        //获取原始文件名称(包含格式)
-        String originalFileName = picture.getOriginalFilename();
-        System.out.println("原始文件名称：" + originalFileName);
- 
-        //获取文件类型，以最后一个`.`为标识
-        String type = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-        System.out.println("文件类型：" + type);
-        //获取文件名称（不包含格式）
-        String name = originalFileName.substring(0, originalFileName.lastIndexOf("."));
- 
-        //设置文件新名称: 当前时间+文件名称（不包含格式）
-        Date d = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        String date = sdf.format(d);
-        String fileName = date + name + "." + type;
-        System.out.println("新文件名称：" + fileName);
- 
-        //在指定路径下创建一个文件
-        File targetFile = new File(path, fileName);
- 
-        //将文件保存到服务器指定位置
+		if(picture != null){
+			Uploader uploader = new Uploader();
+			String path = uploader.upload(picture, request);
+			tblGoods.setGoodsImageUrl(path);
+		}
+		
         try {
-            picture.transferTo(targetFile);
-            System.out.println("上传成功");
-            //将文件在服务器的存储路径返回
-            tblGoods.setGoodsImageUrl("./upload/"+fileName);
             boolean flag = tblGoodsBiz.modifyFun(tblGoods);
     		if(flag){
     			return "redirect:/admin/goods";
@@ -269,7 +205,7 @@ public class TblGoodsController {
     			model.addAttribute("tblGoods", tblGoods);
     			return "/admin_updategood";
     		}
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println("上传失败");
             e.printStackTrace();
             model.addAttribute("errMsg","保存失败");
@@ -288,7 +224,6 @@ public class TblGoodsController {
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		
 		ModelAndView modelAndView = new ModelAndView();
-		
 		
 		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.addObject("typeList",typeList);
