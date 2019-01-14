@@ -36,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(document.form1.goodsDescript.value == ""){
 				errMsg = errMsg+"商品描述不能为空<br>"
 			}
+			if($('#i-file').val().length == 0){
+				errMsg = errMsg+"必须上传图片<br>"
+			}
 				
 			if (errMsg == ""){
 				return true;

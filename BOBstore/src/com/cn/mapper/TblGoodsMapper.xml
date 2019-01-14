@@ -23,8 +23,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 	</sql>
 	<update id="updateFun" parameterType="TblGoods">
-		update tbl_goods set goodsID=#{goodsID},goodsName=#{goodsName},detailedTypeID=#{detailedTypeID},goodsPrice=#{goodsPrice},
+		update tbl_goods set goodsName=#{goodsName},detailedTypeID=#{detailedTypeID},goodsPrice=#{goodsPrice},
 		goodsInCount=#{goodsInCount},goodsSellCount=#{goodsSellCount},goodsDescript=#{goodsDescript},goodsImageUrl=#{goodsImageUrl},goodsDate=#{goodsDate},goodsDiscountPrice=#{goodsDiscountPrice}
+		where goodsID=#{goodsID};
 	</update>
 	
 	<delete id="delectFun">

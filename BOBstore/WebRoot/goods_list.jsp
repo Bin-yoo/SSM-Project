@@ -70,56 +70,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li>
                             <p class="shop_list_title">酒水饮料</p>
                             <ul class="extraMenu">
-                            	<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-									<li ${i.detailedTypeID == 1 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=1">啤酒风味</a></li>
-									<li ${i.detailedTypeID == 2 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=2">中国精酿</a></li>
-									<li ${i.detailedTypeID == 3 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=3">各国精酿</a></li>
-									<li ${i.detailedTypeID == 4 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=4">果汁饮料</a></li>
-                                </c:forEach>
+								<li ${detailedTypeID == 1 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=1">啤酒风味</a></li>
+								<li ${detailedTypeID == 2 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=2">中国精酿</a></li>
+								<li ${detailedTypeID == 3 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=3">各国精酿</a></li>
+								<li ${detailedTypeID == 4 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=4">果汁饮料</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">咖啡冲饮</p>
                             <ul class="extraMenu">
-                            	<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-									<li ${i.detailedTypeID == 5 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=5">速溶咖啡</a></li>
-									<li ${i.detailedTypeID == 6 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=6">固体饮料</a></li>
-                                </c:forEach> 
+								<li ${detailedTypeID == 5 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=5">速溶咖啡</a></li>
+								<li ${detailedTypeID == 6 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=6">固体饮料</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">糖果系列</p>
                             <ul class="extraMenu">
-                            	<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-									<li ${i.detailedTypeID == 7 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=7">软糖</a></li>
-
-									<li ${i.detailedTypeID == 8 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=8">奶片</a></li>
-
-									<li ${i.detailedTypeID == 9 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=9">果冻</a></li>
-
-									<li ${i.detailedTypeID == 10 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=10">硬糖</a></li>
-
-									<li ${i.detailedTypeID == 11 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=11">巧克力</a></li>
-                                </c:forEach>
+								<li ${detailedTypeID == 7 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=7">软糖</a></li>
+								<li ${detailedTypeID == 8 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=8">奶片</a></li>
+								<li ${detailedTypeID == 9 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=9">果冻</a></li>
+								<li ${detailedTypeID == 10 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=10">硬糖</a></li>
+								<li ${detailedTypeID == 11 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=11">巧克力</a></li>
                             </ul>
                         </li>
                         <li>
                             <p class="shop_list_title">零食糕点</p>
                             <ul class="extraMenu">
-                            	<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-	                                <li ${i.detailedTypeID == 12 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=12">曲奇饼干</a></li>
-	                                <li ${i.detailedTypeID == 13 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=13">西式糕点</a></li>
-	                                <li ${i.detailedTypeID == 14 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=14">传统糕点</a></li>
-	                                <li ${i.detailedTypeID == 15 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=15">膨化食品</a></li>
-	                                <li ${i.detailedTypeID == 16 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=16">辣条</a></li>
-                                </c:forEach>
+                                <li ${detailedTypeID == 12 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=12">曲奇饼干</a></li>
+                                <li ${detailedTypeID == 13 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=13">西式糕点</a></li>
+                                <li ${detailedTypeID == 14 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=14">传统糕点</a></li>
+                                <li ${detailedTypeID == 15 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=15">膨化食品</a></li>
+                                <li ${detailedTypeID == 16 ? "class='active_li'" : ""}><a href="good/viewgoods?detailedTypeID=16">辣条</a></li>
                             </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="shop_cart">
                     <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
+<<<<<<< HEAD
                     <a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+=======
+                    <c:if test="${not empty ShopcartCount}">
+                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    </c:if>
+                    <c:if test="${empty ShopcartCount}">
+                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
+                    </c:if>
+>>>>>>> 6868a712d0b6d79e85f792155aa9f5c15e75a6a1
                 </div>
             </div>
             <div class="main">
@@ -159,28 +156,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</c:if>
 								<c:if test="${pageBean.currPage > 1 }">
 									<li>
-										<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-											<a href="javascript:void(0)" onclick="doSearch(${i.detailedTypeID},1)">
-		                                        <span aria-hidden="true">首页</span>
-		                                    </a>
-										</c:forEach>
-										<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-											<a href="javascript:void(0)" onclick="doSearch(${i.detailedTypeID},${pageBean.currPage - 1 })">
+										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},1)">
+	                                        <span aria-hidden="true">首页</span>
+	                                    </a>
+										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${pageBean.currPage - 1 })">
 	                                        <span aria-hidden="true">&laquo;</span>
 	                                    </a>
-										</c:forEach>
                                     </li>
 								</c:if>
 								<c:if test="${pageBean.totalPage <= 5}">
-								    <c:forEach begin="1" end="${pageBean.totalPage}" step="1" var="i" varStatus="status">
-								    	<c:forEach begin="1" end="1" step="1" var="a" items="${pageBean.list}">
-									        <c:if test="${pageBean.currPage == i}">
-								        		<li><a href="javascript:void(0)" onclick="doSearch(${a.detailedTypeID},${status.index })">${status.index}</a></li>
-									        </c:if>
-									        <c:if test="${pageBean.currPage != i}">
-								        		<li><a href="javascript:void(0)" onclick="doSearch(${a.detailedTypeID},${status.index })">${status.index}</a></li>
-									        </c:if>
-								        </c:forEach>
+								    <c:forEach begin="1" end="${pageBean.totalPage}" step="1" var="i">
+								        <c:if test="${pageBean.currPage == i}">
+							        		<li><a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${i })">${i }</a></li>
+								        </c:if>
+								        <c:if test="${pageBean.currPage != i}">
+							        		<li><a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${i })">${i }</a></li>
+								        </c:if>
 								    </c:forEach>
 								</c:if>
 								<c:if test="${pageBean.totalPage > 5}">
@@ -222,16 +213,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</c:if>
 								<c:if test="${pageBean.currPage < pageBean.totalPage }">
 									<li>
-										<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-											<a href="javascript:void(0)" aria-label="Next"  onclick="doSearch(${i.detailedTypeID},${pageBean.currPage + 1 })">
-		                                        <span aria-hidden="true">&raquo;</span>
-		                                    </a>
-										</c:forEach>
-	                                    <c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-											<a href="javascript:void(0)" onclick="doSearch(${i.detailedTypeID},${pageBean.totalPage })">
-												<span aria-hidden="true">末页</span>
-											</a>
-										</c:forEach>
+										<a href="javascript:void(0)" aria-label="Next"  onclick="doSearch(${detailedTypeID},${pageBean.currPage + 1 })">
+	                                        <span aria-hidden="true">&raquo;</span>
+	                                    </a>
+										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${pageBean.totalPage })">
+											<span aria-hidden="true">末页</span>
+										</a>
 	                                </li>
 								</c:if>
 								<li>

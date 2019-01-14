@@ -82,6 +82,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 			})
 			
+			$("#showbtn").click(function(){
+			    $("#old_img").show();
+			    $("#hidebtn").show();
+			    $("#showbtn").hide();
+			});
+			
+			$("#hidebtn").click(function(){
+			    $("#old_img").hide();
+			    $("#hidebtn").hide();
+			    $("#showbtn").show();
+			});
+			
 		});
 	</script>
 
@@ -198,19 +210,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <textarea class="form-control" name="goodsDescript" id="goodsDescript" >${tblGoods.goodsDescript}</textarea>
                                     </div>
                                 </div>
-                                <div class="from-group">
+                                <div class="from-group" id="old_img" style="display: none;">
                                     <div class="col-sm-2">
                                         <label for="file" class="button default"> 商品图片:</label>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <img alt="${tblGoods.goodsDescript}" src="${tblGoods.goodsImageUrl}" class="img-responsive">
+                                    </div>
+                                </div>
+                                <div class="from-group">
+                                    <div class="col-sm-2">
+                                        <label for="file" class="button default"> 上传新图片:</label>
                                     </div>
                                     <div class="col-sm-4">
                                         <input id='goodsImageUrl' class="form-control" disabled>
                                     </div>
-                                    <div class="col-sm-1">
-                                        <input type="button" id="i-check" value="浏览" class="btn" onclick="$('#i-file').click();">
+                                    <div class="col-sm-2">
+                                        <input type="button" id="i-check" value="上传新图片" class="btn" onclick="$('#i-file').click();">
                                         <input type="file" id='i-file' name="i-file" onchange="$('#goodsImageUrl').val($('#i-file').val())" style="display: none">
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" class="btn btn-link">点击查看图片</button>
+                                        <input type="button" class="btn" id="showbtn" value="查看当前图片">
+                                        <input type="button" class="btn" id="hidebtn" value="查看当前图片" style="display: none;">
                                     </div>
                                 </div>
                                 <div class="from-group lastdiv">
