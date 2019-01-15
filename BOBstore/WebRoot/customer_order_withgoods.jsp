@@ -31,12 +31,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="container-fluid mt">
             <div class="aside">
                 <div class="user">
-                    <h4>你好，用户标哥</h4>
+                	<c:if test="${not empty sessionScope.customer}">
+                		<h4>
+	                    	你好，用户${sessionScope.customer.customerTrueName}
+	                    </h4>
+                	</c:if>
+                	<c:if test="${empty sessionScope.customer}">
+                		<h4>
+	                    	你好，请 <a href="login.jsp">登录</a>
+	                    </h4>
+                	</c:if>
                     <div class="controller">
-                        <span><a href="">注销用户</a></span>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                    	<c:if test="${not empty sessionScope.customer}">
+	                		<span><a href="user/logout">注销用户</a></span>
+	                	</c:if>
+	                	<c:if test="${empty sessionScope.customer}">
+	                		<span><a href="register.jsp">注册账号</a></span>
+	                	</c:if>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">

@@ -27,17 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		} */
     	$(function(){
 			var Amount = $('#Amount');
-			var Stock = $('#Stock');
-			/* var sum = $('sum').test(); */
-			/* var goodsPrice = $('goodsPrice').test();
-			var goodsDiscountPrice = $('goodsDiscountPrice').test(); */
+			var Stock = $('.Stock');
 			
-			$('#reduce').click(function(){
+			$('.reduce').click(function(){
 				if(parseInt(Amount.val()) > 1){
 					Amount.val(parseInt(Amount.val())-1)
 				}	
 			})
-			$('#add').click(function(){
+			$('.add').click(function(){
 				if(parseInt(Amount.val()) < parseInt(Stock.val())){
 					Amount.val(parseInt(Amount.val())+1)
 					
@@ -75,17 +72,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="container-fluid mt">
             <div class="aside">
                 <div class="user">
-                    <h4>你好，用户标哥</h4>
+                	<c:if test="${not empty sessionScope.customer}">
+                		<h4>
+	                    	你好，用户${sessionScope.customer.customerTrueName}
+	                    </h4>
+                	</c:if>
+                	<c:if test="${empty sessionScope.customer}">
+                		<h4>
+	                    	你好，请 <a href="login.jsp">登录</a>
+	                    </h4>
+                	</c:if>
                     <div class="controller">
-                        <span><a href="">注销用户</a></span>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                    	<c:if test="${not empty sessionScope.customer}">
+	                		<span><a href="user/logout">注销用户</a></span>
+	                	</c:if>
+	                	<c:if test="${empty sessionScope.customer}">
+	                		<span><a href="register.jsp">注册账号</a></span>
+	                	</c:if>
+                        <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
-                        <li class="active"><a href="">我的购物车</a></li>
+                        <li class="active"><a href="shopCart/viewShopCart">我的购物车</a></li>
                         <li><a href="order/allOrder">所有订单</a></li>
                         <li><a href="">待发货</a></li>
                         <li><a href="">待收货</a></li>
@@ -121,7 +130,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
                                     </div>
                                     <div class="item_title">
-                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
+                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" class="Stock" id="Stock" hidden="hidden" />
                                         <a href="#">${good.goodsName}</a>
                                     </div>
                                 </li>
@@ -134,9 +143,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   					</c:if>
                                 </li>
                                 <li class="td td-amount">
-                                    <button type="button" class="btn btn-default" id="reduce">-</button>
-                                    <input type="text" name="amount" value="1" id="Amount" style="max-width:80px;text-align: center;" class="btn">
-                                    <button type="button" class="btn btn-default" id="add">+</button>
+                                    <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
+                                    <input type="text" name="amount" value="1"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <button type="button" class="btn btn-default add" id="add">+</button>
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">

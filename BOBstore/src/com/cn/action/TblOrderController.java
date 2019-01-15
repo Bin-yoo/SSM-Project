@@ -35,7 +35,6 @@ public class TblOrderController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		
 		List<TblOrderQuery> orderList=tblOrderBiz.selectAllFun(customer);
 		
 		modelAndView.addObject("orderList",orderList);

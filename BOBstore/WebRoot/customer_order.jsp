@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -30,13 +31,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
         <div class="container-fluid mt">
             <div class="aside">
-                <div class="user">
-                    <h4>你好，用户标哥</h4>
+               <div class="user">
+                	<c:if test="${not empty sessionScope.customer}">
+                		<h4>
+	                    	你好，用户${sessionScope.customer.customerTrueName}
+	                    </h4>
+                	</c:if>
+                	<c:if test="${empty sessionScope.customer}">
+                		<h4>
+	                    	你好，请 <a href="login.jsp">登录</a>
+	                    </h4>
+                	</c:if>
                     <div class="controller">
-                        <span><a href="">注销用户</a></span>
-                        <br>
-                        <span><a href="">账号管理</a></span>
-                        <span><a href="">我的商城</a></span>
+                    	<c:if test="${not empty sessionScope.customer}">
+	                		<span><a href="user/logout">注销用户</a></span>
+	                	</c:if>
+	                	<c:if test="${empty sessionScope.customer}">
+	                		<span><a href="register.jsp">注册账号</a></span>
+	                	</c:if>
+                        <span><a href="">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
@@ -71,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="item_title">
                       
-                                        <a href="#">${order}</a>
+                                        <a href="#">￥<p>${order.goodsName}</p></a>
                                     </div>
                                 </li>
                                 <li class="td td-price">￥199.00</li>

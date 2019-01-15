@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.location.href= "/BOBstore/shopCart/add?goodsID=" + goodsID + "&count=" + count;
 		}
    		
-		$(function(){
+		$(function(){Z
 			var Count = $('#Count');
 			var Stock = $('#Stock');
 			$('#reduce').click(function(){
@@ -151,7 +151,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="shop_cart">
                     <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
-                    <a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    <c:if test="${not empty ShopcartCount}">
+                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    </c:if>
+                    <c:if test="${empty ShopcartCount}">
+                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
+                    </c:if>
                 </div>
             </div>
             <div class="main">
