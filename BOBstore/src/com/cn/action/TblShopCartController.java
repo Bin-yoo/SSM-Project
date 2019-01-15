@@ -51,7 +51,7 @@ public class TblShopCartController
 		boolean flag = tblShopcartBiz.addFun(customer.getCustomerName(),goodsID,count);
 		
 		if(flag){
-			return "redirect:/good/goodsdetail?goodsID=" + goodsID;
+			return "redirect:/good/goodsdetail?goodsID=" + goodsID + "&add=true";
 		}else{
 			model.addAttribute("errMsg","ÃÌº” ß∞‹");
 			return "redirect:/good/goodsdetail?goodsID=" + goodsID;

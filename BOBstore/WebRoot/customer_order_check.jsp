@@ -164,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 		￥${tblGoods.goodsDiscountPrice * count}
                                 	</c:if>
 							</div>
-                            <div class="order"><button class="btn" onclick="order_submit()">提交订单</button></div>
+                            <div class="order"><button class="btn" style="color: #fff" onclick="order_submit()">提交订单</button></div>
                         </div>
                     </div>
                 </div>

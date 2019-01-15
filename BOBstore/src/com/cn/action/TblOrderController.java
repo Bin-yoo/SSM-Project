@@ -91,4 +91,10 @@ public class TblOrderController {
 		}
 		
 	}
+	
+	@RequestMapping("/commit")
+	public String commit(Integer[] shopcartID){
+		System.out.println(shopcartID[0]);
+		return "good/index";
+	}
 }

@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
-                        <li class="active_li"><a href="">热门推荐</a></li>
+                        <li class="active_li"><a href="good/index">热门推荐</a></li>
                         <li>
                             <p class="shop_list_title">酒水饮料</p>
                             <ul class="extraMenu">
