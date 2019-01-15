@@ -7,7 +7,7 @@ import com.cn.entity.TblOrderQuery;
 
 public interface TblOrderMapper {
 
-	List<TblOrderQuery> selectAllByName(String customerName);
+	List<TblOrderQuery> selectAllByName();
 
 	void insertOrderFun(TblOrderQuery tblOrderQuery);
 
@@ -16,5 +16,14 @@ public interface TblOrderMapper {
 	int selectOredeIDByNewestOrderDate();
 
 	List<TblOrderQuery> selectByorderStateByName(TblOrderQuery tblOrderQuery);
+
+
+	int selectCountPageFun(TblOrderQuery tblOrderQuery);
+
+	List<TblOrderQuery> selectByCondtionPageFun(TblOrderQuery tblOrderQuery);
+
+	void updateGrant(Integer orderID);
+
+
 
 }

@@ -29,7 +29,24 @@ public class TblOrderQuery {
 	
 	private Integer goodsTypeID;
 	private String goodsTypeName;
+	
+	
+	public Integer getStartNum() {
+		return startNum;
+	}
+	public void setStartNum(Integer startNum) {
+		this.startNum = startNum;
+	}
+	public Integer getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
 	private String detailedTypeName;
+	
+	private Integer startNum;				//从第几行开始查询
+	private Integer pageSize;
 
 	public Double getOrderPrice() {
 		return orderPrice;

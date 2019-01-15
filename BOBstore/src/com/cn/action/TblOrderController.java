@@ -13,10 +13,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.cn.biz.TblCustomerBiz;
 import com.cn.biz.TblGoodsBiz;
 import com.cn.biz.TblOrderBiz;
+import com.cn.entity.TblAdmin;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
+import com.cn.entity.TblGoodsType;
+import com.cn.entity.TblGoodsTypeDetail;
 import com.cn.entity.TblOrder;
 import com.cn.entity.TblOrderQuery;
+import com.cn.util.PageBean;
 
 @Controller
 @RequestMapping("/order")
@@ -28,20 +32,44 @@ public class TblOrderController {
 	TblGoodsBiz tblGoodsBiz;
 	@Autowired
 	TblCustomerBiz tblCustomerBiz;
+	@RequestMapping("/Grant")
+	public String grant(Integer orderID,Integer currPage){
+		boolean flag = tblOrderBiz.grantByOrder(orderID);
+		if(flag){
+			return "redirect:/order/adminOrder?currPage=" + currPage;
+		}else{
+			return "redirect:/order/adminOrder?currPage=" + currPage;
+		}
+		
+	}
 	
 	@RequestMapping("/allOrder")
 	public ModelAndView allOrder(HttpSession session){
-		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		TblAdmin tblAdmin = (TblAdmin)session.getAttribute("admin");
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		List<TblOrderQuery> orderList=tblOrderBiz.selectAllFun(customer);
+		List<TblOrderQuery> orderList=tblOrderBiz.selectAllFun();
 		
 		modelAndView.addObject("orderList",orderList);
 		modelAndView.setViewName("customer_order");
 		
 		return modelAndView;
+	}
+	@RequestMapping("/adminOrder")
+	public ModelAndView adminOrder(TblOrderQuery tblOrderQuery,Integer currPage){
+		int limit = 6;
+		PageBean<TblOrderQuery> pageBean = tblOrderBiz.viewadminOrderFun(tblOrderQuery,currPage,limit);
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		modelAndView.addObject("pageBean",pageBean);
+		modelAndView.setViewName("admin_order");
+		
+		return modelAndView;
+		
 	}
 	@RequestMapping("/withgoods")
 	public ModelAndView withgoods(HttpSession session,char orderState){

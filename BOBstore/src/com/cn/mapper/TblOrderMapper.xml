@@ -5,6 +5,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="com.cn.mapper.TblOrderMapper">
+	<select id="selectCountPageFun" parameterType="tblOrderQuery" resultType="int">
+		select count(*) from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID
+	</select>
+	<select id="selectByCondtionPageFun" parameterType="tblOrderQuery" resultType="tblOrderQuery">
+		select top ${pageSize} * from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID 
+ and de.orderID not in(select top ${startNum} de.orderID from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID)
+	</select>
+
+
+	<update id="updateGrant">
+		update tbl_order set orderState = 1 where orderID = #{orderID}
+	</update>
+
+
+
+
 	<select id="selectByorderStateByName" parameterType="tblOrderQuery" resultType="tblOrderQuery">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID 
 		and customerName=#{customerName} and orderState=#{orderState}
@@ -27,4 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into tbl_order_detailed
 		values(#{orderID},#{goodsID},#{orderPrice},#{goodCount})
 	</insert>
+	
+	
+	
 </mapper>

@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cn.entity.TblAdmin;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblOrder;
 import com.cn.entity.TblOrderQuery;
 import com.cn.mapper.TblOrderMapper;
+import com.cn.util.PageBean;
 
 @Service
 public class TblOrderBiz {
@@ -16,9 +18,9 @@ public class TblOrderBiz {
 	@Autowired
 	TblOrderMapper tblOrderMapper;
 
-	public List<TblOrderQuery> selectAllFun(TblCustomer customer) {
+	public List<TblOrderQuery> selectAllFun() {
 		// TODO Auto-generated method stub
-		return tblOrderMapper.selectAllByName(customer.getCustomerName());
+		return tblOrderMapper.selectAllByName();
 	}
 
 	public boolean submitOrder(TblOrderQuery tblOrderQuery) {
@@ -60,6 +62,38 @@ public class TblOrderBiz {
 		tblOrderQuery.setCustomerName(customer.getCustomerName());
 		tblOrderQuery.setOrderState(orderState);
 		return tblOrderMapper.selectByorderStateByName(tblOrderQuery);
+	}
+
+
+
+	public PageBean<TblOrderQuery> viewadminOrderFun(TblOrderQuery tblOrderQuery, Integer currPage, int limit) {
+		// TODO Auto-generated method stub
+		int totalCount = tblOrderMapper.selectCountPageFun(tblOrderQuery);
+		PageBean<TblOrderQuery>pageBean= new PageBean<TblOrderQuery>(totalCount, currPage, limit);
+		if(tblOrderQuery == null){
+			tblOrderQuery = new TblOrderQuery();
+		}
+		
+		tblOrderQuery.setPageSize(pageBean.getLimit());
+		tblOrderQuery.setStartNum((pageBean.getCurrPage() - 1)*pageBean.getLimit());
+		
+		if(totalCount > 0){
+			pageBean.setList(tblOrderMapper.selectByCondtionPageFun(tblOrderQuery));
+		}
+		
+		return pageBean;
+	}
+
+	public boolean grantByOrder(Integer orderID) {
+		// TODO Auto-generated method stub
+		try{
+			tblOrderMapper.updateGrant(orderID);
+			return true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 }
