@@ -149,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-amount">
                                     <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
-                                    <input type="text" name="amount" value="1"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <input type="text" name="amount" value="${good.goodCount }"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
                                     <button type="button" class="btn btn-default add" id="add">+</button>
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
