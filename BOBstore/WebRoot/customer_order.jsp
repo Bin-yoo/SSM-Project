@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="order_list">
-                    <c:forEach items="orderList" var="order">
+                    	<c:forEach items="${orderlist}" var="order">
                         <div class="item">
                             <ul class="item-content">
                                 <li class="td td-item">
@@ -70,8 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
                                     </div>
                                     <div class="item_title">
-                      
-                                        <a href="#">${order}</a>
+                                        <a href="#">${order.goodsName}</a>
                                     </div>
                                 </li>
                                 <li class="td td-price">￥199.00</li>
@@ -87,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                             </ul>
                         </div>
-                        </c:forEach>
+                    	</c:forEach>
                     </div>
                 </div>
             </div>
