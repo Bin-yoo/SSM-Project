@@ -16,6 +16,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="./css/users.css">
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript">
+    	function deleteFun(shopcartID){
+			var flag = confirm("您真的要删除该行记录吗？");
+			
+			if(flag){
+				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
+			}
+		}
     	/* function setSum(){
    			var amount = $('#amount');
 			var goodsPrice = $('#goodsPrice').text();
@@ -130,13 +137,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
                                     </div>
                                     <div class="item_title">
-<<<<<<< HEAD
                                     	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
                                         <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
-=======
-                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" class="Stock" id="Stock" hidden="hidden" />
-                                        <a href="#">${good.goodsName}</a>
->>>>>>> b25c9ae66f07f2a924e5dc4a7aa3b6a5425e9aba
                                     </div>
                                 </li>
                                 <li class="td td-price">
@@ -154,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">
-                                    <a href="#" class="btn btn-danger">删除</a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
                                 </li>
                             </ul>
                         </div>
