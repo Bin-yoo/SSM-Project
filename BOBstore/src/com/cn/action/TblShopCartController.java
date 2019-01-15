@@ -23,6 +23,13 @@ public class TblShopCartController
 	@Autowired
 	TblShopcartBiz tblShopcartBiz;
 	
+	@RequestMapping("/removeGoods")
+	public String delectGoods(Integer shopcartID){
+		if(shopcartID!=null){
+			tblShopcartBiz.removeFun(shopcartID);
+		}
+		return "redirect:/shopCart/viewShopCart";
+	}
 	
 	@RequestMapping("/viewShopCart")
 	public ModelAndView viewShopCart(HttpSession session){
@@ -45,10 +52,17 @@ public class TblShopCartController
 	@RequestMapping("/add")
 	public String addToShopCartFun(Integer goodsID,Integer count,HttpSession session,Model model){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		boolean flag=false;
 		if(customer == null){
 			return "redirect:/login.jsp";
 		}
-		boolean flag = tblShopcartBiz.addFun(customer.getCustomerName(),goodsID,count);
+		TblShopcart tblShopcart = tblShopcartBiz.selectShopcartByGoodsID(customer.getCustomerName(),goodsID);
+		if(tblShopcart==null){
+			flag = tblShopcartBiz.addFun(customer.getCustomerName(),goodsID,count);
+		}else{
+			count = tblShopcart.getGoodCount() + count;
+			flag = tblShopcartBiz.updateFun(customer.getCustomerName(),count,tblShopcart.getGoodsID());
+		}
 		
 		if(flag){
 			return "redirect:/good/goodsdetail?goodsID=" + goodsID + "&add=true";

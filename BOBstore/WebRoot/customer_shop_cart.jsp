@@ -16,6 +16,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="./css/users.css">
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript">
+    	function deleteFun(shopcartID){
+			var flag = confirm("您真的要删除该行记录吗？");
+			
+			if(flag){
+				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
+			}
+		}
     	/* function setSum(){
    			var amount = $('#amount');
 			var goodsPrice = $('#goodsPrice').text();
@@ -129,43 +136,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     
                     <div class="order_list">
-                    	<form action="order/commit" method="post">
-	                    	<c:forEach items="${shopcartList }" var="good">
-		                        <div class="item">	
-		                            <ul class="item-content">
-		                                <li class="td td-chk">
-		                                    <input type="checkbox" name="select" value="">
-		                                </li>
-		                                <li class="td td-item">
-		                                    <div class="item_img">
-		                                        <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
-		                                    </div>
-		                                    <div class="item_title">
-		                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
-		                                        <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
-		                                    </div>
-		                                </li>
-		                                <li class="td td-price">
-		                                	<c:if test="${empty good.goodsDiscountPrice}">
-		                  						￥ <span id="goodsPrice">${good.goodsPrice}</span>
-		                  					</c:if>
-		                  					<c:if test="${not empty good.goodsDiscountPrice}">
-		                  						￥ <span id="goodsDiscountPrice">${good.goodsDiscountPrice}</span>
-		                  					</c:if>
-		                                </li>
-		                                <li class="td td-amount">
-		                                    <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
-		                                    <input type="text" name="amount" value="${good.goodCount }"  id="amount" style="max-width:80px;text-align: center;" class="btn">
-		                                    <button type="button" class="btn btn-default add" id="add">+</button>
-		                                </li>
-		                                <li class="td td-sum">￥<span id="sum">159.00</span></li>
-		                                <li class="td td-op">
-		                                    <a href="#" class="btn btn-danger">删除</a>
-		                                </li>
-		                            </ul>
-		                        </div>
-	                        </c:forEach>
-                        </form>
+                    	<c:forEach items="${shopcartList }" var="good">
+                        <div class="item">	
+                            <ul class="item-content">
+                                <li class="td td-chk">
+                                	
+                                    <input type="checkbox" name="select" value="">
+                                </li>
+                                <li class="td td-item">
+                                    <div class="item_img">
+                                        <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
+                                    </div>
+                                    <div class="item_title">
+                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
+                                        <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
+                                    </div>
+                                </li>
+                                <li class="td td-price">
+                                	<c:if test="${empty good.goodsDiscountPrice}">
+                  						￥ <span id="goodsPrice">${good.goodsPrice}</span>
+                  					</c:if>
+                  					<c:if test="${not empty good.goodsDiscountPrice}">
+                  						￥ <span id="goodsDiscountPrice">${good.goodsDiscountPrice}</span>
+                  					</c:if>
+                                </li>
+                                <li class="td td-amount">
+                                    <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
+                                    <input type="text" name="amount" value="${good.goodCount }"  id="amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <button type="button" class="btn btn-default add" id="add">+</button>
+                                </li>
+                                <li class="td td-sum">￥<span id="sum">159.00</span></li>
+                                <li class="td td-op">
+                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
+                                </li>
+                            </ul>
+                        </div>
+                        </c:forEach>
                     </div>
                     <div class="commit_order">
                         <div class="selectall">

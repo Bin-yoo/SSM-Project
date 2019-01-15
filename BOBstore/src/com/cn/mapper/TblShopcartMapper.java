@@ -15,4 +15,14 @@ public interface TblShopcartMapper {
 
 	List<TblShopcartQuery> selectAllByName(String customerName);
 
+	
+	void removeByshopcartIDFun(Integer shopcartID);
+
+
+	TblShopcart selectShopcartByGoodsID(TblShopcart tblShopcart);
+
+
+	void updateFun(TblShopcart tblShopcart);
+	
+
 }
