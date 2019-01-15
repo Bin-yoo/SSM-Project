@@ -33,28 +33,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		} */
     	$(function(){
-			var Amount = $('#Amount');
+			var amount = $('#amount');
 			var Stock = $('.Stock');
 			
 			$('.reduce').click(function(){
-				if(parseInt(Amount.val()) > 1){
-					Amount.val(parseInt(Amount.val())-1)
+				if(parseInt(amount.val()) > 1){
+					amount.val(parseInt(amount.val())-1)
 				}	
 			})
 			$('.add').click(function(){
-				if(parseInt(Amount.val()) < parseInt(Stock.val())){
-					Amount.val(parseInt(Amount.val())+1)
+				if(parseInt(amount.val()) < parseInt(Stock.val())){
+					amount.val(parseInt(amount.val())+1)
 					
 				}
 			})
 			
 			amount.blur(function(){
-				if(parseInt(Amount.val()) < 1){
-					parseInt(Amount.val(1));
-				}if(isNaN(Amount.val())){
-					parseInt(Amount.val(1));
-				}if(parseInt(Amount.val()) > parseInt(Stock.val())){
-					parseInt(Amount.val(parseInt(Stock.val())));
+				if(parseInt(amount.val()) < 1){
+					parseInt(amount.val(1));
+				}if(isNaN(amount.val())){
+					parseInt(amount.val(1));
+				}if(parseInt(amount.val()) > parseInt(Stock.val())){
+					parseInt(amount.val(parseInt(Stock.val())));
 				}
 				
 			})
@@ -124,6 +124,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="th th-op">操作</div>
                         </div>
                     </div>
+                    
+                    <div>
+                    	
+                    		<input type="checkbox" name="shopcartID" value="1">1
+                    		<input type="checkbox" name="shopcartID" value="2">2
+                    		<input type="checkbox" name="shopcartID" value="3">3
+                    		<input type="checkbox" name="shopcartID" value="4">4
+                    		<input type="submit" name="submit" value="提交尼玛">
+                    	
+                    </div>
+                    
                     <div class="order_list">
                     	<c:forEach items="${shopcartList }" var="good">
                         <div class="item">	
@@ -151,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-amount">
                                     <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
-                                    <input type="text" name="amount" value="${good.goodCount }"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <input type="text" name="amount" value="${good.goodCount }"  id="amount" style="max-width:80px;text-align: center;" class="btn">
                                     <button type="button" class="btn btn-default add" id="add">+</button>
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
@@ -171,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="rightBar">
                             <div class="good_num">已选商品0件</div>
                             <div class="total">总计: ￥159.00</div>
-                            <div class="order"><button class="btn" onclick="order_submit()">提交订单</button></div>
+                            <div class="order"><button class="btn" style="color: #fff" onclick="order_submit()">提交订单</button></div>
                         </div>
                     </div>
                 </div>

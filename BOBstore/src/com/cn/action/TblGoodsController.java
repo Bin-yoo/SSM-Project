@@ -155,7 +155,7 @@ public class TblGoodsController {
 	}
 	
 	@RequestMapping("/goodsdetail")
-	public ModelAndView viewGoodsDetail(Integer goodsID,HttpSession session){
+	public ModelAndView viewGoodsDetail(Integer goodsID,boolean add,HttpSession session){
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
 		
@@ -164,7 +164,9 @@ public class TblGoodsController {
 			int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
 			modelAndView.addObject("ShopcartCount",ShopcartCount);
 		}
-		
+		if(add){
+			modelAndView.addObject("add",add);
+		}
 		
 		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.setViewName("goods_detail");

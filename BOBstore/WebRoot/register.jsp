@@ -30,6 +30,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if(document.form1.customerTrueName.value == ""){
 				errMsg = errMsg+"姓名不能为空<br>"
 			}
+			if(document.form1.customerPhone.value != "" ){
+				if(!(/^1(3|4|5|7|8)\d{9}$/.test(document.form1.customerPhone.value))){ 
+			        errMsg = errMsg+"手机号码格式有误，请重填<br>"
+			    } 
+			}
+			
 				
 			if (errMsg == ""){
 				return true;

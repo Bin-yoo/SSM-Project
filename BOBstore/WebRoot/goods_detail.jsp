@@ -164,10 +164,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="main">
                 <div class="container">
+                	<c:if test="${add }">
+                		<div class="row">
+                			<div class="col-sm-8 col-sm-offset-2">
+	                       		<div class="alert alert-warning alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									<strong>Ok!</strong>已添加进购物车
+								</div>
+							</div>
+                		</div>
+                	</c:if>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-2">
                             <div class="goodbox">
-                            	
                                 	<div class="good_img">
                                     	<img src="${tblGoods.goodsImageUrl}" alt="">
                                 	</div>

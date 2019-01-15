@@ -65,7 +65,7 @@ public class TblShopCartController
 		}
 		
 		if(flag){
-			return "redirect:/good/goodsdetail?goodsID=" + goodsID;
+			return "redirect:/good/goodsdetail?goodsID=" + goodsID + "&add=true";
 		}else{
 			model.addAttribute("errMsg","ÃÌº” ß∞‹");
 			return "redirect:/good/goodsdetail?goodsID=" + goodsID;

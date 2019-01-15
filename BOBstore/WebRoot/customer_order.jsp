@@ -88,7 +88,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                </li>
 	                                <li class="td td-price">￥${order.orderPrice }</li>
 	                                <li class="td td-amount">
-	                                    <input type="text" name="amount" value="x${order.goodCount }" style="width:40px;text-align: center;" class="btn" disabled="disabled">
+	                                    <input type="text" name="amount" value="x${order.goodCount }" style="width:40px;text-align: center;margin-left: 30px;" class="btn" disabled="disabled">
 	                                </li>
 	                                <li class="td td-sum">￥${order.totalMoney}</li>
 	                                <li class="td td-sta">
