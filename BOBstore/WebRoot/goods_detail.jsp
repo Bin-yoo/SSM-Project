@@ -30,11 +30,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function addShopCart(goodsID){
 			var count = $("#Count").val();
-			alert("成功加入购物车！");
+			alert("添加成功");
 			window.location.href= "/BOBstore/shopCart/add?goodsID=" + goodsID + "&count=" + count;
 		}
    		
-		$(function(){Z
+		$(function(){
 			var Count = $('#Count');
 			var Stock = $('#Stock');
 			$('#reduce').click(function(){
@@ -95,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	<c:if test="${empty sessionScope.customer}">
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <span><a href="">个人中心</a></span>
+                        <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">

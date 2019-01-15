@@ -25,13 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				sum = amount.val() * goodsDiscountPrice;
 			}
 		} */
-		function deleteFun(shopcartID){
-			var flag = confirm("您真的要删除该行记录吗？");
-			
-			if(flag){
-				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
-			}
-		}
     	$(function(){
 			var Amount = $('#Amount');
 			var Stock = $('.Stock');
@@ -151,12 +144,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-amount">
                                     <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
-                                    <input type="text" name="amount" value="1"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
+                                    <input type="text" name="amount" value="${good.goodCount }"  id="Amount" style="max-width:80px;text-align: center;" class="btn">
                                     <button type="button" class="btn btn-default add" id="add">+</button>
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">
-                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
+                                    <a href="#" class="btn btn-danger">删除</a>
                                 </li>
                             </ul>
                         </div>
