@@ -24,6 +24,14 @@ public class TblShopCartController
 	TblShopcartBiz tblShopcartBiz;
 	
 	
+	@RequestMapping("/removeGoods")
+	public String delectGoods(Integer shopcartID){
+		if(shopcartID!=null){
+			tblShopcartBiz.removeFun(shopcartID);
+		}
+		return "redirect:/shopCart/viewShopCart";
+	}
+	
 	@RequestMapping("/viewShopCart")
 	public ModelAndView viewShopCart(HttpSession session){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -41,14 +49,30 @@ public class TblShopCartController
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param goodsID
+	 * @param count
+	 * @param session
+	 * @param model
+	 * @return selectShopcartByGoodsID是用于判断该用户购物车里有没有该商品
+	 */
 	@RequestMapping("/add")
 	public String addToShopCartFun(Integer goodsID,Integer count,HttpSession session,Model model){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		boolean flag=false;
 		if(customer == null){
 			return "redirect:/login.jsp";
 		}
-		boolean flag = tblShopcartBiz.addFun(customer.getCustomerName(),goodsID,count);
+		
+		TblShopcart tblShopcart = tblShopcartBiz.selectShopcartByGoodsID(customer.getCustomerName(),goodsID);
+		if(tblShopcart==null){
+			flag = tblShopcartBiz.addFun(customer.getCustomerName(),goodsID,count);
+		}else{
+			count = tblShopcart.getGoodCount() + count;
+			flag = tblShopcartBiz.updateFun(customer.getCustomerName(),count,tblShopcart.getGoodsID());
+			
+		}
 		
 		if(flag){
 			return "redirect:/good/goodsdetail?goodsID=" + goodsID;

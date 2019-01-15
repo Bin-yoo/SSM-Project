@@ -30,6 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function addShopCart(goodsID){
 			var count = $("#Count").val();
+			alert("成功加入购物车！");
 			window.location.href= "/BOBstore/shopCart/add?goodsID=" + goodsID + "&count=" + count;
 		}
    		

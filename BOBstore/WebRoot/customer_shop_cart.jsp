@@ -25,6 +25,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				sum = amount.val() * goodsDiscountPrice;
 			}
 		} */
+		function deleteFun(shopcartID){
+			var flag = confirm("您真的要删除该行记录吗？");
+			
+			if(flag){
+				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
+			}
+		}
     	$(function(){
 			var Amount = $('#Amount');
 			var Stock = $('.Stock');
@@ -149,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">
-                                    <a href="#" class="btn btn-danger">删除</a>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
                                 </li>
                             </ul>
                         </div>
