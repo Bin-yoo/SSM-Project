@@ -9,4 +9,10 @@ public interface TblOrderMapper {
 
 	List<TblOrderQuery> selectAllByName(String customerName);
 
+	void insertOrderFun(TblOrderQuery tblOrderQuery);
+
+	void insertOrederDetailFun(TblOrderQuery tblOrderQuery);
+
+	int selectOredeIDByNewestOrderDate();
+
 }

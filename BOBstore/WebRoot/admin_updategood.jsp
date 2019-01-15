@@ -110,14 +110,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <span><a href="admin/logout">注销用户</a></span>
                 </div>
             </div>
-            <div class="search">
-                <form action="#" class="search_form">
-                    <input type="text" class="search_input" placeholder="搜索" />
-                    <button class="search_button">
-                        <i class="glyphicon glyphicon-search"></i>
-                    </button>
-                </form>
-            </div>
             <div class="menu">
                 <ul class="shop_list">
                     <li><a href="admin/goods">商品管理</a></li>

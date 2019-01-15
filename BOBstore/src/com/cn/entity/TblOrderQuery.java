@@ -9,17 +9,15 @@ public class TblOrderQuery {
 	private String orderPhone;
 	private String orderAddressee;
 	private Double totalMoney;
-	private Timestamp orderDate;
-	private char orderState;
+	private Timestamp orderDate = new Timestamp((new java.util.Date()).getTime());
+	private char orderState = '0';
 	
 	
 	private Integer goodsID;
 	private Integer goodCount;
+	private Double orderPrice;
 	
-	
-	private String goodsName;
-	
-	
+	private String goodsName;	
 	private Integer detailedTypeID;
 	private Double goodsPrice;
 	private Integer goodsInCount;
@@ -32,8 +30,13 @@ public class TblOrderQuery {
 	private Integer goodsTypeID;
 	private String goodsTypeName;
 	private String detailedTypeName;
-	
-	
+
+	public Double getOrderPrice() {
+		return orderPrice;
+	}
+	public void setOrderPrice(Double orderPrice) {
+		this.orderPrice = orderPrice;
+	}
 	public Integer getOrderID() {
 		return orderID;
 	}

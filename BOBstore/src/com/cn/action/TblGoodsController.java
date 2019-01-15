@@ -160,16 +160,14 @@ public class TblGoodsController {
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
 		
 		ModelAndView modelAndView = new ModelAndView();
-		if(customer == null){
-			modelAndView.setViewName("login");
-			return modelAndView;
+		if(customer != null){
+			int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
+			modelAndView.addObject("ShopcartCount",ShopcartCount);
 		}
-		int ShopcartCount = tblShopcartBiz.selectShopcartCountByName(customer.getCustomerName());
 		
 		
 		modelAndView.addObject("tblGoods",tblGoods);
 		modelAndView.setViewName("goods_detail");
-		modelAndView.addObject("ShopcartCount",ShopcartCount);
 		
 		return modelAndView;
 		
@@ -190,7 +188,7 @@ public class TblGoodsController {
 			return "redirect:/admin.jsp";
 		}
 		
-		if(picture != null){
+		if(picture.getSize() != 0){
 			Uploader uploader = new Uploader();
 			String path = uploader.upload(picture, request);
 			tblGoods.setGoodsImageUrl(path);

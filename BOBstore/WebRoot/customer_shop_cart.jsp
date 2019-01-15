@@ -25,13 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				sum = amount.val() * goodsDiscountPrice;
 			}
 		} */
-		function deleteFun(shopcartID){
-			var flag = confirm("您真的要删除该行记录吗？");
-			
-			if(flag){
-				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
-			}
-		}
     	$(function(){
 			var Amount = $('#Amount');
 			var Stock = $('.Stock');
@@ -134,11 +127,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-item">
                                     <div class="item_img">
-                                        <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
+                                        <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
                                     </div>
                                     <div class="item_title">
+<<<<<<< HEAD
+                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
+                                        <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
+=======
                                     	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" class="Stock" id="Stock" hidden="hidden" />
                                         <a href="#">${good.goodsName}</a>
+>>>>>>> b25c9ae66f07f2a924e5dc4a7aa3b6a5425e9aba
                                     </div>
                                 </li>
                                 <li class="td td-price">
@@ -156,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </li>
                                 <li class="td td-sum">￥<span id="sum">159.00</span></li>
                                 <li class="td td-op">
-                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
+                                    <a href="#" class="btn btn-danger">删除</a>
                                 </li>
                             </ul>
                         </div>
@@ -171,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="rightBar">
                             <div class="good_num">已选商品0件</div>
                             <div class="total">总计: ￥159.00</div>
-                            <div class="order"><a href="">结算</a></div>
+                            <div class="order"><button class="btn" onclick="order_submit()">提交订单</button></div>
                         </div>
                     </div>
                 </div>

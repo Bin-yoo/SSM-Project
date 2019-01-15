@@ -11,5 +11,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectAllByName" parameterType="String" resultType="tblOrderQuery">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
 	</select>
+	<insert id="insertOrderFun" parameterType="tblOrderQuery">
+		insert into tbl_order
+		values(#{customerName},#{orderAddress},#{orderPhone},#{orderAddressee},#{totalMoney},#{orderDate},#{orderState})
+	</insert>
+	<select id="selectOredeIDByNewestOrderDate" parameterType="String" resultType="int">
+		select top 1 orderID from tbl_order order by orderDate desc;
+	</select>
+	<insert id="insertOrederDetailFun" parameterType="tblOrderQuery">
+		insert into tbl_order_detailed
+		values(#{orderID},#{goodsID},#{orderPrice},#{goodCount})
+	</insert>
 </mapper>
-

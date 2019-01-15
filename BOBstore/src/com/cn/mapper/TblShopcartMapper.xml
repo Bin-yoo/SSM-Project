@@ -5,23 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="com.cn.mapper.TblShopcartMapper">
-	<select id="selectShopcartCountByName" parameterType="tblShopcart" resultType="int">
+	<select id="selectShopcartCountByName" parameterType="String" resultType="int">
 		select count(*) from tbl_shopcart where customerName=#{customerName}
 	</select>
 	<insert id="insertFun" parameterType="tblShopcart">
-		insert into tbl_shopcart(customerName,goodsID,goodCount) values(#{customerName},#{goodsID},#{goodCount}) 
+		insert into tbl_shopcart(customerName,goodsID,goodCount) values(#{customerName},#{goodsID},#{goodCount})
 	</insert>
-	<select id="selectShopcartByGoodsID" parameterType="tblShopcart" resultType="tblShopcart">
-		select * from tbl_shopcart where customerName=#{customerName} and goodsID=#{goodsID}
-	</select>                                                                                                                                                                     
 	<select id="selectAllByName" parameterType="String" resultType="tblShopcartQuery">
 		select * from tbl_shopcart  ts, tbl_goods tg where ts.goodsID = tg.goodsID and customerName=#{customerName}
 	</select>
-	<delete id="removeByshopcartIDFun" parameterType="int">
-		delete from tbl_shopcart where shopcartID=#{shopcartID}
-	</delete>
-	<update id="updateFun" parameterType="tblShopcart">
-		update tbl_shopcart set goodCount=#{goodCount} where customerName=#{customerName} and goodsID=#{goodsID}
-	</update>
 </mapper>
 

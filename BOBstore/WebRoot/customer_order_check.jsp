@@ -18,6 +18,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	
+		function order_submit(){
+			
+			var customerName = $("#customerName").val();
+			var orderAddressee = $("#orderAddressee").val();
+			var orderAddress = $("#orderAddress").val();
+			var orderPhone = $("#orderPhone").val();
+			var goodsID = $("#goodsID").val();
+			var orderPrice = $("#orderPrice").val();
+			var goodCount = $("#goodCount").val();
+			var totalMoney = $("#totalMoney").val();
+
+			window.location.href= "/BOBstore/order/buyNow/submit?customerName=" + customerName + "&orderAddressee=" + orderAddressee + "&orderAddress=" + orderAddress + "&orderPhone=" + orderPhone + "&goodsID=" + goodsID + "&orderPrice=" + orderPrice + "&goodCount=" + goodCount + "&totalMoney=" + totalMoney;
+		}
+	
 		function getFocus(id){
 			
 			if(id == 1){
@@ -68,8 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
-                        <li><a href="">我的购物车</a></li>
-                        <li><a href="">所有订单</a></li>
+                        <li><a href="shopCart/viewShopCart">我的购物车</a></li>
+                        <li><a href="order/allOrder">所有订单</a></li>
                         <li><a href="">待发货</a></li>
                         <li><a href="">待收货</a></li>
                     </ul>
@@ -79,17 +93,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="container">
                     <span class="tab">确认订单信息</span>
                     <div class="cus_msg">
+                    	<input type="hidden" id="customerName" name="customerName" value="${sessionScope.customer.customerName}"/>
                     	<div class="cus_name form-inline">
                     		<label for="customerAddressee" class="control-label">收件人:</label>
-                    		<input type="text" class="btn" id="customerAddressee" name="customerAddressee" value="${sessionScope.customer.customerTrueName}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(1)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="orderAddressee" name="orderAddressee" value="${sessionScope.customer.customerTrueName}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(1)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_address form-inline"">
                     		<label for="customerAddress" class="control-label">收件地址:</label>
-                    		<input type="text" class="btn" id="customerAddress" name="customerAddress" value="${sessionScope.customer.customerAddress}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(2)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="orderAddress" name="orderAddress" value="${sessionScope.customer.customerAddress}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(2)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     	<div class="cus_phone form-inline"">
                     		<label for="customerPhone" class="control-label">联系电话:</label>
-                    		<input type="text" class="btn" id="customerPhone" name="customerPhone" value="${sessionScope.customer.customerPhone}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(3)"><i class="glyphicon glyphicon-pencil"></i></button>
+                    		<input type="text" class="btn" id="orderPhone" name="orderPhone" value="${sessionScope.customer.customerPhone}" style="width: 600px;"/><button class="btn btn-default" onclick="getFocus(3)"><i class="glyphicon glyphicon-pencil"></i></button>
                     	</div>
                     </div>
                     <div class="userbox check">
@@ -109,26 +124,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="item_title">
                                         <a href="#">${tblGoods.goodsName }</a>
+                                        <input type="hidden" name="goodsID" id="goodsID" value="${tblGoods.goodsID }">
                                     </div>
                                 </li>
                                 <li class="td td-price">
                                 	<c:if test="${empty tblGoods.goodsDiscountPrice}">
                                 		￥${tblGoods.goodsPrice }
+                                		<input type="hidden" name="orderPrice" id="orderPrice" value="${tblGoods.goodsPrice }">
                                 	</c:if>
                                 	<c:if test="${not empty tblGoods.goodsDiscountPrice}">
                                 		￥${tblGoods.goodsDiscountPrice }
+                                		<input type="hidden" name="orderPrice" id="orderPrice" value="${tblGoods.goodsDiscountPrice }">
                                 	</c:if>
                                 </li>
                                 <li class="td td-sum">
                                 	<c:if test="${empty tblGoods.goodsDiscountPrice}">
                                 		￥${tblGoods.goodsPrice * count}
+                                		<input type="hidden" name="totalMoney" id="totalMoney" value="${tblGoods.goodsPrice * count}">
                                 	</c:if>
                                 	<c:if test="${not empty tblGoods.goodsDiscountPrice}">
                                 		￥${tblGoods.goodsDiscountPrice * count}
+                                		<input type="hidden" name="totalMoney" id="totalMoney" value="${tblGoods.goodsDiscountPrice * count}">
                                 	</c:if>
                                 </li>
                                 <li class="td td-amount">
                                     <input type="text" name="amount" value="x ${count}" style="max-width:80px;text-align: center;" class="btn" disabled="disabled">
+                                    <input type="hidden" name="goodCount" id="goodCount" value="${count}">
                                 </li>
                             </ul>
                         </div>
@@ -143,7 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 		￥${tblGoods.goodsDiscountPrice * count}
                                 	</c:if>
 							</div>
-                            <div class="order"><a href="">提交订单</a></div>
+                            <div class="order"><button class="btn" onclick="order_submit()">提交订单</button></div>
                         </div>
                     </div>
                 </div>

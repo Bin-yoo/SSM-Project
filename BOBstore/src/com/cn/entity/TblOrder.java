@@ -10,8 +10,8 @@ public class TblOrder {
 	private String orderPhone;
 	private String orderAddressee;
 	private Double totalMoney;
-	private Timestamp orderDate;
-	private char orderState;
+	private Timestamp orderDate = new Timestamp((new java.util.Date()).getTime());
+	private char orderState = '0';
 	
 	public Integer getOrderID() {
 		return orderID;

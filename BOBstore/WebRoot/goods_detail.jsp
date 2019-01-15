@@ -30,11 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		function addShopCart(goodsID){
 			var count = $("#Count").val();
-			alert("成功加入购物车！");
 			window.location.href= "/BOBstore/shopCart/add?goodsID=" + goodsID + "&count=" + count;
 		}
    		
-		$(function(){Z
+		$(function(){
 			var Count = $('#Count');
 			var Stock = $('#Stock');
 			$('#reduce').click(function(){
@@ -55,6 +54,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					parseInt(Count.val(1));
 				}if(parseInt(Count.val()) > parseInt(Stock.val())){
 					parseInt(Count.val(parseInt(Stock.val())));
+				}if(Count.val() == null || Count.val() == ""){
+					parseInt(Count.val(1));
 				}
 				
 			})

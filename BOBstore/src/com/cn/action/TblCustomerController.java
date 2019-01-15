@@ -30,22 +30,19 @@ public class TblCustomerController {
 	
 	
 	@RequestMapping("/login")
-	public ModelAndView Login(@ModelAttribute("name")String name,String password,HttpSession session){
+	public ModelAndView Login(@ModelAttribute("name")String name,String password,Integer goodsID,HttpSession session){
 		
 		TblCustomer tblCustomer = tblCustomerBiz.login(name, password);
-		
-		
+
 		ModelAndView modelAndView = new ModelAndView();
 		if(tblCustomer==null){
 			modelAndView.addObject("errMsg", "用户名或密码错误！");
 			modelAndView.setViewName("login");
-		}
-		else{
-			
-			
-			
+		}else if(tblCustomer != null && goodsID != null){
 			session.setAttribute("customer", tblCustomer);
-//			modelAndView.setViewName("redirect:../house/viewByConditionPage");
+			modelAndView.setViewName("redirect:../good/goodsdetail?goodsID="+goodsID);
+		}else{
+			session.setAttribute("customer", tblCustomer);
 			modelAndView.setViewName("redirect:../good/index");
 		}
 		return modelAndView;
@@ -81,7 +78,7 @@ public class TblCustomerController {
 		session.removeAttribute("customer");
 		
 		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("redirect:../index.jsp");
+		modelAndView.setViewName("redirect:../good/index");
 		
 		return modelAndView;
 	}

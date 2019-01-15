@@ -20,5 +20,38 @@ public class TblOrderBiz {
 		// TODO Auto-generated method stub
 		return tblOrderMapper.selectAllByName(customer.getCustomerName());
 	}
+
+	public boolean submitOrder(TblOrderQuery tblOrderQuery) {
+		// TODO Auto-generated method stub
+		try {
+			tblOrderMapper.insertOrderFun(tblOrderQuery);
+			
+			return true;
+		} catch (Exception e) {
+			System.out.println("下单失败!!!");
+			e.printStackTrace();
+			
+			return false;
+		}
+	}
+
+	public boolean submitOrderDetail(TblOrderQuery tblOrderQuery) {
+		// TODO Auto-generated method stub
+		try {
+			tblOrderMapper.insertOrederDetailFun(tblOrderQuery);
+			
+			return true;
+		} catch (Exception e) {
+			System.out.println("下单失败!!!");
+			e.printStackTrace();
+			
+			return false;
+		}
+	}
+
+	public int checkSubmitOrderID() {
+		// TODO Auto-generated method stub
+		return tblOrderMapper.selectOredeIDByNewestOrderDate();
+	}
 	
 }
