@@ -49,15 +49,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	<c:if test="${empty sessionScope.customer}">
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <span><a href="">个人中心</a></span>
+                        <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
                         <li><a href="shopCart/viewShopCart">我的购物车</a></li>
                         <li class="active"><a href="order/allOrder">所有订单</a></li>
-                        <li><a href="">待发货</a></li>
-                        <li><a href="">待收货</a></li>
+                        <li><a href="order/withgoods?orderState=0">待发货</a></li>
+                        <li><a href="order/withaccept?orderState=2">待收货</a></li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                <li class="td td-amount">
 	                                    <input type="text" name="amount" value="x${order.goodCount }" style="width:40px;text-align: center;" class="btn" disabled="disabled">
 	                                </li>
-	                                <li class="td td-sum">￥${order.goodCount * order.orderPrice}</li>
+	                                <li class="td td-sum">￥${order.totalMoney}</li>
 	                                <li class="td td-sta">
 	                                	<c:if test="${order.orderState == '0'.charAt(0)}">
 	                                		未发货
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                		<a class="btn btn-danger">收货</a>
 	                                	</c:if>
 	                                	<c:if test="${order.orderState == '2'.charAt(0)}">
-	                                		<a href="#" class="btn btn-danger">收货</a>
+	                                		<p>已签收</p>
 	                                	</c:if>
 	                                </li>
 	                            </ul>

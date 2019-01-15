@@ -103,8 +103,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <ul class="shop_list">
                         <li class="active"><a href="shopCart/viewShopCart">我的购物车</a></li>
                         <li><a href="order/allOrder">所有订单</a></li>
-                        <li><a href="">待发货</a></li>
-                        <li><a href="">待收货</a></li>
+                        <li><a href="order/withgoods?orderState=0">待发货</a></li>
+                        <li><a href="order/withaccept?orderState=2">待收货</a></li>
                     </ul>
                 </div>
             </div>

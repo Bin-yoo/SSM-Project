@@ -15,4 +15,6 @@ public interface TblOrderMapper {
 
 	int selectOredeIDByNewestOrderDate();
 
+	List<TblOrderQuery> selectByorderStateByName(TblOrderQuery tblOrderQuery);
+
 }

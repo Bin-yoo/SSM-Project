@@ -43,6 +43,34 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
+	@RequestMapping("/withgoods")
+	public ModelAndView withgoods(HttpSession session,char orderState){
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		List<TblOrderQuery> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
+		
+		modelAndView.addObject("orderList",orderList);
+		modelAndView.setViewName("customer_order_withgoods");
+		
+		return modelAndView;
+	}
+	@RequestMapping("/withaccept")
+	public ModelAndView withacceptOrder(HttpSession session,char orderState){
+		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		
+		List<TblOrderQuery> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
+		
+		modelAndView.addObject("orderList",orderList);
+		modelAndView.setViewName("customer_order_withaccept");
+		
+		return modelAndView;
+	}
 	
 	@RequestMapping("/setOrder")
 	public ModelAndView setOrder(){

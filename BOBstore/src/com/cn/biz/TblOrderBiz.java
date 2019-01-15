@@ -53,5 +53,13 @@ public class TblOrderBiz {
 		// TODO Auto-generated method stub
 		return tblOrderMapper.selectOredeIDByNewestOrderDate();
 	}
+
+	public List<TblOrderQuery> selectByorderStateFun(TblCustomer customer, char orderState) {
+		// TODO Auto-generated method stub
+		TblOrderQuery tblOrderQuery = new TblOrderQuery();
+		tblOrderQuery.setCustomerName(customer.getCustomerName());
+		tblOrderQuery.setOrderState(orderState);
+		return tblOrderMapper.selectByorderStateByName(tblOrderQuery);
+	}
 	
 }

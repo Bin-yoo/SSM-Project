@@ -48,15 +48,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	<c:if test="${empty sessionScope.customer}">
 	                		<span><a href="register.jsp">注册账号</a></span>
 	                	</c:if>
-                        <span><a href="">个人中心</a></span>
+                        <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
-                        <li><a href="">我的购物车</a></li>
-                        <li><a href="">所有订单</a></li>
-                        <li class="active"><a href="">待发货</a></li>
-                        <li><a href="">待收货</a></li>
+                        <li><a href="shopCart/viewShopCart">我的购物车</a></li>
+                        <li ><a href="order/allOrder">所有订单</a></li>
+                        <li class="active"><a href="order/withgoods?orderState=0">待发货</a></li>
+                        <li><a href="order/withaccept?orderState=2">待收货</a></li>
                     </ul>
                 </div>
             </div>
@@ -74,29 +74,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                     </div>
                     <div class="order_list">
-                        <div class="item">
-                            <ul class="item-content">
-                                <li class="td td-item">
-                                    <div class="item_img">
-                                        <a href=""><img src="./img/2d295ff0a3796aaa6f01c93bc798f861.jpg" alt=""></a>
-                                    </div>
-                                    <div class="item_title">
-                                        <a href="#">电脑键盘清洁泥笔记本清洁套装软胶汽车内饰清洗清理工具手机液晶屏幕清洁剂去尘除尘清灰胶魔力机械死角神器</a>
-                                    </div>
-                                </li>
-                                <li class="td td-price">￥199.00</li>
-                                <li class="td td-amount">
-                                    <button type="button" class="btn btn-default">-</button>
-                                    <input type="text" name="amount" value="1" style="width:40px;text-align: center;" class="btn">
-                                    <button type="button" class="btn btn-default">+</button>
-                                </li>
-                                <li class="td td-sum">￥159.00</li>
-                                <li class="td td-sta">已发货</li>
-                                <li class="td td-op">
-                                    <a href="#" class="btn btn-danger">收货</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <c:forEach items="${orderList}" var="order">
+	                        <div class="item">
+	                            <ul class="item-content">
+	                                <li class="td td-item">
+	                                    <div class="item_img">
+	                                        <a href="good/goodsdetail?goodsID=${order.goodsID}"><img src="${order.goodsImageUrl}" alt=""></a>
+	                                    </div>
+	                                    <div class="item_title">
+	                                        <a href="good/goodsdetail?goodsID=${order.goodsID}">${order.goodsName}</a>
+	                                    </div>
+	                                </li>
+	                                <li class="td td-price">￥${order.orderPrice }</li>
+	                                <li class="td td-amount">
+	                                    <input type="text" name="amount" value="x${order.goodCount }" style="width:40px;text-align: center;" class="btn" disabled="disabled">
+	                                </li>
+	                                <li class="td td-sum">￥${order.totalMoney}</li>
+	                                <li class="td td-sta">
+	                                	<c:if test="${order.orderState == '0'.charAt(0)}">
+	                                		未发货
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '1'.charAt(0)}">
+	                                		已发货
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '2'.charAt(0)}">
+	                                		已收货
+	                                	</c:if>
+                               	 	</li>
+	                                <li class="td td-op">
+	                                	<c:if test="${order.orderState == '0'.charAt(0)}">
+	                                		<a class="btn btn-danger">收货</a>
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '1'.charAt(0)}">
+	                                		<a class="btn btn-danger">收货</a>
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '2'.charAt(0)}">
+	                                		<p>已签收</p>
+	                                	</c:if>
+	                                </li>
+	                            </ul>
+	                        </div>
+                    	</c:forEach>
                     </div>
                 </div>
             </div>
