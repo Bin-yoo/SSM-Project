@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </div>
                                     <div class="col-sm-9">
                                         <select name="sex" id="sex" class="form-control">
-											<option value="0" ${tblCustomer.sex == 0 ? "selected='selected'":""}>男</option>
+											<option value="0" ${tblCustomer.sex == 0 ? "selected='selected'":""}>女</option>
 											<option value="1" ${tblCustomer.sex == 1 ? "selected='selected'":""}>男</option>
                                         </select>
                                     </div>
