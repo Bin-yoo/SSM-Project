@@ -23,15 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				window.location.href="/BOBstore/shopCart/removeGoods?shopcartID=" + shopcartID;
 			}
 		}
-    	/* function setSum(){
-   			var amount = $('#amount');
-			var goodsPrice = $('#goodsPrice').text();
-			var goodsDiscountPrice = $('#goodsDiscountPrice').text();
-			var sum = 0;
-			if(!isNaN(goodsDiscountPrice)){
-				sum = amount.val() * goodsDiscountPrice;
-			}
-		} */
+		
     	$(function(){
 			var amount = $('#amount');
 			var Stock = $('.Stock');
@@ -56,8 +48,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}if(parseInt(amount.val()) > parseInt(Stock.val())){
 					parseInt(amount.val(parseInt(Stock.val())));
 				}
-				
 			})
+			
+			var all = document.getElementById ("all");			//全选checkbox
+			var box = document.getElementsByName('shopcartID');	//子复选框
+			
+			//遍历checkbox，把子复选框的checked设置成全选框的状态，实现全选/全不选
+			all.onclick = function (){
+				for ( var i = 0; i < box.length; i++){
+					box[i].checked = this.checked;
+				}
+			};
+			//遍历checkbox，子复选框有一个未选中时，如果全选框设为false不选状态
+			for ( var i = 0; i < box.length; i++){
+				box[i].onclick = function (){
+					if ( !this.checked ){
+						all.checked = false;
+					}
+				};
+			}
+			
 		});
     </script>
 </head>
@@ -105,6 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li><a href="order/allOrder">所有订单</a></li>
                         <li><a href="order/withgoods?orderState=0">待发货</a></li>
                         <li><a href="order/withaccept?orderState=2">待收货</a></li>
+                        <li><a href="order/accept?orderState=2">已收货</a></li>
                     </ul>
                 </div>
             </div>
@@ -114,8 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="userbox">
                         <div class="table_th">
                             <div class="th th-chk">
-                                <input type="checkbox" name="selectall" value="">
-                                全选
+                                <input type="checkbox" id="all" name="selectall" value="">全选
                             </div>
                             <div class="th th-item">商品信息</div>
                             <div class="th th-price">单价</div>
@@ -124,67 +134,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="th th-op">操作</div>
                         </div>
                     </div>
-                    
-                    <div>
-                    	
-                    		<input type="checkbox" name="shopcartID" value="1">1
-                    		<input type="checkbox" name="shopcartID" value="2">2
-                    		<input type="checkbox" name="shopcartID" value="3">3
-                    		<input type="checkbox" name="shopcartID" value="4">4
-                    		<input type="submit" name="submit" value="提交尼玛">
-                    	
-                    </div>
-                    
-                    <div class="order_list">
-                    	<c:forEach items="${shopcartList }" var="good">
-                        <div class="item">	
-                            <ul class="item-content">
-                                <li class="td td-chk">
-                                	
-                                    <input type="checkbox" name="select" value="">
-                                </li>
-                                <li class="td td-item">
-                                    <div class="item_img">
-                                        <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
-                                    </div>
-                                    <div class="item_title">
-                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
-                                        <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
-                                    </div>
-                                </li>
-                                <li class="td td-price">
-                                	<c:if test="${empty good.goodsDiscountPrice}">
-                  						￥ <span id="goodsPrice">${good.goodsPrice}</span>
-                  					</c:if>
-                  					<c:if test="${not empty good.goodsDiscountPrice}">
-                  						￥ <span id="goodsDiscountPrice">${good.goodsDiscountPrice}</span>
-                  					</c:if>
-                                </li>
-                                <li class="td td-amount">
-                                    <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
-                                    <input type="text" name="amount" value="${good.goodCount }"  id="amount" style="max-width:80px;text-align: center;" class="btn">
-                                    <button type="button" class="btn btn-default add" id="add">+</button>
-                                </li>
-                                <li class="td td-sum">￥<span id="sum">159.00</span></li>
-                                <li class="td td-op">
-                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
-                                </li>
-                            </ul>
-                        </div>
-                        </c:forEach>
-                    </div>
-                    <div class="commit_order">
-                        <div class="selectall">
-                            <input type="checkbox" name="selectall" value="">
-                            全选
-                        </div>
-                        <div class="del"><a href="">删除</a></div>
-                        <div class="rightBar">
-                            <div class="good_num">已选商品0件</div>
-                            <div class="total">总计: ￥159.00</div>
-                            <div class="order"><button class="btn" style="color: #fff" onclick="order_submit()">提交订单</button></div>
-                        </div>
-                    </div>
+                    <form action="order/batchSubmission" method="post">                 
+	                    <div class="order_list">
+                    		<c:forEach items="${shopcartList }" var="good">
+		                        <div class="item">	
+		                            <ul class="item-content">
+		                                <li class="td td-chk">
+		                                    <input type="checkbox" name="shopcartID" value="${good.shopcartID}">
+		                                </li>
+		                                <li class="td td-item">
+		                                    <div class="item_img">
+		                                        <a href="good/goodsdetail?goodsID=${good.goodsID}"><img src="${good.goodsImageUrl}" alt=""></a>
+		                                    </div>
+		                                    <div class="item_title">
+		                                    	<input type="hidden" value="${good.goodsInCount - good.goodsSellCount}" id="Stock" hidden="hidden" />
+		                                        <a href="good/goodsdetail?goodsID=${good.goodsID}">${good.goodsName}</a>
+		                                    </div>
+		                                </li>
+		                                <li class="td td-price">
+		                                	<c:if test="${empty good.goodsDiscountPrice}">
+		                  						￥ <span id="goodsPrice">${good.goodsPrice}</span>
+		                  					</c:if>
+		                  					<c:if test="${not empty good.goodsDiscountPrice}">
+		                  						￥ <span id="goodsDiscountPrice">${good.goodsDiscountPrice}</span>
+		                  					</c:if>
+		                                </li>
+		                                <li class="td td-amount">
+		                                    <button type="button"  class="btn btn-default reduce" id="reduce">-</button>
+		                                    <input type="text" name="amount" value="${good.goodCount }"  id="amount" style="max-width:80px;text-align: center;" class="btn">
+		                                    <button type="button" class="btn btn-default add" id="add">+</button>
+		                                </li>
+		                                <li class="td td-sum">￥
+		                                	<c:if test="${empty good.goodsDiscountPrice}">
+		                  						<span id="sum">${good.goodCount * good.goodsPrice}</span>
+		                  					</c:if>
+		                  					<c:if test="${not empty good.goodsDiscountPrice}">
+		                  						<span id="sum">${good.goodCount * good.goodsDiscountPrice}</span>
+		                  					</c:if>
+		                                </li>
+		                                <li class="td td-op">
+		                                    <button type="button" class="btn btn-danger btn-sm" onclick='deleteFun(${good.shopcartID})'>删除</button>
+		                                </li>
+		                            </ul>
+		                        </div>
+                        	</c:forEach>
+	                    </div>
+	                    <div class="commit_order">
+	                        <div class="selectall">
+	                            <input type="checkbox" id="all" name="selectall" value="">全选
+	                        </div>
+	                        <div class="del"><a href="">删除</a></div>
+	                        <div class="rightBar">
+	                            <div class="good_num">已选商品0件</div>
+	                            <div class="total">总计: ￥159.00</div>
+	                            <div class="order"><input type="submit" class="btn" style="color: #fff">提交订单</input></div>
+	                        </div>
+	                    </div>
+                    </form>
                 </div>
             </div>
         </div>

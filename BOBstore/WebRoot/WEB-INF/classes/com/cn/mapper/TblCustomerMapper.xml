@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.cn.mapper.TblCustomerMapper">
+	<select id="selectAllFun" resultType="tblCustomer">
+		select * from tbl_customer
+	</select>
+	
+	<select id="selectByCustomerNameFun" parameterType="String" resultType="tblCustomer">
+		select * from tbl_customer where customerName=#{name}
+	</select>
+	
+	<insert id="insertFun" parameterType="tblCustomer">
+		insert into tbl_customer(customerName,password,customerTrueName,customerAddress,sex,customerEmail,customerPhone,customerRegDate)
+		values(#{customerName},#{password},#{customerTrueName},#{customerAddress},#{sex},#{customerEmail},#{customerPhone},#{customerRegDate})
+	</insert>
+</mapper>

@@ -56,7 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <li><a href="shopCart/viewShopCart">我的购物车</a></li>
                         <li ><a href="order/allOrder">所有订单</a></li>
                         <li class="active"><a href="order/withgoods?orderState=0">待发货</a></li>
-                        <li><a href="order/withaccept?orderState=2">待收货</a></li>
+                        <li><a href="order/withaccept?orderState=1">待收货</a></li>
+                        <li><a href="order/accept?orderState=2">已收货</a></li>
                     </ul>
                 </div>
             </div>
@@ -103,13 +104,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                	 	</li>
 	                                <li class="td td-op">
 	                                	<c:if test="${order.orderState == '0'.charAt(0)}">
-	                                		<a class="btn btn-danger">收货</a>
+	                                		<a href="order/sign_good?orderID=${order.orderID}" class="btn btn-danger">收货</a>
 	                                	</c:if>
 	                                	<c:if test="${order.orderState == '1'.charAt(0)}">
-	                                		<a class="btn btn-danger">收货</a>
+	                                		<a href="order/sign_good?orderID=${order.orderID}" class="btn btn-danger">收货</a>
 	                                	</c:if>
 	                                	<c:if test="${order.orderState == '2'.charAt(0)}">
-	                                		<p>已签收</p>
+	                                		<button class="btn btn-danger">已收货</button>
 	                                	</c:if>
 	                                </li>
 	                            </ul>

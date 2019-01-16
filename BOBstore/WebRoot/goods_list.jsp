@@ -36,9 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="good/index"><h3>弟中弟商店-校园宅基送</h3></a>
             </div>
             <div class="search">
-                <form action="#" class="search_form">
-                    <input type="text" class="search_input" placeholder="搜索商品">
-                    <button class="search_button"><i class="glyphicon glyphicon-search"></i></button>
+                <form action="good/viewgoods" class="search_form">
+                    <input type="text" name="goodsName" class="search_input" placeholder="搜索商品">
+                    <button type="submit" class="search_button"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
             </div>
         </div>
@@ -64,6 +64,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	</c:if>
                         <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
+                </div>
+                <div class="shop_cart">
+                    <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
+                    <c:if test="${not empty ShopcartCount}">
+                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    </c:if>
+                    <c:if test="${empty ShopcartCount}">
+                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
+                    </c:if>
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
@@ -105,15 +114,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </ul>
                         </li>
                     </ul>
-                </div>
-                <div class="shop_cart">
-                    <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
-                    <c:if test="${not empty ShopcartCount}">
-                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
-                    </c:if>
-                    <c:if test="${empty ShopcartCount}">
-                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
-                    </c:if>
                 </div>
             </div>
             <div class="main">

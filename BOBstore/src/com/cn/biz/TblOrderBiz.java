@@ -18,9 +18,9 @@ public class TblOrderBiz {
 	@Autowired
 	TblOrderMapper tblOrderMapper;
 
-	public List<TblOrderQuery> selectAllFun() {
+	public List<TblOrderQuery> selectAllFun(String customerName) {
 		// TODO Auto-generated method stub
-		return tblOrderMapper.selectAllByName();
+		return tblOrderMapper.selectAllByName(customerName);
 	}
 
 	public boolean submitOrder(TblOrderQuery tblOrderQuery) {
@@ -64,7 +64,17 @@ public class TblOrderBiz {
 		return tblOrderMapper.selectByorderStateByName(tblOrderQuery);
 	}
 
-
+	public boolean signGoodsByOrderID(Integer orderID) {
+		// TODO Auto-generated method stub
+		try {
+			tblOrderMapper.c_updateStateFun(orderID);
+			return true;
+		} catch (Exception e) {
+			System.out.println("«© ’ ß∞‹!!!");
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public PageBean<TblOrderQuery> viewadminOrderFun(TblOrderQuery tblOrderQuery, Integer currPage, int limit) {
 		// TODO Auto-generated method stub

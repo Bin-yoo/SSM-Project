@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.cn.mapper.TblGoodsMapper">
+	<sql id="tblGoods_where">
+			<if test="goodsName !=null and  goodsName != '' ">
+				and goodsName like '%${goodsName}%'
+			</if>
+			<if test="priceB !=null">
+				and goodsDiscountPrice &gt;=#{priceB}
+			</if>
+			<if test="priceE !=null">
+				and goodsDiscountPrice &lt;=#{priceE}
+			</if>
+			<if test="goodsTypeID !=null">
+				and t.goodsTypeID = #{goodsTypeID}
+			</if>
+			<if test="detailedTypeID !=null">
+				and dt.detailedTypeID = #{detailedTypeID}
+			</if>
+	</sql>
+	<update id="updateFun" parameterType="TblGoods">
+		update tbl_goods set goodsName=#{goodsName},detailedTypeID=#{detailedTypeID},goodsPrice=#{goodsPrice},
+		goodsInCount=#{goodsInCount},goodsSellCount=#{goodsSellCount},goodsDescript=#{goodsDescript},
+		<if test="goodsImageUrl !=null and  goodsImageUrl != '' ">
+			goodsImageUrl=#{goodsImageUrl},
+		</if>
+		goodsDate=#{goodsDate},goodsDiscountPrice=#{goodsDiscountPrice}
+		where goodsID=#{goodsID};
+	</update>
+	
+	<delete id="delectFun">
+		delete from tbl_goods where goodsID=#{goodsID}
+	</delete>
+	<select id="selectByIdFun" resultType="tblGoods">
+		select * from tbl_goods where goodsID = #{goodsID}
+	</select>
+	<insert id="insertFun" parameterType="tblGoods" useGeneratedKeys="true" keyProperty="goodsID">
+		insert into tbl_goods(goodsName,detailedTypeID,goodsInCount,goodsPrice,goodsDiscountPrice,goodsImageUrl,goodsDescript,goodsDate)
+		
+		values(#{goodsName},#{detailedTypeID},#{goodsInCount},#{goodsPrice},#{goodsDiscountPrice},#{goodsImageUrl},#{goodsDescript},#{goodsDate})
+	</insert>
+	
+	<select id="selectCountConditionPageFun" parameterType="tblGoodsQuery" resultType="int">
+		select count(*) from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
+		<where>
+			g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
+			
+				<include refid="tblGoods_where"></include>
+		</where>
+	</select>
+	
+	<select id="selectByConditionPageFun" parameterType="tblGoodsQuery" resultType="tblGoods">
+		select top ${pageSize} * from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t 
+		<where>
+			g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
+			and g.goodsID not in (select top ${startNum} g.goodsID from tbl_goods g,tbl_goodstype_detailed dt,tbl_goodstype t
+				<where>
+					g.detailedTypeID = dt.detailedTypeID and dt.goodsTypeID = t.goodsTypeID
+					<include refid="tblGoods_where"/>
+				</where>
+				 order by g.goodsid)
+				<include refid="tblGoods_where"></include>
+		</where>
+		order by g.goodsid;
+	</select>
+	<select id="selectByHotGoods" resultType="tblGoods" parameterType="tblGoodsQuery">
+		select top ${limit} * from tbl_goods
+		<where>
+			<if test="detailedTypeID != null">
+				and detailedTypeID = ${detailedTypeID}
+			</if>
+		</where>
+			
+		order by goodsSellCount desc
+	</select>
+</mapper>
+

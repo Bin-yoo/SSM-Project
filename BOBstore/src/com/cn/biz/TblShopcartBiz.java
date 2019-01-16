@@ -75,6 +75,9 @@ public class TblShopcartBiz {
 					return false;
 				}
 	}
+	public TblShopcartQuery selectByShopcartIdFun(int i) {
+		return tblShopcartMapper.selectByShopcartIDFun(i);
+	}
 	
 	
 }

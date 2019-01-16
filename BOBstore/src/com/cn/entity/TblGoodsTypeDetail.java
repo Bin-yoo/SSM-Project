@@ -1,6 +1,6 @@
 package com.cn.entity;
 
-public class TblGoodsTypeDetail {
+public class TblGoodsTypeDetail extends TblGoodsType{
 
 	private Integer detailedTypeID;
 	private Integer goodsTypeID;

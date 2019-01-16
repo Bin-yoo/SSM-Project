@@ -67,10 +67,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </form>
         </div>
         <div class="back">
-            <span><a href="">返回商城</a></span>
+            <span><a href="good/index">返回商城</a></span>
         </div>
         <div class="register">
-            <span><a href="#">注册账号</a></span>
+            <span><a href="register.jsp">注册账号</a></span>
             <span><a href="#">找回密码</a></span>
         </div>
     </div>

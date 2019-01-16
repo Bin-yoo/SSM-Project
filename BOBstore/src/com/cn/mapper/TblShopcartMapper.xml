@@ -8,8 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="removeByshopcartIDFun" parameterType="int">
 		delete from tbl_shopcart where shopcartID=#{shopcartID}
 	</delete>
-	
-	
 	<update id="updateFun" parameterType="tblShopcart">
 		update tbl_shopcart set goodCount=#{goodCount} where customerName=#{customerName} and goodsID=#{goodsID}
 	</update>
@@ -22,10 +20,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertFun" parameterType="tblShopcart">
 		insert into tbl_shopcart(customerName,goodsID,goodCount) values(#{customerName},#{goodsID},#{goodCount})
 	</insert>
-	
-	
 	<select id="selectAllByName" parameterType="String" resultType="tblShopcartQuery">
 		select * from tbl_shopcart  ts, tbl_goods tg where ts.goodsID = tg.goodsID and customerName=#{customerName}
+	</select>
+	<select id="selectByShopcartIDFun" parameterType="int" resultType="tblShopcartQuery">
+		select * from tbl_shopcart  ts, tbl_goods tg where ts.goodsID = tg.goodsID and shopcartID=#{shopcartID}
 	</select>
 	
 </mapper>

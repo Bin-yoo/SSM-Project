@@ -23,6 +23,9 @@ public interface TblShopcartMapper {
 
 
 	void updateFun(TblShopcart tblShopcart);
+
+
+	TblShopcartQuery selectByShopcartIDFun(int i);
 	
 
 }

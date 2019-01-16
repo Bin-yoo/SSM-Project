@@ -26,9 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and customerName=#{customerName} and orderState=#{orderState}
 	</select>
 
-	<select id="selectAllFun" resultType="tblOrder">
-		select * from tbl_street
-	</select>
+	
 	<select id="selectAllByName" parameterType="String" resultType="tblOrderQuery">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
 	</select>
@@ -43,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into tbl_order_detailed
 		values(#{orderID},#{goodsID},#{orderPrice},#{goodCount})
 	</insert>
-	
-	
-	
+	<update id="c_updateStateFun" parameterType="int">
+		update tbl_order set orderState=2 where orderID = #{orderID}
+	</update>
 </mapper>

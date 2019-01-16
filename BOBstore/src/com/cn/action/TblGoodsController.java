@@ -145,11 +145,13 @@ public class TblGoodsController {
 		}
 		
 		List<TblGoods> glist = pageBean.getList();
-		TblGoods tgoods = glist.get(0);
+		TblGoods tgoods = null;
+		if(glist != null){
+			tgoods = glist.get(0);
+			modelAndView.addObject("detailedTypeID",tgoods.getDetailedTypeID());
+		}
 		modelAndView.addObject("pageBean",pageBean);
-		modelAndView.addObject("detailedTypeID",tgoods.getDetailedTypeID());
 		modelAndView.setViewName("goods_list");
-	
 		
 		return modelAndView;
 	}

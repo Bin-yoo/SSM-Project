@@ -2,8 +2,8 @@ package com.cn.entity;
 
 import java.sql.Timestamp;
 
-public class TblShopcartQuery {
-	private Integer goodsID;
+public class TblShopcartQuery extends TblShopcart{
+	
 	private String goodsName;
 	private Integer detailedTypeID;
 	private Double goodsPrice;
@@ -16,12 +16,8 @@ public class TblShopcartQuery {
 	
 	private Integer goodsTypeID;
 	private String goodsTypeName;
-	public Integer getGoodsID() {
-		return goodsID;
-	}
-	public void setGoodsID(Integer goodsID) {
-		this.goodsID = goodsID;
-	}
+	private String detailedTypeName;
+	
 	public String getGoodsName() {
 		return goodsName;
 	}
@@ -94,28 +90,5 @@ public class TblShopcartQuery {
 	public void setDetailedTypeName(String detailedTypeName) {
 		this.detailedTypeName = detailedTypeName;
 	}
-	public Integer getShopcartID() {
-		return shopcartID;
-	}
-	public void setShopcartID(Integer shopcartID) {
-		this.shopcartID = shopcartID;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-	public Integer getGoodCount() {
-		return goodCount;
-	}
-	public void setGoodCount(Integer goodCount) {
-		this.goodCount = goodCount;
-	}
-	private String detailedTypeName;
-	
-	
-	private Integer shopcartID;
-	private String customerName;
-	private Integer goodCount;
+
 }

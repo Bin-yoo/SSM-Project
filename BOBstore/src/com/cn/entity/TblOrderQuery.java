@@ -2,22 +2,9 @@ package com.cn.entity;
 
 import java.sql.Timestamp;
 
-public class TblOrderQuery {
-	private Integer orderID;
-	private String customerName;
-	private String orderAddress;
-	private String orderPhone;
-	private String orderAddressee;
-	private Double totalMoney;
-	private Timestamp orderDate = new Timestamp((new java.util.Date()).getTime());
-	private char orderState = '0';
-	
-	
-	private Integer goodsID;
-	private Integer goodCount;
-	private Double orderPrice;
-	
-	private String goodsName;	
+public class TblOrderQuery extends TblOrderDetail{
+
+	private String goodsName;
 	private Integer detailedTypeID;
 	private Double goodsPrice;
 	private Integer goodsInCount;
@@ -30,6 +17,8 @@ public class TblOrderQuery {
 	private Integer goodsTypeID;
 	private String goodsTypeName;
 	
+	private Integer startNum;				//从第几行开始查询
+	private Integer pageSize;
 	
 	public Integer getStartNum() {
 		return startNum;
@@ -45,74 +34,13 @@ public class TblOrderQuery {
 	}
 	private String detailedTypeName;
 	
-	private Integer startNum;				//从第几行开始查询
-	private Integer pageSize;
-
-	public Double getOrderPrice() {
-		return orderPrice;
+	private Integer shopcartID;
+	
+	public Integer getShopcartID() {
+		return shopcartID;
 	}
-	public void setOrderPrice(Double orderPrice) {
-		this.orderPrice = orderPrice;
-	}
-	public Integer getOrderID() {
-		return orderID;
-	}
-	public void setOrderID(Integer orderID) {
-		this.orderID = orderID;
-	}
-	public String getCustomerName() {
-		return customerName;
-	}
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-	public String getOrderAddress() {
-		return orderAddress;
-	}
-	public void setOrderAddress(String orderAddress) {
-		this.orderAddress = orderAddress;
-	}
-	public String getOrderPhone() {
-		return orderPhone;
-	}
-	public void setOrderPhone(String orderPhone) {
-		this.orderPhone = orderPhone;
-	}
-	public String getOrderAddressee() {
-		return orderAddressee;
-	}
-	public void setOrderAddressee(String orderAddressee) {
-		this.orderAddressee = orderAddressee;
-	}
-	public Double getTotalMoney() {
-		return totalMoney;
-	}
-	public void setTotalMoney(Double totalMoney) {
-		this.totalMoney = totalMoney;
-	}
-	public Timestamp getOrderDate() {
-		return orderDate;
-	}
-	public void setOrderDate(Timestamp orderDate) {
-		this.orderDate = orderDate;
-	}
-	public char getOrderState() {
-		return orderState;
-	}
-	public void setOrderState(char orderState) {
-		this.orderState = orderState;
-	}
-	public Integer getGoodsID() {
-		return goodsID;
-	}
-	public void setGoodsID(Integer goodsID) {
-		this.goodsID = goodsID;
-	}
-	public Integer getGoodCount() {
-		return goodCount;
-	}
-	public void setGoodCount(Integer goodCount) {
-		this.goodCount = goodCount;
+	public void setShopcartID(Integer shopcartID) {
+		this.shopcartID = shopcartID;
 	}
 	public String getGoodsName() {
 		return goodsName;
@@ -186,6 +114,5 @@ public class TblOrderQuery {
 	public void setDetailedTypeName(String detailedTypeName) {
 		this.detailedTypeName = detailedTypeName;
 	}
-	
-	
+
 }

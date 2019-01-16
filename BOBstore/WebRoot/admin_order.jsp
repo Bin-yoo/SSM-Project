@@ -18,8 +18,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript">
     	function update(orderID,currPage){
-    		
-			window.location.href= "/BOBstore/order/Grant?orderID=" + orderID + "&currPage=" + currPage;
+    		var flag = confirm("您真的要发货吗？");
+			if(flag){
+				window.location.href= "/BOBstore/order/Grant?orderID=" + orderID + "&currPage=" + currPage;
+			}
     	}
     	function doTurnTO(currPage){
 			var f = window.location.href="/BOBstore/order/adminOrder?currPage=" + currPage;
@@ -99,9 +101,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                	</c:if>
 									</td>
                                     <td>
-                                    	<a class="" href="&currPage="></a>
-                                    	<button type="button" class="btn btn-success btn-sm" onclick="update(${order.orderID},${pageBean.currPage})">发货</button>
-                                        
+                                    	<c:if test="${order.orderState == '0'.charAt(0)}">
+	                                		<a class="" href="&currPage="></a>
+                                    		<button type="button" class="btn btn-success btn-sm" onclick="update(${order.orderID},${pageBean.currPage})">发货</button>
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '1'.charAt(0)}">
+	                                		<a class="" href="&currPage="></a>
+                                    		<button type="button" class="btn btn-success btn-sm" onclick="update(${order.orderID},${pageBean.currPage})" disabled="disabled">发货</button>
+	                                	</c:if>
+	                                	<c:if test="${order.orderState == '2'.charAt(0)}">
+	                                		<a class="" href="&currPage="></a>
+                                    		<button type="button" class="btn btn-success btn-sm" onclick="update(${order.orderID},${pageBean.currPage})" disabled="disabled">发货</button>
+	                                	</c:if>
+                                    	
                                     </td>
                                 </tr>
                                 </c:forEach>

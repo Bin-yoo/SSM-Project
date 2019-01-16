@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.cn.mapper.TblOrderMapper">
+	<select id="selectCountPageFun" parameterType="tblOrderQuery" resultType="int">
+		select count(*) from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID
+	</select>
+	<select id="selectByCondtionPageFun" parameterType="tblOrderQuery" resultType="tblOrderQuery">
+		select top ${pageSize} * from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID 
+ and de.orderID not in(select top ${startNum} de.orderID from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID)
+	</select>
+
+
+	<update id="updateGrant">
+		update tbl_order set orderState = 1 where orderID = #{orderID}
+	</update>
+
+
+
+
+	<select id="selectByorderStateByName" parameterType="tblOrderQuery" resultType="tblOrderQuery">
+		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID 
+		and customerName=#{customerName} and orderState=#{orderState}
+	</select>
+
+	
+	<select id="selectAllByName" parameterType="String" resultType="tblOrderQuery">
+		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
+	</select>
+	<insert id="insertOrderFun" parameterType="tblOrderQuery">
+		insert into tbl_order
+		values(#{customerName},#{orderAddress},#{orderPhone},#{orderAddressee},#{totalMoney},#{orderDate},#{orderState})
+	</insert>
+	<select id="selectOredeIDByNewestOrderDate" parameterType="String" resultType="int">
+		select top 1 orderID from tbl_order order by orderDate desc;
+	</select>
+	<insert id="insertOrederDetailFun" parameterType="tblOrderQuery">
+		insert into tbl_order_detailed
+		values(#{orderID},#{goodsID},#{orderPrice},#{goodCount})
+	</insert>
+	<update id="c_updateStateFun" parameterType="int">
+		update tbl_order set orderState=2 where orderID = #{orderID}
+	</update>
+</mapper>

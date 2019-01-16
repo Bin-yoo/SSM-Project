@@ -28,9 +28,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="good/index"><h3>弟中弟商店-校园宅基送</h3></a>
             </div>
             <div class="search">
-                <form action="#" class="search_form">
-                    <input type="text" class="search_input" placeholder="搜索商品">
-                    <button class="search_button"><i class="glyphicon glyphicon-search"></i></button>
+                <form action="good/viewgoods" class="search_form">
+                    <input type="text" name="goodsName" class="search_input" placeholder="搜索商品">
+                    <button type="submit" class="search_button"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
             </div>
         </div>
@@ -56,6 +56,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                	</c:if>
                         <span><a href="shopCart/viewShopCart">个人中心</a></span>
                     </div>
+                </div>
+                <div class="shop_cart">
+                    <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
+                    <c:if test="${not empty ShopcartCount}">
+                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
+                    </c:if>
+                    <c:if test="${empty ShopcartCount}">
+                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
+                    </c:if>
                 </div>
                 <div class="menu">
                     <ul class="shop_list">
@@ -98,15 +107,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </li>
                     </ul>
                 </div>
-                <div class="shop_cart">
-                    <i class="glyphicon glyphicon-shopping-cart" style="color:#0094FF;"></i>
-                    <c:if test="${not empty ShopcartCount}">
-                    	<a href="shopCart/viewShopCart">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">${ShopcartCount}</span></a>
-                    </c:if>
-                    <c:if test="${empty ShopcartCount}">
-                    	<a href="login.jsp">购物车&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="badge">你还没登陆呢,亲</span></a>
-                    </c:if>
-                </div>
             </div>
             <div class="main">
                 <div class="container">
@@ -147,10 +147,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	
                             	<dt class="item" >
                                 	<div class="img">
-                                    	<img src="${popularWine.goodsImageUrl}">
+                                    	<a href="good/goodsdetail?goodsID=${popularWine.goodsID}"><img src="${popularWine.goodsImageUrl}"></a>
                                 	</div>
                                 	<div class="text">
-                                    	<p class="g_title">${popularWine.goodsName}</p>
+                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${popularWine.goodsID}">${popularWine.goodsName}</a></p>
                                     	<p class="g_price">￥
                                     	<span class="pri">${popularWine.goodsPrice}</span>
                                     	<span class="num">${popularWine.goodsSellCount}已销售</span>
@@ -168,10 +168,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	
                             	<dt class="item" >
                                 	<div class="img">
-                                    	<img src="${popularCandy.goodsImageUrl}">
+                                    	<a href="good/goodsdetail?goodsID=${popularCandy.goodsID}"><img src="${popularCandy.goodsImageUrl}"></a>
                                 	</div>
                                 	<div class="text">
-                                    	<p class="g_title">${popularCandy.goodsName}</p>
+                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${popularCandy.goodsID}">${popularCandy.goodsName}</a></p>
                                     	<p class="g_price">￥
                                     	<span class="pri">${popularCandy.goodsPrice}</span>
                                     	<span class="num">${popularCandy.goodsSellCount}已销售</span>
@@ -189,10 +189,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         	
                             	<dt class="item" >
                                 	<div class="img">
-                                    	<img src="${popularSnacks.goodsImageUrl}">
+                                    	<a href="good/goodsdetail?goodsID=${popularSnacks.goodsID}"><img src="${popularSnacks.goodsImageUrl}"></a>
                                 	</div>
                                 	<div class="text">
-                                    	<p class="g_title">${popularSnacks.goodsName}</p>
+                                    	<p class="g_title"><a href="good/goodsdetail?goodsID=${popularSnacks.goodsID}">${popularSnacks.goodsName}</a></p>
                                     	<p class="g_price">￥
                                     	<span class="pri">${popularSnacks.goodsPrice}</span>
                                     	<span class="num">${popularSnacks.goodsSellCount}已销售</span>

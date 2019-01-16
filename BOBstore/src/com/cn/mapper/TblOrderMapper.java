@@ -7,7 +7,7 @@ import com.cn.entity.TblOrderQuery;
 
 public interface TblOrderMapper {
 
-	List<TblOrderQuery> selectAllByName();
+	List<TblOrderQuery> selectAllByName(String customerName);
 
 	void insertOrderFun(TblOrderQuery tblOrderQuery);
 
@@ -17,13 +17,12 @@ public interface TblOrderMapper {
 
 	List<TblOrderQuery> selectByorderStateByName(TblOrderQuery tblOrderQuery);
 
+	void c_updateStateFun(Integer orderID);
 
 	int selectCountPageFun(TblOrderQuery tblOrderQuery);
 
 	List<TblOrderQuery> selectByCondtionPageFun(TblOrderQuery tblOrderQuery);
 
 	void updateGrant(Integer orderID);
-
-
 
 }
