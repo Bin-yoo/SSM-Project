@@ -27,7 +27,14 @@ public class TblCustomerController {
 	@Autowired
 	TblShopcartBiz tblShopcartBiz;
 	
-	
+	/**
+	 * 
+	 * @param name 登录名
+	 * @param password 密码
+	 * @param goodsID 商品ID
+	 * @param session
+	 * @return 这个方法用于登录，并且判断你在加入购物车和立即购买时有没有登录，没有登录则返回登录界面
+	 */
 	
 	@RequestMapping("/login")
 	public ModelAndView Login(@ModelAttribute("name")String name,String password,Integer goodsID,HttpSession session){
@@ -47,7 +54,11 @@ public class TblCustomerController {
 		}
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param tblCustomer 传入用户信息
+	 * @return 用于登录
+	 */
 	@RequestMapping("/register")
 	public ModelAndView register(TblCustomer tblCustomer){
 		boolean flag = tblCustomerBiz.register(tblCustomer);
@@ -64,13 +75,21 @@ public class TblCustomerController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param name
+	 * @return 注册时用的，检查有没有相同的用户名
+	 */
 	@RequestMapping("/checkName")
 	public @ResponseBody String checkName(String name){
 		boolean flag = tblCustomerBiz.checkByCustomerName(name);
 		return flag + "";
 	}
-	
+	/**
+	 * 
+	 * @param request
+	 * @return 登出
+	 */
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request){
 		HttpSession session = request.getSession();

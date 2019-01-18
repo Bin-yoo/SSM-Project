@@ -34,7 +34,12 @@ public class TblOrderController {
 	TblCustomerBiz tblCustomerBiz;
 	@Autowired
 	TblShopcartBiz tblShopcartBiz;
-
+	/**
+	 * 
+	 * @param orderID 订单ID
+	 * @param currPage 在管理员的订单页面上的页数
+	 * @return 发货，修改订单状态
+	 */
 	@RequestMapping("/Grant")
 	public String grant(Integer orderID,Integer currPage){
 		boolean flag = tblOrderBiz.grantByOrder(orderID);
@@ -46,7 +51,11 @@ public class TblOrderController {
 		
 	}
 
-	
+	/**
+	 * 
+	 * @param session
+	 * @return 通过session中保存的用户名将查询到的所有订单返回到用户的订单页面上
+	 */
 	@RequestMapping("/allOrder")
 	public ModelAndView allOrder(HttpSession session){
 		TblCustomer tblCustomer = (TblCustomer)session.getAttribute("customer");
@@ -61,6 +70,12 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
+	/**
+	 * 
+	 * @param tblOrderQuery
+	 * @param currPage
+	 * @return 管理员订单页面，并且完成分页
+	 */
 	@RequestMapping("/adminOrder")
 	public ModelAndView adminOrder(TblOrderQuery tblOrderQuery,Integer currPage){
 		int limit = 6;
@@ -75,6 +90,12 @@ public class TblOrderController {
 		return modelAndView;
 		
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param orderState 订单的状态
+	 * @return 返回查询到的状态为未发货的订单
+	 */
 	@RequestMapping("/withgoods")
 	public ModelAndView withgoods(HttpSession session,char orderState){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -89,7 +110,12 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param session
+	 * @param orderState
+	 * @return 返回查询到的状态为已收货的订单
+	 */
 	@RequestMapping("/accept")
 	public ModelAndView acceptOrder(HttpSession session,char orderState){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -104,6 +130,12 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
+	/**
+	 * 
+	 * @param session
+	 * @param orderState
+	 * @return 返回查询到的状态为未收货的订单
+	 */
 	@RequestMapping("/withaccept")
 	public ModelAndView withacceptOrder(HttpSession session,char orderState){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -118,7 +150,13 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param goodsID 商品ID
+	 * @param count 要买的商品的数量
+	 * @param session
+	 * @return 立即购买功能，并将订单生成
+	 */
 	@RequestMapping("/buyNow")
 	public ModelAndView buyNow(Integer goodsID,Integer count,HttpSession session){
 		TblCustomer tblCustomer = (TblCustomer)session.getAttribute("customer");
@@ -148,7 +186,12 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param tblOrderQuery
+	 * @param session
+	 * @return 订单确认时，生成订单
+	 */
 	@RequestMapping("/buyNow/submit")
 	public String order_submit(TblOrderQuery tblOrderQuery,HttpSession session){
 		
@@ -174,7 +217,11 @@ public class TblOrderController {
 		}
 		
 	}
-	
+	/**
+	 * 
+	 * @param shopcartID
+	 * @return 购物车批量提交
+	 */
 	@RequestMapping("/batchSubmission")
 	public ModelAndView batchSubmission(Integer[] shopcartID){
 		ModelAndView modelAndView = new ModelAndView();
@@ -199,7 +246,11 @@ public class TblOrderController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param shopcartID
+	 * @return 购物车批量提交
+	 */
 	@RequestMapping("/batchSubmission/submit")
 	public String order_batchSubmission(TblOrderQueryModel querymodel){
 		
@@ -233,7 +284,11 @@ public class TblOrderController {
 			return "redirect:../shopCart/viewShopCart";
 		}
 	}
-	
+	/**
+	 * 
+	 * @param shopcartID
+	 * @return 用户签收
+	 */
 	@RequestMapping("/sign_good")
 	public String sign_good(Integer orderID){
 		boolean flag = tblOrderBiz.signGoodsByOrderID(orderID);

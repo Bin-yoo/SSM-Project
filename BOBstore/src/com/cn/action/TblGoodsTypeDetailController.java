@@ -16,7 +16,11 @@ public class TblGoodsTypeDetailController {
 
 	@Autowired
 	TblGoodsTypeDetailBiz tblGoodsTypeDetailBiz;
-	
+	/**
+	 * 
+	 * @param goodsTypeID
+	 * @return 按照商品类型ID查找
+	 */
 	@RequestMapping("/viewByGoodsTypeId")
 	public @ResponseBody List<TblGoodsTypeDetail> viewByGoodsTypeId(Integer goodsTypeID){
 		List<TblGoodsTypeDetail> detailList = tblGoodsTypeDetailBiz.viewGoodsTypeIDFun(goodsTypeID);

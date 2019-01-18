@@ -15,7 +15,13 @@ public class TblGoodsBiz {
 
 	@Autowired
 	TblGoodsMapper tblGoodsMapper;
-
+	/**
+	 * 
+	 * @param tblGoodsQuery
+	 * @param currPage 页数
+	 * @param limit 行数
+	 * @return pageBean，里面存有分页查询到
+	 */
 	public PageBean<TblGoods> viewByConditionPageFun(TblGoodsQuery tblGoodsQuery, Integer currPage, int limit) {
 		int totalCount = tblGoodsMapper.selectCountConditionPageFun(tblGoodsQuery);
 		PageBean <TblGoods>pageBean = new PageBean<TblGoods>(totalCount,currPage,limit);
@@ -48,7 +54,7 @@ public class TblGoodsBiz {
 	/**
 	 * 
 	 * @param tblGoods 
-	 * @return
+	 * @return 购物车添加
 	 */
 	public boolean addFun(TblGoods tblGoods) {
 		// TODO Auto-generated method stub
@@ -60,7 +66,14 @@ public class TblGoodsBiz {
 			return false;
 		}
 	}
-
+	/**
+	 * 
+	 * @param tblGoodsQuery
+	 * @param currPage
+	 * @param limit
+	 * @param detailedTypeID
+	 * @return 分页查询
+	 */
 	public PageBean<TblGoods> viewBydetailedTypeID(TblGoodsQuery tblGoodsQuery, Integer currPage, int limit,
 			Integer detailedTypeID) {
 		// TODO Auto-generated method stub
@@ -79,7 +92,11 @@ public class TblGoodsBiz {
 		
 		return pageBean;
 	}
-
+	/**
+	 * 
+	 * @param goodsID
+	 * @return 查询商品详情
+	 */
 	public TblGoods selectByGoodsIdFun(Integer goodsID) {
 		return tblGoodsMapper.selectByIdFun(goodsID);
 	}
@@ -93,7 +110,11 @@ public class TblGoodsBiz {
 			return false;
 		}
 	}
-
+	/**
+	 * 
+	 * @param tblGoods
+	 * @return 商品的修改
+	 */
 	public boolean modifyFun(TblGoods tblGoods) {
 		try{
 			tblGoodsMapper.updateFun(tblGoods);

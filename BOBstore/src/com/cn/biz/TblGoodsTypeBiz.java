@@ -13,7 +13,10 @@ public class TblGoodsTypeBiz {
 	
 	@Autowired
 	TblGoodsTypeMapper tblGoodsTypeMapper;
-	
+	/**
+	 * 
+	 * @return 返回商品类型
+	 */
 	public List<TblGoodsType> viewAllTypeFun() {
 		return tblGoodsTypeMapper.selectAllType();
 	}

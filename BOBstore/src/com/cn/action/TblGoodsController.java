@@ -47,10 +47,10 @@ public class TblGoodsController {
 	TblShopcartBiz tblShopcartBiz;
 	/**
 	 * 
-	 * @param tblGoods
-	 * @param session
+	 * @param tblGoods 加入的商品的信息
+	 * @param session 
 	 * @param model
-	 * @return 
+	 * @return 用于商品添加功能，必须要上传图片
 	 * 
 	 */ 
 	
@@ -82,7 +82,10 @@ public class TblGoodsController {
 			return "/admin_addgood";
         }
 	}
-	
+	/**
+	 * 
+	 * @return 用于添加商品的功能，查询出表里有的类型并且显示到添加界面上
+	 */
 	@RequestMapping("/befAdd")
 	public ModelAndView befAddFun(){
 		List<TblGoodsType> typeList = tblGoodsTypeBiz.viewAllTypeFun();
@@ -100,7 +103,12 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param tblGoodsQuery 商品的工具类
+	 * @param session
+	 * @return 用于商店的首页，返回几种热门商品的列表
+	 */
 	@RequestMapping("/index")
 	public ModelAndView viewOfGoods(TblGoodsQuery tblGoodsQuery,HttpSession session){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -130,6 +138,14 @@ public class TblGoodsController {
 		return modelAndView;
 	}
 	
+	/**
+	 * 
+	 * @param currPage 页数
+	 * @param tblGoodsQuery 商品工具类
+	 * @param detailedTypeID 类型ID
+	 * @param session 
+	 * @return 通过传进来的类型ID，完成几个页面的翻页查询
+	 */
 	@RequestMapping("/viewgoods")
 	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery,Integer detailedTypeID,HttpSession session){
 		int limit = 10;
@@ -155,7 +171,13 @@ public class TblGoodsController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param goodsID 商品的ID
+	 * @param add 
+	 * @param session
+	 * @return 返回通过商品ID查询到的商品的详细信息
+	 */
 	@RequestMapping("/goodsdetail")
 	public ModelAndView viewGoodsDetail(Integer goodsID,boolean add,HttpSession session){
 		TblGoods tblGoods = tblGoodsBiz.selectByGoodsIdFun(goodsID);
@@ -176,7 +198,12 @@ public class TblGoodsController {
 		return modelAndView;
 		
 	}
-	
+	/**
+	 * 
+	 * @param goodsID 商品ID
+	 * @param currPage
+	 * @return 用于管理员删除商品的功能
+	 */
 	@RequestMapping("remove")
 	public String removeFun(Integer goodsID,Integer currPage){
 		if(goodsID!=null){
@@ -185,6 +212,15 @@ public class TblGoodsController {
 		return "redirect:../admin/goods?currPage=" + currPage;
 		
 	}
+	/**
+	 * 
+	 * @param tblGoods 整个商品的信息
+	 * @param session
+	 * @param model
+	 * @param picture 图片
+	 * @param request
+	 * @return 用于管理员修改商品信息
+	 */
 	@RequestMapping("modify")
 	public String modifyFun(TblGoods tblGoods,HttpSession session,Model model,@RequestParam("i-file") MultipartFile picture, HttpServletRequest request){
 		TblAdmin admin = (TblAdmin)session.getAttribute("admin");
@@ -215,7 +251,13 @@ public class TblGoodsController {
 			return "/admin_updategood";
         }
 	}
-	
+	/**
+	 * 
+	 * @param goodsID 商品id
+	 * @param goodsTypeID 商品的类型
+	 * @param tblGoodsQuery 攻击类
+	 * @return 将查询到的商品信息返回到修改商品信息页面上
+	 */
 	@RequestMapping("/befModify")
 	public ModelAndView befModifyFun(Integer goodsID,Integer goodsTypeID,TblGoodsQuery tblGoodsQuery){
 		

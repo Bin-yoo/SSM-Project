@@ -30,7 +30,11 @@ public class TblShopCartController
 		}
 		return "redirect:/shopCart/viewShopCart";
 	}
-	
+	/**
+	 * 
+	 * @param session
+	 * @return 查看购物车
+	 */
 	@RequestMapping("/viewShopCart")
 	public ModelAndView viewShopCart(HttpSession session){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");
@@ -48,7 +52,14 @@ public class TblShopCartController
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param goodsID
+	 * @param count 数量
+	 * @param session
+	 * @param model 
+	 * @return 添加购物车的功能
+	 */
 	@RequestMapping("/add")
 	public String addToShopCartFun(Integer goodsID,Integer count,HttpSession session,Model model){
 		TblCustomer customer = (TblCustomer)session.getAttribute("customer");

@@ -16,7 +16,12 @@ public class TblShopcartBiz {
 
 	@Autowired
 	TblShopcartMapper tblShopcartMapper;
-	
+	/**
+	 * 
+	 * @param customerName
+	 * @param goodsID
+	 * @return 添加时确认购物车中是否有这个商品
+	 */
 	public TblShopcart selectShopcartByGoodsID(String customerName, Integer goodsID) {
 
 		TblShopcart tblShopcart = new TblShopcart();
@@ -28,6 +33,13 @@ public class TblShopcartBiz {
 
 
 }
+	/**
+	 * 
+	 * @param customerName
+	 * @param count
+	 * @param goodsID
+	 * @return 添加购物车时，假如购物车中有同样的商品，就更新购物车
+	 */
 	public boolean updateFun(String customerName, Integer count, Integer goodsID) {
 		TblShopcart tblShopcart = new TblShopcart();
 		tblShopcart.setCustomerName(customerName);
@@ -41,11 +53,19 @@ public class TblShopcartBiz {
 			return false;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param customer
+	 * @return 查询购物车中所有的东西
+	 */
 	public List<TblShopcartQuery> selectAllFun(TblCustomer customer) {
 		return tblShopcartMapper.selectAllByName(customer.getCustomerName());	
 	}
-	
+	/**
+	 * 
+	 * @param shopcartID
+	 * @return 删除购物车中的某样商品
+	 */
 	public boolean removeFun(Integer shopcartID) {
 		// TODO Auto-generated method
 		try{
@@ -55,13 +75,23 @@ public class TblShopcartBiz {
 			return false;
 		}
 	}
-	
+	/**
+	 * 
+	 * @param customerName
+	 * @return 查询用户的购物车中有几样商品
+	 */
 	public int selectShopcartCountByName(String customerName) {
 		// TODO Auto-generated method stub
 		
 		return tblShopcartMapper.selectShopcartCountByName(customerName);
 	}
-
+	/**
+	 * 
+	 * @param customerName
+	 * @param goodsID
+	 * @param count
+	 * @return 添加购物车时，假如购物车中没有同样的商品，就添加购物车
+	 */
 	public boolean addFun(String customerName, Integer goodsID, Integer count) {
 		// TODO Auto-generated method stub
 				TblShopcart tblShopcart = new TblShopcart();
@@ -75,6 +105,11 @@ public class TblShopcartBiz {
 					return false;
 				}
 	}
+	/**
+	 * 
+	 * @param i
+	 * @return 通过购物车ID查询购物车
+	 */
 	public TblShopcartQuery selectByShopcartIdFun(int i) {
 		return tblShopcartMapper.selectByShopcartIDFun(i);
 	}

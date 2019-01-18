@@ -34,7 +34,13 @@ public class TblAdminController {
 	TblGoodsTypeBiz tblGoodsTypeBiz;
 	@Autowired
 	TblGoodsTypeDetailBiz tblGoodsTypeDetailBiz;
-	
+	/**
+	 * 
+	 * @param name 登录名
+	 * @param password 密码
+	 * @param session 将Admin存进session里面
+	 * @return Admin
+	 */
 	@RequestMapping("/login")
 	public ModelAndView Login(@ModelAttribute("name")String name,String password,HttpSession session){
 		
@@ -51,7 +57,11 @@ public class TblAdminController {
 		}
 		return modelAndView;
 	}
-
+	/**
+	 * 
+	 * @param request
+	 * @return 登出功能，将登录时存入session的admin删除
+	 */
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -63,7 +73,12 @@ public class TblAdminController {
 		
 		return modelAndView;
 	}
-	
+	/**
+	 * 
+	 * @param currPage 页数
+	 * @param tblGoodsQuery tlbGoods的工具类
+	 * @return 将商品的大类型和小类型，还有查询到的东西加进PageBean里返回
+	 */
 	@RequestMapping("/goods")
 	public ModelAndView viewGoods(Integer currPage,TblGoodsQuery tblGoodsQuery){
 		int limit = 6;

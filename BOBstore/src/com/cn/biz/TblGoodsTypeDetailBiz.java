@@ -13,11 +13,18 @@ public class TblGoodsTypeDetailBiz {
 
 	@Autowired
 	TblGoodsTypeDetailMapper tblGoodsTypeDetailMapper;
-	
+	/**
+	 * 
+	 * @return 返回商品类型
+	 */
 	public List<TblGoodsTypeDetail> viewAllDetailTypeFun() {
 		return tblGoodsTypeDetailMapper.selectAllDetailType();
 	}
-
+	/**
+	 * 
+	 * @param goodsTypeID
+	 * @return 返回商品类型
+	 */
 	public List<TblGoodsTypeDetail> viewGoodsTypeIDFun(Integer goodsTypeID) {
 		return tblGoodsTypeDetailMapper.selectByGoodsTypeID(goodsTypeID);
 	}
