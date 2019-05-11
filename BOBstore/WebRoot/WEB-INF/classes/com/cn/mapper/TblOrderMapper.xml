@@ -13,23 +13,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  and de.orderID not in(select top ${startNum} de.orderID from tbl_order de, tbl_goods tg, tbl_order_detailed od,tbl_goodstype_detailed gd where od.goodsID = tg.goodsID and de.orderID = od.orderID and gd.detailedTypeID = tg.detailedTypeID)
 	</select>
 
-
 	<update id="updateGrant">
 		update tbl_order set orderState = 1 where orderID = #{orderID}
 	</update>
-
-
-
 
 	<select id="selectByorderStateByName" parameterType="tblOrderQuery" resultType="tblOrderQuery">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID 
 		and customerName=#{customerName} and orderState=#{orderState}
 	</select>
 
-	
-	<select id="selectAllByName" parameterType="String" resultType="tblOrderQuery">
+	<resultMap type="tblOrder" id="tblOrderBean">
+		<id column="orderID" property="orderID" />
+		<result column="customerName" property="customerName"/>
+		<result column="orderAddress" property="orderAddress"/>
+		<result column="orderPhone" property="orderPhone"/>
+		<result column="orderAddressee" property="orderAddressee"/>
+		<result column="totalMoney" property="totalMoney"/>
+		<result column="orderDate" property="orderDate"/>
+		<result column="orderState" property="orderState"/>
+        <collection property="orderdetail" ofType="tblOrderDetail">
+        	<id column="orderID" property="orderID" />
+        	<id column="goodsID" property="goodsID" />
+        	<result column="orderPrice" property="orderPrice"/>
+        	<result column="goodCount" property="goodCount"/>
+        	<association property="tblGoods" javaType="tblGoods">
+        		<id column="goodsID" property="goodsID" />
+        		<result column="goodsName" property="goodsName"/>
+        		<result column="goodsImageUrl" property="goodsImageUrl"/>
+            </association>
+        </collection>
+    </resultMap>
+	<select id="selectAllByName" parameterType="String" resultMap="tblOrderBean">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
 	</select>
+	
 	<insert id="insertOrderFun" parameterType="tblOrderQuery">
 		insert into tbl_order
 		values(#{customerName},#{orderAddress},#{orderPhone},#{orderAddressee},#{totalMoney},#{orderDate},#{orderState})

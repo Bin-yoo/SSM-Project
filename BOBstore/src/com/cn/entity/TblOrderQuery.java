@@ -17,7 +17,7 @@ public class TblOrderQuery extends TblOrderDetail{
 	private Integer goodsTypeID;
 	private String goodsTypeName;
 	
-	private Integer startNum;				//从第几行开始查询
+	private Integer startNum;
 	private Integer pageSize;
 	
 	public Integer getStartNum() {

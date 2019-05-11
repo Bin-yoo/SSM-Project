@@ -17,6 +17,7 @@ import com.cn.biz.TblShopcartBiz;
 import com.cn.entity.TblAdmin;
 import com.cn.entity.TblCustomer;
 import com.cn.entity.TblGoods;
+import com.cn.entity.TblOrder;
 import com.cn.entity.TblOrderQuery;
 import com.cn.entity.TblShopcartQuery;
 import com.cn.util.PageBean;
@@ -63,7 +64,7 @@ public class TblOrderController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		List<TblOrderQuery> orderList=tblOrderBiz.selectAllFun(tblCustomer.getCustomerName());
+		List<TblOrder> orderList=tblOrderBiz.selectAllFun(tblCustomer.getCustomerName());
 		
 		modelAndView.addObject("orderList",orderList);
 		modelAndView.setViewName("customer_order");

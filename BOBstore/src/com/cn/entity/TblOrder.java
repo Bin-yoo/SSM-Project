@@ -1,6 +1,7 @@
 package com.cn.entity;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class TblOrder {
 
@@ -12,7 +13,15 @@ public class TblOrder {
 	private Double totalMoney;
 	private Timestamp orderDate = new Timestamp((new java.util.Date()).getTime());
 	private char orderState = '0';
+		
+	List<TblOrderDetail> orderdetail;
 	
+	public List<TblOrderDetail> getOrderdetail() {
+		return orderdetail;
+	}
+	public void setOrderdetail(List<TblOrderDetail> orderdetail) {
+		this.orderdetail = orderdetail;
+	}
 	public Integer getOrderID() {
 		return orderID;
 	}

@@ -6,6 +6,16 @@ public class TblOrderDetail extends TblOrder{
 	private Integer goodsID;
 	private Double orderPrice;
 	private Integer goodCount;
+	
+	private TblGoods tblGoods;
+
+	public TblGoods getTblGoods() {
+		return tblGoods;
+	}
+	public void setTblGoods(TblGoods tblGoods) {
+		this.tblGoods = tblGoods;
+	}
+	
 	public Integer getOrderID() {
 		return orderID;
 	}

@@ -22,7 +22,7 @@ public class TblOrderBiz {
 	 * @param customerName
 	 * @return 差询用户的所有订单
 	 */
-	public List<TblOrderQuery> selectAllFun(String customerName) {
+	public List<TblOrder> selectAllFun(String customerName) {
 		// TODO Auto-generated method stub
 		return tblOrderMapper.selectAllByName(customerName);
 	}

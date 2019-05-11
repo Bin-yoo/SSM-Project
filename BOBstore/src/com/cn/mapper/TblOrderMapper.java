@@ -7,7 +7,7 @@ import com.cn.entity.TblOrderQuery;
 
 public interface TblOrderMapper {
 
-	List<TblOrderQuery> selectAllByName(String customerName);
+	List<TblOrder> selectAllByName(String customerName);
 
 	void insertOrderFun(TblOrderQuery tblOrderQuery);
 
