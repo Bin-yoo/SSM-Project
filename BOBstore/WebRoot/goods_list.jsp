@@ -23,10 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/index.js"></script>
     <script type="text/javascript">
-	
-		function doSearch(detailedTypeID,currPage){
-			var f = window.location.href="/BOBstore/good/viewgoods?detailedTypeID=" + detailedTypeID + "&currPage=" +currPage;
-		}
+
+        function doSearch(currPage){
+            var f = document.getElementById('sform');
+            f.action = f.action + "?currPage=" +currPage;
+            f.submit();
+        }
     </script>
 </head>
 <body>
@@ -36,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <a href="good/index"><h3>弟中弟商店-校园宅基送</h3></a>
             </div>
             <div class="search">
-                <form action="good/viewgoods" class="search_form">
-                    <input type="text" name="goodsName" class="search_input" placeholder="搜索商品">
+                <form action="good/viewgoods" method="post" class="search_form" id="sform">
+                    <input type="text" name="goodsName" value="${goodName}" class="search_input" placeholder="搜索商品">
                     <button type="submit" class="search_button"><i class="glyphicon glyphicon-search"></i></button>
                 </form>
             </div>
@@ -120,9 +122,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="container">
    
                     <span class="tab">
-                    	<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
-							${i.detailedTypeName}
-                        </c:forEach>
+						<c:if test="${goodName == null}">
+							<c:forEach items="${pageBean.list}" begin="1" end="1" step="1" var="i">
+								${i.detailedTypeName}
+							</c:forEach>
+						</c:if>
+						<c:if test="${goodName != null}">
+							搜索关键词:${goodName}
+						</c:if>
                     </span>
                     <div class="goodsbox">
                         <dl class="goodslist">
@@ -153,10 +160,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</c:if>
 								<c:if test="${pageBean.currPage > 1 }">
 									<li>
-										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},1)">
+										<a href="javascript:void(0)" onclick="doSearch(1)">
 	                                        <span aria-hidden="true">首页</span>
 	                                    </a>
-										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${pageBean.currPage - 1 })">
+										<a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage - 1 })">
 	                                        <span aria-hidden="true">&laquo;</span>
 	                                    </a>
                                     </li>
@@ -164,10 +171,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<c:if test="${pageBean.totalPage <= 5}">
 								    <c:forEach begin="1" end="${pageBean.totalPage}" step="1" var="i">
 								        <c:if test="${pageBean.currPage == i}">
-							        		<li><a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${i })">${i }</a></li>
+							        		<li><a href="javascript:void(0)" onclick="doSearch(${i })">${i }</a></li>
 								        </c:if>
 								        <c:if test="${pageBean.currPage != i}">
-							        		<li><a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${i })">${i }</a></li>
+							        		<li><a href="javascript:void(0)" onclick="doSearch(${i })">${i }</a></li>
 								        </c:if>
 								    </c:forEach>
 								</c:if>
@@ -176,28 +183,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								        <c:if test="${pageBean.currPage+3 >= pageBean.totalPage}">
 								            <c:forEach begin="${pageBean.totalPage-4}" end="${pageBean.totalPage}" var="i">
 								                <c:if test="${i == page.currPage+1}">
-								                    <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${i })">${i}</a></li>
+								                    <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
 								                </c:if>
 								                <c:if test="${i != page.currPage+1}">
-								                    <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${i })">${i}</a></li>
+								                    <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
 								                </c:if>
 								            </c:forEach>
 								        </c:if>
 								        <c:if test="${pageBean.currPage+3 < pageBean.totalPage}">
-								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${pageBean.currPage-2 })">${pageBean.currPage-2}</a></li>
-								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${pageBean.currPage-1 })">${pageBean.currPage-1}</a></li>
-								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${pageBean.currPage })">${pageBean.currPage }</a></li>
-								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${pageBean.currPage+1 })">${pageBean.currPage+1 }</a></li>
-								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${pageBean.currPage+2 })">${pageBean.currPage+2 }</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage-2 })">${pageBean.currPage-2}</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage-1 })">${pageBean.currPage-1}</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage })">${pageBean.currPage }</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage+1 })">${pageBean.currPage+1 }</a></li>
+								            <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.currPage+2 })">${pageBean.currPage+2 }</a></li>
 								        </c:if>
 								    </c:if>
 								    <c:if test="${pageBean.currPage <= 2}">
 								        <c:forEach begin="1" end="5" step="1" var="i">
 								            <c:if test="${page.currPage+1 == i}">
-								                <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${i })">${i}</a></li>
+								                <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
 								            </c:if>
 								            <c:if test="${page.currPage+1 != i}">
-								                <li><a href="javascript:void(0)" onclick="doSearch(${pageBean.list.detailedTypeID},${i })">${i}</a></li>
+								                <li><a href="javascript:void(0)" onclick="doSearch(${i })">${i}</a></li>
 								            </c:if>
 								        </c:forEach>
 								    </c:if>
@@ -210,10 +217,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</c:if>
 								<c:if test="${pageBean.currPage < pageBean.totalPage }">
 									<li>
-										<a href="javascript:void(0)" aria-label="Next"  onclick="doSearch(${detailedTypeID},${pageBean.currPage + 1 })">
+										<a href="javascript:void(0)" aria-label="Next"  onclick="doSearch(${pageBean.currPage + 1 })">
 	                                        <span aria-hidden="true">&raquo;</span>
 	                                    </a>
-										<a href="javascript:void(0)" onclick="doSearch(${detailedTypeID},${pageBean.totalPage })">
+										<a href="javascript:void(0)" onclick="doSearch(${pageBean.totalPage })">
 											<span aria-hidden="true">末页</span>
 										</a>
 	                                </li>

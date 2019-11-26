@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <form action="admin/goods" method="post" class="form-inline" id="sform">
                                 <div class="form-group">
                                     <label for="goodsName">商品名</label>
-                                    <input type="text" class="form-control" name="goodsName" id="goodsName" placeholder="输入商品关键词">
+                                    <input type="text" class="form-control" name="goodsName" id="goodsName" value="${goodName}" placeholder="输入商品关键词">
                                 </div>
                                 <div class="form-group">
                                     <label for="goodsTypeID">商品类型</label>

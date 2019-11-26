@@ -76,7 +76,7 @@ public class TblOrderBiz {
 	 * @param orderState
 	 * @return 通过订单状态查询订单
 	 */
-	public List<TblOrderQuery> selectByorderStateFun(TblCustomer customer, char orderState) {
+	public List<TblOrder> selectByorderStateFun(TblCustomer customer, char orderState) {
 		// TODO Auto-generated method stub
 		TblOrderQuery tblOrderQuery = new TblOrderQuery();
 		tblOrderQuery.setCustomerName(customer.getCustomerName());

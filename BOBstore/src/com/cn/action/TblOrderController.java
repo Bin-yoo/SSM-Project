@@ -63,7 +63,6 @@ public class TblOrderController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		
 		List<TblOrder> orderList=tblOrderBiz.selectAllFun(tblCustomer.getCustomerName());
 		
 		modelAndView.addObject("orderList",orderList);
@@ -104,7 +103,7 @@ public class TblOrderController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		List<TblOrderQuery> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
+		List<TblOrder> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
 		
 		modelAndView.addObject("orderList",orderList);
 		modelAndView.setViewName("customer_order_withgoods");
@@ -124,10 +123,10 @@ public class TblOrderController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		List<TblOrderQuery> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
+		List<TblOrder> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
 		
 		modelAndView.addObject("orderList",orderList);
-		modelAndView.setViewName("customer_order_withaccept");
+		modelAndView.setViewName("customer_order_accepted");
 		
 		return modelAndView;
 	}
@@ -144,7 +143,7 @@ public class TblOrderController {
 		ModelAndView modelAndView = new ModelAndView();
 		
 		
-		List<TblOrderQuery> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
+		List<TblOrder> orderList=tblOrderBiz.selectByorderStateFun(customer,orderState);
 		
 		modelAndView.addObject("orderList",orderList);
 		modelAndView.setViewName("customer_order_withaccept");

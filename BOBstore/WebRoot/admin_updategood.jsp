@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="menu">
                 <ul class="shop_list">
                     <li><a href="admin/goods">商品管理</a></li>
-                    <li><a href="">订单</a></li>
+                    <li><a href="/BOBstore/order/adminOrder">订单</a></li>
                 </ul>
             </div>
         </div>

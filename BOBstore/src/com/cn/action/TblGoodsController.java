@@ -166,6 +166,7 @@ public class TblGoodsController {
 			tgoods = glist.get(0);
 			modelAndView.addObject("detailedTypeID",tgoods.getDetailedTypeID());
 		}
+		modelAndView.addObject("goodName",tblGoodsQuery.getGoodsName());
 		modelAndView.addObject("pageBean",pageBean);
 		modelAndView.setViewName("goods_list");
 		

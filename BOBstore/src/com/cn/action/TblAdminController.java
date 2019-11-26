@@ -93,6 +93,7 @@ public class TblAdminController {
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("pageBean",pageBean);
+		modelAndView.addObject("goodName",tblGoodsQuery.getGoodsName());
 		modelAndView.addObject("typeList",typeList);
 		modelAndView.addObject("detailTypeList",detailTypeList);
 		modelAndView.setViewName("admin_goods");

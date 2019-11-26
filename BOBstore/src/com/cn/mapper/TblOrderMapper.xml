@@ -17,11 +17,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update tbl_order set orderState = 1 where orderID = #{orderID}
 	</update>
 
-	<select id="selectByorderStateByName" parameterType="tblOrderQuery" resultType="tblOrderQuery">
-		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID 
-		and customerName=#{customerName} and orderState=#{orderState}
-	</select>
-
 	<resultMap type="tblOrder" id="tblOrderBean">
 		<id column="orderID" property="orderID" />
 		<result column="customerName" property="customerName"/>
@@ -45,6 +40,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 	<select id="selectAllByName" parameterType="String" resultMap="tblOrderBean">
 		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID and customerName=#{customerName}
+	</select>
+	<select id="selectByorderStateByName" parameterType="tblOrderQuery" resultMap="tblOrderBean">
+		select * from tbl_order de, tbl_goods tg, tbl_order_detailed od where od.goodsID = tg.goodsID and de.orderID = od.orderID
+		and customerName=#{customerName} and orderState=#{orderState}
 	</select>
 	
 	<insert id="insertOrderFun" parameterType="tblOrderQuery">
